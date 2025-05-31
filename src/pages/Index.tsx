@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Zap, Users, ArrowRight, Menu, X, Star, CheckCircle } from "lucide-react";
+import { Brain, Code, Zap, Users, ArrowRight, Menu, X, Star, CheckCircle, Building2 } from "lucide-react";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,39 +21,64 @@ const Index = () => {
       color: "bg-blue-50"
     },
     {
-      icon: Code,
-      title: "AI-Powered Software",
-      description: "Full-stack development with AI integration, from chatbots to intelligent automation systems.",
-      features: ["Web Applications", "Mobile Apps", "API Development", "Cloud Integration"],
+      icon: Building2,
+      title: "Enterprise Applications",
+      description: "Comprehensive enterprise-level software solutions designed for scalability, security, and performance.",
+      features: ["ERP Systems", "CRM Platforms", "Business Intelligence", "Workflow Automation"],
       color: "bg-emerald-50"
     },
     {
-      icon: Zap,
-      title: "AI Consulting",
-      description: "Strategic AI consulting to help you identify opportunities and implement AI solutions effectively.",
-      features: ["AI Strategy", "Technical Audits", "Implementation Planning", "Team Training"],
+      icon: Code,
+      title: "AI-Powered Enterprise",
+      description: "Intelligent enterprise applications that combine traditional business logic with cutting-edge AI capabilities.",
+      features: ["Smart Analytics", "Automated Decision Making", "Intelligent APIs", "AI-Enhanced UX"],
       color: "bg-purple-50"
+    },
+    {
+      icon: Zap,
+      title: "Digital Transformation",
+      description: "End-to-end digital transformation services to modernize your business processes and technology stack.",
+      features: ["Legacy Modernization", "Cloud Migration", "Process Optimization", "Technology Consulting"],
+      color: "bg-orange-50"
     }
   ];
 
   const portfolio = [
     {
-      title: "Intelligent Customer Service Platform",
-      description: "AI-powered chatbot system that reduced customer response time by 80%",
-      tech: ["Python", "TensorFlow", "React", "AWS"],
+      title: "Enterprise ERP System",
+      description: "Complete enterprise resource planning solution for manufacturing companies with real-time analytics",
+      tech: ["React", "Node.js", "PostgreSQL", "Docker"],
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
     },
     {
-      title: "Predictive Analytics Dashboard",
-      description: "Machine learning platform for real-time business intelligence and forecasting",
-      tech: ["Python", "Scikit-learn", "Vue.js", "PostgreSQL"],
+      title: "AI-Powered CRM Platform",
+      description: "Customer relationship management system with AI-driven insights and predictive lead scoring",
+      tech: ["Python", "TensorFlow", "React", "MongoDB"],
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
     },
     {
-      title: "Computer Vision Quality Control",
-      description: "Automated quality inspection system using deep learning for manufacturing",
-      tech: ["PyTorch", "OpenCV", "FastAPI", "Docker"],
+      title: "Intelligent Supply Chain",
+      description: "Enterprise supply chain management with machine learning for demand forecasting and optimization",
+      tech: ["Python", "Scikit-learn", "Vue.js", "AWS"],
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Financial Analytics Dashboard",
+      description: "Enterprise-grade financial reporting and analytics platform with AI-powered insights",
+      tech: ["React", "D3.js", "Python", "PostgreSQL"],
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Smart Document Processing",
+      description: "AI-powered document management system for enterprise document workflows and automation",
+      tech: ["PyTorch", "OpenCV", "FastAPI", "React"],
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Enterprise HR Platform",
+      description: "Comprehensive human resources management system with AI-driven talent analytics",
+      tech: ["Angular", "Spring Boot", "MySQL", "Azure"],
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -120,19 +144,19 @@ const Index = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Badge className="mb-6 bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200">
-              Leading AI Development Agency
+              Enterprise Software & AI Solutions
             </Badge>
             <h1 className="text-5xl md:text-7xl font-light text-slate-800 mb-6 leading-tight">
-              Transforming Ideas with
-              <span className="font-normal block text-blue-600"> Artificial Intelligence</span>
+              Enterprise Applications
+              <span className="font-normal block text-blue-600">Enhanced by AI</span>
             </h1>
             <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              We specialize in cutting-edge AI solutions that drive innovation and accelerate business growth. 
-              From machine learning to intelligent automation, we bring your vision to life.
+              We deliver robust enterprise-level applications and intelligent AI solutions that transform businesses. 
+              From traditional enterprise software to AI-powered systems, we build scalable solutions for the modern world.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg">
-                Start Your AI Journey
+                Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button variant="outline" size="lg" className="border-blue-300 text-blue-600 hover:bg-blue-50">
@@ -147,20 +171,20 @@ const Index = () => {
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-800 mb-4">Our AI Services</h2>
+            <h2 className="text-4xl font-light text-slate-800 mb-4">Our Services</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Comprehensive AI solutions designed to solve complex problems and create competitive advantages
+              Comprehensive software development services from enterprise applications to cutting-edge AI solutions
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <Card key={index} className={`${service.color} border-gray-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
                 <CardHeader className="text-center">
                   <div className="mx-auto mb-4 p-3 bg-white rounded-full w-fit">
                     <service.icon className="h-8 w-8 text-slate-700" />
                   </div>
-                  <CardTitle className="text-slate-800 font-medium">{service.title}</CardTitle>
+                  <CardTitle className="text-slate-800 font-medium text-lg">{service.title}</CardTitle>
                   <CardDescription className="text-slate-600">{service.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -185,11 +209,11 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-light text-slate-800 mb-4">Featured Projects</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Showcasing our latest AI innovations and successful implementations
+              Showcasing our enterprise applications and AI-powered solutions across various industries
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolio.map((project, index) => (
               <Card key={index} className="bg-white border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-video overflow-hidden">
