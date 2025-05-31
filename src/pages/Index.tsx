@@ -98,42 +98,88 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-lg border-b border-blue-100 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <img src="/lovable-uploads/3b3156ce-46b8-4b78-96fc-595fa728e0a9.png" alt="Calcera Global" className="h-8 w-8" />
-              <span className="text-2xl font-bold text-slate-800">Calcera Global</span>
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            {/* Logo Section */}
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/3b3156ce-46b8-4b78-96fc-595fa728e0a9.png" 
+                  alt="Calcera Global" 
+                  className="h-10 w-10 rounded-lg shadow-sm" 
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-slate-900 tracking-tight">Calcera Global</span>
+                <span className="text-xs text-slate-500 font-medium tracking-wide">Enterprise Solutions</span>
+              </div>
             </div>
             
-            <div className="hidden md:flex space-x-8">
-              <a href="#services" className="text-slate-600 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#portfolio" className="text-slate-600 hover:text-blue-600 transition-colors">Portfolio</a>
-              <a href="#about" className="text-slate-600 hover:text-blue-600 transition-colors">About</a>
-              <a href="#contact" className="text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#services" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 relative group">
+                Services
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+              </a>
+              <a href="#portfolio" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 relative group">
+                Portfolio
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+              </a>
+              <a href="#about" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 relative group">
+                About
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+              </a>
+              <a href="#contact" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 relative group">
+                Contact
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+              </a>
+              <Button 
+                size="sm" 
+                className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg px-6 py-2 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
+              >
+                Get Started
+              </Button>
             </div>
             
+            {/* Mobile Menu Button */}
             <Button 
               variant="ghost" 
               size="icon"
-              className="md:hidden text-slate-800"
+              className="md:hidden text-slate-700 hover:bg-slate-100 rounded-full transition-colors duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
         
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 border-t border-blue-100">
-            <div className="px-4 py-4 space-y-4">
-              <a href="#services" className="block text-slate-600 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#portfolio" className="block text-slate-600 hover:text-blue-600 transition-colors">Portfolio</a>
-              <a href="#about" className="block text-slate-600 hover:text-blue-600 transition-colors">About</a>
-              <a href="#contact" className="block text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+          <div className="md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/50 shadow-lg">
+            <div className="px-6 py-6 space-y-4">
+              <a href="#services" className="block text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 py-2">
+                Services
+              </a>
+              <a href="#portfolio" className="block text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 py-2">
+                Portfolio
+              </a>
+              <a href="#about" className="block text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 py-2">
+                About
+              </a>
+              <a href="#contact" className="block text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors duration-200 py-2">
+                Contact
+              </a>
+              <div className="pt-4">
+                <Button 
+                  size="sm" 
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg rounded-full font-medium text-sm transition-all duration-200"
+                >
+                  Get Started
+                </Button>
+              </div>
             </div>
           </div>
         )}
