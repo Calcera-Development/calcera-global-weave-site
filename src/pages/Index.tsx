@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Zap, Users, ArrowRight, Menu, X, Star, CheckCircle, Building2, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield } from "lucide-react";
+import { Brain, Code, Zap, Users, ArrowRight, Menu, X, Star, CheckCircle, Building2, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, Heart } from "lucide-react";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,28 +25,28 @@ const Index = () => {
     {
       icon: Code,
       title: "Web Development",
-      description: "Achieve scalable web app success with our experienced developers.",
+      description: "Powerful, scalable, and future-ready web applications tailored to your vision.",
       features: ["React & Next.js", "Full-Stack Development", "API Integration", "Performance Optimization"],
       color: "bg-blue-50"
     },
     {
       icon: Brain,
-      title: "AI Solutions", 
-      description: "Harness your operations with cutting-edge AI solutions.",
+      title: "AI & Automation", 
+      description: "Smarter workflows, better insights. We infuse AI to help your business think ahead.",
       features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
       color: "bg-purple-50"
     },
     {
       icon: ShoppingCart,
       title: "Ecommerce Solutions",
-      description: "Streamline your business with seamless eCommerce.",
+      description: "From Shopify to custom storefronts, we build systems that grow with you.",
       features: ["Shopify Development", "Payment Integration", "Inventory Management", "Order Processing"],
       color: "bg-emerald-50"
     },
     {
       icon: Users,
-      title: "UI/UX Designs",
-      description: "Design user experiences that captivate and convert.",
+      title: "UI/UX Design",
+      description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
       features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
       color: "bg-orange-50"
     }
@@ -54,74 +54,74 @@ const Index = () => {
 
   const portfolio = [
     {
-      title: "CoupleCompass",
-      category: "Whatsapp",
-      tags: ["Chat Analysis", "AI"],
-      description: "CoupleCompass is an AI-powered WhatsApp chatbot that uncovers hidden behavioral patterns in conversations. Powered by GPT, it analyzes chat history to identify communication styles, emotional tones, and relationship dynamics, providing valuable insights in a simple and engaging way.",
+      title: "Chat Companion",
+      category: "AI + WhatsApp",
+      tags: ["AI", "WhatsApp"],
+      description: "A relationship wellness chatbot that decodes communication patterns, offering users personalized insights. Powered by GPT, it's like therapy, simplified.",
       icon: MessageCircle,
       color: "bg-green-100"
     },
     {
-      title: "MedCast",
-      category: "Podcast", 
-      tags: ["AI Simulator"],
-      description: "MedCast is a full-stack application that enhances user engagement through AI-driven podcast creation and interactive chatbot experiences. Powered by Gemini AI, it enables effortless podcast generation and AI-driven scenario simulations for learning, training, and decision-making, creating a seamless and dynamic user experience.",
+      title: "MedPod",
+      category: "Podcast AI Platform", 
+      tags: ["AI", "Podcast"],
+      description: "AI-driven platform that auto-generates podcasts, simulates interviews, and educates users with interactive AI personas. Fast. Smart. Fun.",
       icon: Mic,
       color: "bg-blue-100"
     },
     {
-      title: "Multimodal",
-      category: "Multi-model",
-      tags: ["AI Debate Model"],
-      description: "Multimodal is an AI-powered synthesis and debate model that integrates four AI models into a dynamic chat interface. It analyzes diverse perspectives, synthesizes insights, and facilitates intelligent discussions, providing a well-rounded approach to complex topics.",
+      title: "MultiLens",
+      category: "AI Debate Engine",
+      tags: ["AI", "Multi-model"],
+      description: "An AI-powered debate and synthesis tool that brings multiple perspectives to life through a collaborative, multi-model interface.",
       icon: Layers,
       color: "bg-purple-100"
     },
     {
-      title: "ClientSnare",
-      category: "Lead Generation",
-      tags: ["AI"],
-      description: "ClientSnare is a lead generation search tool that helps users identify businesses without websites or those with underperforming ones. It offers filters like review count, location, and business type, along with AI-powered recommendations via Gemini. The platform also includes an email collection feature for seamless outreach.",
+      title: "LeadSpark",
+      category: "Smart Prospecting Tool",
+      tags: ["AI", "Lead Generation"],
+      description: "Find untapped leads. With AI filters, real-time web scans, and smart suggestions, LeadSpark uncovers businesses that need your services—before they even know it.",
       icon: Search,
       color: "bg-yellow-100"
     },
     {
-      title: "Inventory Sync",
-      category: "Ecommerce",
-      tags: ["Shopify"],
-      description: "Effortlessly manage shared inventory across multiple Shopify products with our Inventory Sync tool. Automatically update stock levels for all items with the same SKU in real time, streamline bulk updates, and handle large inventories with ease. Perfect for businesses offering product variations, this scalable solution keeps your store organized and efficient.",
+      title: "Shopify Inventory Syncer",
+      category: "Ecommerce Tool",
+      tags: ["Shopify", "Automation"],
+      description: "A robust tool that keeps stock levels in perfect sync across product variations—because growing businesses deserve organized chaos, minus the chaos.",
       icon: ShoppingCart,
       color: "bg-emerald-100"
     },
     {
-      title: "Financely",
-      category: "Finance",
-      tags: ["AI"],
-      description: "Financely simplifies finance management with cutting-edge AI. Track your spending, uncover hidden recurring charges, and scan invoices for detailed breakdowns and actionable insights. With smart recommendations, Financely helps businesses optimize their financial health effortlessly.",
+      title: "Financera",
+      category: "Smart Finance Assistant",
+      tags: ["AI", "Finance"],
+      description: "From invoice scanning to expense tracking, Financera uses AI to help businesses manage finances without breaking a sweat.",
       icon: Calculator,
       color: "bg-indigo-100"
     },
     {
-      title: "Magnolia Hideout",
-      category: "Resort",
-      tags: [],
-      description: "Magnolia Hideout – a beautifully designed website created for a serene resort, showcasing its luxurious amenities, breathtaking surroundings, and the ultimate escape experience.",
+      title: "Resort Bliss",
+      category: "Magnolia Hideout",
+      tags: ["Resort", "Web Design"],
+      description: "A digital sanctuary for a real one. A high-end resort website with stunning visuals and calming UX that mirrors the guest experience.",
       icon: MapPin,
       color: "bg-teal-100"
     },
     {
       title: "Fuel Food",
-      category: "Restaurant",
-      tags: ["Dashboard"],
-      description: "Fuel Food is a modern website designed to deliver an exceptional user experience. It features a visually appealing landing page, an intuitive menu cart for browsing, a smooth checkout process, and a powerful backend for admin management. Built for efficiency and ease, Fuel Food ensures seamless functionality for both customers and administrators.",
+      category: "Restaurant App",
+      tags: ["Restaurant", "Dashboard"],
+      description: "Complete digital experience for a restaurant—ordering, checkout, admin dashboard, and all the tasty UI in between.",
       icon: Utensils,
       color: "bg-red-100"
     },
     {
       title: "Ceylon Turtles",
-      category: "Conservation",
-      tags: [],
-      description: "Ceylon Turtles is a thoughtfully designed website focused on raising awareness about turtles and protecting hatcheries. It offers educational resources, inspiring stories, and ways to support turtle conservation efforts.",
+      category: "Conservation Site",
+      tags: ["Conservation", "Education"],
+      description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
       icon: Shield,
       color: "bg-green-100"
     }
@@ -129,23 +129,23 @@ const Index = () => {
 
   const whyChooseUs = [
     {
-      title: "Not just coders, we're problem solvers",
-      description: "At Tensho Labs, we're more than just developers—we're innovative problem solvers. We approach every project with a solution-driven mindset, ensuring your challenges are met with creativity, precision, and expertise.",
-      icon: Brain
-    },
-    {
-      title: "UI/UX That Inspires.",
-      description: "From intuitive interfaces to stunning designs, our best-in-class UI/UX design transforms the way your users interact with your product.",
+      title: "More Than Developers — We're Your Digital Co-Founders",
+      description: "We don't just write code. We dive into your business goals, understand your users, and build what makes a difference.",
       icon: Users
     },
     {
-      title: "Total Transparency.",
-      description: "Transparency is at the core of everything we do. With real-time task boards, you're always informed about project progress, and open communication ensures no hidden discussions or surprises—keeping you fully in the loop.",
+      title: "Design That Connects",
+      description: "We make your brand feel alive with UI/UX that's as intuitive as it is beautiful.",
+      icon: Heart
+    },
+    {
+      title: "Full Transparency",
+      description: "You see what we see. Real-time project tracking, open communication, and no mystery meetings.",
       icon: CheckCircle
     },
     {
-      title: "Collaboration at the Core.",
-      description: "We believe the best results come from working together. By fostering open communication and a seamless partnership, we align our expertise with your vision to create solutions that truly reflect your goals. Consider us an extension of your team—dedicated, transparent, and committed to achieving success together.",
+      title: "Built on Collaboration",
+      description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
       icon: Zap
     }
   ];
@@ -159,14 +159,14 @@ const Index = () => {
             {/* Logo Section */}
             <div className="flex items-center space-x-3 group">
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-blue-600">Tensho Labs</span>
-                <span className="text-sm text-slate-500 font-medium tracking-wide">Design. Code. Integrate.</span>
+                <span className="text-2xl font-bold text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-blue-600">Calcera</span>
+                <span className="text-sm text-slate-500 font-medium tracking-wide">Design. Build. Elevate.</span>
               </div>
             </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              {["Home", "About Us", "Services", "Portfolio"].map((item, index) => (
+              {["Home", "About Us", "Services", "Work"].map((item, index) => (
                 <a 
                   key={item}
                   href={`#${item.toLowerCase().replace(' ', '-')}`} 
@@ -202,7 +202,7 @@ const Index = () => {
         {/* Mobile Menu */}
         <div className={`md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/50 shadow-lg transition-all duration-300 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
           <div className="px-6 py-6 space-y-4">
-            {["Home", "About Us", "Services", "Portfolio"].map((item, index) => (
+            {["Home", "About Us", "Services", "Work"].map((item, index) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase().replace(' ', '-')}`} 
@@ -230,20 +230,23 @@ const Index = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h1 className="text-6xl md:text-8xl font-light text-slate-800 mb-8 leading-tight">
-              <span className="inline-block transform transition-all duration-700 hover:scale-105">Design.</span>
-              <span className="inline-block transform transition-all duration-700 hover:scale-105 mx-4">Code.</span>
-              <span className="font-normal inline-block text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text transform transition-all duration-700 hover:scale-105">Integrate.</span>
+              <span className="inline-block transform transition-all duration-700 hover:scale-105">We Design.</span>
+              <span className="inline-block transform transition-all duration-700 hover:scale-105 mx-4">We Build.</span>
+              <span className="font-normal inline-block text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text transform transition-all duration-700 hover:scale-105">We Elevate.</span>
             </h1>
-            <p className="text-2xl text-slate-600 mb-12 max-w-4xl mx-auto leading-relaxed transform transition-all duration-700 delay-300 opacity-0 animate-[fade-in_1s_ease-out_0.5s_forwards]">
-              We build pixel perfect tech to keep you ahead of the curve.
+            <p className="text-2xl text-slate-600 mb-4 max-w-4xl mx-auto leading-relaxed transform transition-all duration-700 delay-300 opacity-0 animate-[fade-in_1s_ease-out_0.5s_forwards]">
+              Beautiful code. Intelligent design. Seamless solutions.
+            </p>
+            <p className="text-lg text-slate-500 mb-12 max-w-3xl mx-auto leading-relaxed transform transition-all duration-700 delay-400 opacity-0 animate-[fade-in_1s_ease-out_0.6s_forwards]">
+              Crafting technology that feels effortless.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center transform transition-all duration-700 delay-500 opacity-0 animate-[fade-in_1s_ease-out_0.7s_forwards]">
               <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl group text-lg px-10 py-4">
-                Free Consultation
+                Book Free Consultation
                 <ArrowRight className="ml-3 h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
               <Button variant="outline" size="lg" className="border-blue-300 text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 transform hover:scale-105 text-lg px-10 py-4">
-                View Portfolio
+                View Our Work
               </Button>
             </div>
           </div>
@@ -253,6 +256,11 @@ const Index = () => {
       {/* Services Section */}
       <section id="services" className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-light text-slate-800 mb-6 transform transition-all duration-700 hover:scale-105">Our Core Services</h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">What we're great at—so you can be even greater.</p>
+          </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <Card 
@@ -289,10 +297,11 @@ const Index = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-50 to-blue-50">
+      <section id="work" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-50 to-blue-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-light text-slate-800 mb-6 transform transition-all duration-700 hover:scale-105">Some of our work.</h2>
+            <h2 className="text-5xl font-light text-slate-800 mb-6 transform transition-all duration-700 hover:scale-105">Work We're Proud Of</h2>
+            <p className="text-xl text-slate-600">A glimpse into our digital playground.</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -333,7 +342,8 @@ const Index = () => {
       <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-light text-slate-800 mb-6 transform transition-all duration-700 hover:scale-105">Why choose Tensho Labs?</h2>
+            <h2 className="text-5xl font-light text-slate-800 mb-6 transform transition-all duration-700 hover:scale-105">Why Calcera?</h2>
+            <p className="text-xl text-slate-600">Because building with love and logic matters.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12">
@@ -360,8 +370,8 @@ const Index = () => {
       <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-blue-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-light text-slate-800 mb-8 transform transition-all duration-700 hover:scale-105">Enough about us!</h2>
-            <p className="text-2xl text-slate-600 transition-all duration-300 hover:text-slate-700">Let's talk about your idea.</p>
+            <h2 className="text-5xl font-light text-slate-800 mb-8 transform transition-all duration-700 hover:scale-105">Let's Make Something Great Together</h2>
+            <p className="text-2xl text-slate-600 transition-all duration-300 hover:text-slate-700">We'd love to hear what you're building. Let's turn your ideas into beautifully built reality.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-16">
@@ -383,7 +393,7 @@ const Index = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-medium mb-2">Project Description (In a nutshell)</label>
+                  <label className="block text-slate-700 font-medium mb-2">Quick Summary of Your Idea</label>
                   <textarea 
                     rows={4}
                     className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
@@ -400,7 +410,7 @@ const Index = () => {
             </div>
             
             <div className="space-y-8">
-              <h3 className="text-3xl font-medium text-slate-800 mb-8">Or Reach Out!</h3>
+              <h3 className="text-3xl font-medium text-slate-800 mb-8">Or Say Hi Anytime!</h3>
               <div className="space-y-6">
                 <div className="flex items-center space-x-4 transform transition-all duration-300 hover:translate-x-2">
                   <div className="p-3 bg-blue-100 rounded-full">
@@ -410,7 +420,7 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="font-medium text-slate-800">Phone</p>
-                    <p className="text-slate-600">+94 76 418 8801</p>
+                    <p className="text-slate-600">+94 XXX XXX XXX</p>
                   </div>
                 </div>
                 
@@ -422,7 +432,7 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="font-medium text-slate-800">Email</p>
-                    <p className="text-slate-600">tensholabs@gmail.com</p>
+                    <p className="text-slate-600">hello@calcera.io</p>
                   </div>
                 </div>
                 
@@ -446,9 +456,9 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-8 mb-6 md:mb-0">
-              <span className="text-2xl font-bold text-slate-800 transition-colors duration-300 hover:text-blue-700">Tensho Labs</span>
+              <span className="text-2xl font-bold text-slate-800 transition-colors duration-300 hover:text-blue-700">Calcera</span>
               <div className="hidden md:flex space-x-6">
-                {["Home", "About Us", "Services", "Portfolio"].map((item) => (
+                {["Home", "About", "Services", "Work", "Contact"].map((item) => (
                   <a 
                     key={item}
                     href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -460,7 +470,7 @@ const Index = () => {
               </div>
             </div>
             <div className="text-slate-600 text-center md:text-right">
-              <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Tensho Labs</p>
+              <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera. Built with logic and love.</p>
             </div>
           </div>
         </div>
