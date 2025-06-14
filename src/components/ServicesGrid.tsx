@@ -1,3 +1,4 @@
+
 import { Code, Brain, Zap, ShoppingCart, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
@@ -58,7 +59,7 @@ const ServicesGrid = () => {
             What we're great at—so you can be even greater.
           </p>
         </AnimatedWrapper>
-        <div className="space-y-0">
+        <div className="space-y-8">
           {rows.map((row, i) => {
             const isLastRow = i === rows.length - 1;
             const shouldCenter = isLastRow && row.length < 3;
@@ -66,16 +67,12 @@ const ServicesGrid = () => {
               <div
                 key={i}
                 className={
-                  // Mobile: always grid. Desktop: grid normally, flex-center for short last row.
                   shouldCenter
-                    ? "grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8 mb-0"
-                    : "grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 mb-0"
+                    ? // For last row with <3 cards: center items in flex (desktop), use grid for mobile
+                      "grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8"
+                    : // For full rows: use responsive grid with consistent gaps
+                      "grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8"
                 }
-                style={{
-                  // Remove negative margin or overlap at the section edges
-                  marginTop: 0,
-                  marginBottom: 0,
-                }}
               >
                 {row.map((service, rowIdx) => (
                   <AnimatedWrapper
