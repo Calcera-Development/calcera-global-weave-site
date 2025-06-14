@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -559,7 +560,7 @@ const Index = () => {
               </div>
             </div>
             <div className="text-slate-600 text-center md:text-right">
-              <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera. Built with logic and love.</p>
+              <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
             </div>
           </div>
         </div>
