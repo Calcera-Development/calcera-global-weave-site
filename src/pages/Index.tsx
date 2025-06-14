@@ -178,7 +178,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-slate-600 text-center md:text-right">
-            <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
+            <p className="hidden md:block transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
           </div>
         </div>
       </div>
