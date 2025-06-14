@@ -59,24 +59,19 @@ const ServicesGrid = () => {
             What we're great at—so you can be even greater.
           </p>
         </AnimatedWrapper>
-        {/* On desktop (md:), output each row; special styling for last row if < 3 cards */}
         <div className="space-y-0">
           {rows.map((row, i) => {
             const isLastRow = i === rows.length - 1;
-            const shouldCenter =
-              isLastRow && row.length < 3;
-
-            // On small screens, single grid stacks, so centering unnecessary.
+            const shouldCenter = isLastRow && row.length < 3;
             return (
               <div
                 key={i}
-                className={`
-                  grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8
-                  ${shouldCenter ? "md:flex md:justify-center md:gap-8 md:px-4" : ""}
-                  ${shouldCenter ? "lg:grid-cols-5" : ""}
-                  ${!shouldCenter ? "md:grid" : "md:block"}
-                  mb-0
-                `}
+                className={
+                  // On md+ up: grid for normal rows, flex+center for short last row
+                  shouldCenter
+                    ? "mt-0 mb-0 grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8 lg:grid-cols-5"
+                    : "mt-0 mb-0 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8"
+                }
               >
                 {row.map((service, rowIdx) => (
                   <AnimatedWrapper
@@ -96,15 +91,16 @@ const ServicesGrid = () => {
                       <CardHeader className="text-center p-6 flex flex-col items-center">
                         <service.icon
                           className={`h-10 w-10 mb-4
-                            ${service.color === "bg-blue-50"
-                              ? "text-blue-500"
-                              : service.color === "bg-purple-50"
-                              ? "text-purple-500"
-                              : service.color === "bg-emerald-50"
-                              ? "text-emerald-500"
-                              : service.color === "bg-violet-50"
-                              ? "text-violet-500"
-                              : "text-orange-500"
+                            ${
+                              service.color === "bg-blue-50"
+                                ? "text-blue-500"
+                                : service.color === "bg-purple-50"
+                                ? "text-purple-500"
+                                : service.color === "bg-emerald-50"
+                                ? "text-emerald-500"
+                                : service.color === "bg-violet-50"
+                                ? "text-violet-500"
+                                : "text-orange-500"
                             }
                             transition-colors duration-300
                           `}
