@@ -166,19 +166,19 @@ const Index = () => {
     {/* Footer */}
     <footer className="py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-100 to-blue-100 border-t border-blue-200">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-0">
           <div className="flex items-center space-x-8">
             <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo footer" style={{
               minWidth: 65
             }} className="h-10 w-auto select-none object-contain" />
-            <div className="hidden md:flex space-x-6">
+            <div className="hidden lg:flex space-x-6">
               {["Home", "About", "Services", "Work", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 transition-colors duration-300">
                 {item}
               </a>)}
             </div>
           </div>
-          <div className="text-slate-600 text-center md:text-right">
-            <p className="hidden md:block transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
+          <div className="text-slate-600 text-center lg:text-right">
+            <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
           </div>
         </div>
       </div>
