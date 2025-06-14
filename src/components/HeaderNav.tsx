@@ -1,91 +1,52 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
-
 interface HeaderNavProps {}
-
 const NAV_ITEMS = ["Home", "About Us", "Services", "Work"];
-
 const HeaderNav: React.FC<HeaderNavProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 z-50 shadow-sm transition-all duration-300 hover:shadow-md">
+  return <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 z-50 shadow-sm transition-all duration-300 hover:shadow-md">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" 
-              alt="Calcera Logo" 
-              className="h-12 w-auto select-none"
-              style={{ minWidth: 85 }}
-            />
+            <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo" style={{
+            minWidth: 85
+          }} className="h-12 w-auto select-none object-fill" />
           </div>
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(' ', '-')}`}
-                className="text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 relative group py-3"
-              >
+            {NAV_ITEMS.map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 relative group py-3">
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
+              </a>)}
+            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
               Book Free Consultation
             </Button>
           </div>
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-slate-700 hover:bg-slate-100 rounded-full transition-all duration-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
+          <Button variant="ghost" size="icon" className="md:hidden text-slate-700 hover:bg-slate-100 rounded-full transition-all duration-300" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </div>
       {/* Mobile Menu */}
-      <div
-        className={`block md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/50 shadow-lg fixed left-0 right-0 top-20 transition-all duration-300 overflow-hidden z-50
+      <div className={`block md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/50 shadow-lg fixed left-0 right-0 top-20 transition-all duration-300 overflow-hidden z-50
           ${isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"}
-        `}
-        style={{
-          transitionProperty: "max-height,opacity",
-        }}
-      >
+        `} style={{
+      transitionProperty: "max-height,opacity"
+    }}>
         <div className="px-6 py-6 space-y-4">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="block text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 py-3"
-              onClick={() => setIsMenuOpen(false)}
-            >
+          {NAV_ITEMS.map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="block text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 py-3" onClick={() => setIsMenuOpen(false)}>
               {item}
-            </a>
-          ))}
+            </a>)}
           <div className="pt-4">
-            <Button
-              size="lg"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg rounded-full font-medium transition-all duration-300"
-            >
+            <Button size="lg" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg rounded-full font-medium transition-all duration-300">
               Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
       </div>
-    </nav>
-  );
+    </nav>;
 };
-
 export default HeaderNav;
