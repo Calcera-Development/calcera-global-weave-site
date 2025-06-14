@@ -8,148 +8,121 @@ import ServicesGrid from "@/components/ServicesGrid";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
-
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const services = [
-    {
-      icon: Code,
-      title: "Web Development",
-      description: "Powerful, scalable, and future-ready web applications tailored to your vision.",
-      features: ["React & Next.js", "Full-Stack Development", "API Integration", "Performance Optimization"],
-      color: "bg-blue-50"
-    },
-    {
-      icon: Brain,
-      title: "AI-Powered Web Applications",
-      description: "We build smart automation, GPT and machine learning-based apps that solve real-world problems for businesses, tailored to your unique needs.",
-      features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
-      color: "bg-purple-50"
-    },
-    {
-      icon: Zap,
-      title: "In-house R&D & Technical Solutions",
-      description: "Our expert R&D team goes from idea discovery to technical blueprint, guiding founders who don’t have a tech plan yet into a working product.",
-      features: ["Discovery Workshops", "Prototype & MVP", "Emerging Tech Consulting", "Custom Integration"],
-      color: "bg-violet-50"
-    },
-    {
-      icon: ShoppingCart,
-      title: "Ecommerce Solutions",
-      description: "From Shopify to custom storefronts, we build systems that grow with you.",
-      features: ["Shopify Development", "Payment Integration", "Inventory Management", "Order Processing"],
-      color: "bg-emerald-50"
-    },
-    {
-      icon: Users,
-      title: "UI/UX Design",
-      description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
-      features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-      color: "bg-orange-50"
-    }
-  ];
-
-  const portfolio = [
-    {
-      title: "Chat Companion",
-      category: "AI + WhatsApp",
-      tags: ["AI", "WhatsApp"],
-      description: "A relationship wellness chatbot that decodes communication patterns, offering users personalized insights. Powered by GPT, it's like therapy, simplified.",
-      icon: MessageCircle,
-      color: "bg-green-100"
-    },
-    {
-      title: "MedPod",
-      category: "Podcast AI Platform", 
-      tags: ["AI", "Podcast"],
-      description: "AI-driven platform that auto-generates podcasts, simulates interviews, and educates users with interactive AI personas. Fast. Smart. Fun.",
-      icon: Mic,
-      color: "bg-blue-100"
-    },
-    {
-      title: "MultiLens",
-      category: "AI Debate Engine",
-      tags: ["AI", "Multi-model"],
-      description: "An AI-powered debate and synthesis tool that brings multiple perspectives to life through a collaborative, multi-model interface.",
-      icon: Layers,
-      color: "bg-purple-100"
-    },
-    {
-      title: "LeadSpark",
-      category: "Smart Prospecting Tool",
-      tags: ["AI", "Lead Generation"],
-      description: "Find untapped leads. With AI filters, real-time web scans, and smart suggestions, LeadSpark uncovers businesses that need your services—before they even know it.",
-      icon: Search,
-      color: "bg-yellow-100"
-    },
-    {
-      title: "Shopify Inventory Syncer",
-      category: "Ecommerce Tool",
-      tags: ["Shopify", "Automation"],
-      description: "A robust tool that keeps stock levels in perfect sync across product variations—because growing businesses deserve organized chaos, minus the chaos.",
-      icon: ShoppingCart,
-      color: "bg-emerald-100"
-    },
-    {
-      title: "Financera",
-      category: "Smart Finance Assistant",
-      tags: ["AI", "Finance"],
-      description: "From invoice scanning to expense tracking, Financera uses AI to help businesses manage finances without breaking a sweat.",
-      icon: Calculator,
-      color: "bg-indigo-100"
-    },
-    {
-      title: "Resort Bliss",
-      category: "Magnolia Hideout",
-      tags: ["Resort", "Web Design"],
-      description: "A digital sanctuary for a real one. A high-end resort website with stunning visuals and calming UX that mirrors the guest experience.",
-      icon: MapPin,
-      color: "bg-teal-100"
-    },
-    {
-      title: "Fuel Food",
-      category: "Restaurant App",
-      tags: ["Restaurant", "Dashboard"],
-      description: "Complete digital experience for a restaurant—ordering, checkout, admin dashboard, and all the tasty UI in between.",
-      icon: Utensils,
-      color: "bg-red-100"
-    },
-    {
-      title: "Ceylon Turtles",
-      category: "Conservation Site",
-      tags: ["Conservation", "Education"],
-      description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
-      icon: Shield,
-      color: "bg-green-100"
-    }
-  ];
-
-  const whyChooseUs = [
-    {
-      title: "More Than Developers — We're Your Digital Co-Founders",
-      description: "We don't just write code. We dive into your business goals, understand your users, and build what makes a difference.",
-      icon: Users
-    },
-    {
-      title: "Design That Connects",
-      description: "We make your brand feel alive with UI/UX that's as intuitive as it is beautiful.",
-      icon: Heart
-    },
-    {
-      title: "Full Transparency",
-      description: "You see what we see. Real-time project tracking, open communication, and no mystery meetings.",
-      icon: CheckCircle
-    },
-    {
-      title: "Built on Collaboration",
-      description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
-      icon: Zap
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+  const services = [{
+    icon: Code,
+    title: "Web Development",
+    description: "Powerful, scalable, and future-ready web applications tailored to your vision.",
+    features: ["React & Next.js", "Full-Stack Development", "API Integration", "Performance Optimization"],
+    color: "bg-blue-50"
+  }, {
+    icon: Brain,
+    title: "AI-Powered Web Applications",
+    description: "We build smart automation, GPT and machine learning-based apps that solve real-world problems for businesses, tailored to your unique needs.",
+    features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
+    color: "bg-purple-50"
+  }, {
+    icon: Zap,
+    title: "In-house R&D & Technical Solutions",
+    description: "Our expert R&D team goes from idea discovery to technical blueprint, guiding founders who don’t have a tech plan yet into a working product.",
+    features: ["Discovery Workshops", "Prototype & MVP", "Emerging Tech Consulting", "Custom Integration"],
+    color: "bg-violet-50"
+  }, {
+    icon: ShoppingCart,
+    title: "Ecommerce Solutions",
+    description: "From Shopify to custom storefronts, we build systems that grow with you.",
+    features: ["Shopify Development", "Payment Integration", "Inventory Management", "Order Processing"],
+    color: "bg-emerald-50"
+  }, {
+    icon: Users,
+    title: "UI/UX Design",
+    description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
+    features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
+    color: "bg-orange-50"
+  }];
+  const portfolio = [{
+    title: "Chat Companion",
+    category: "AI + WhatsApp",
+    tags: ["AI", "WhatsApp"],
+    description: "A relationship wellness chatbot that decodes communication patterns, offering users personalized insights. Powered by GPT, it's like therapy, simplified.",
+    icon: MessageCircle,
+    color: "bg-green-100"
+  }, {
+    title: "MedPod",
+    category: "Podcast AI Platform",
+    tags: ["AI", "Podcast"],
+    description: "AI-driven platform that auto-generates podcasts, simulates interviews, and educates users with interactive AI personas. Fast. Smart. Fun.",
+    icon: Mic,
+    color: "bg-blue-100"
+  }, {
+    title: "MultiLens",
+    category: "AI Debate Engine",
+    tags: ["AI", "Multi-model"],
+    description: "An AI-powered debate and synthesis tool that brings multiple perspectives to life through a collaborative, multi-model interface.",
+    icon: Layers,
+    color: "bg-purple-100"
+  }, {
+    title: "LeadSpark",
+    category: "Smart Prospecting Tool",
+    tags: ["AI", "Lead Generation"],
+    description: "Find untapped leads. With AI filters, real-time web scans, and smart suggestions, LeadSpark uncovers businesses that need your services—before they even know it.",
+    icon: Search,
+    color: "bg-yellow-100"
+  }, {
+    title: "Shopify Inventory Syncer",
+    category: "Ecommerce Tool",
+    tags: ["Shopify", "Automation"],
+    description: "A robust tool that keeps stock levels in perfect sync across product variations—because growing businesses deserve organized chaos, minus the chaos.",
+    icon: ShoppingCart,
+    color: "bg-emerald-100"
+  }, {
+    title: "Financera",
+    category: "Smart Finance Assistant",
+    tags: ["AI", "Finance"],
+    description: "From invoice scanning to expense tracking, Financera uses AI to help businesses manage finances without breaking a sweat.",
+    icon: Calculator,
+    color: "bg-indigo-100"
+  }, {
+    title: "Resort Bliss",
+    category: "Magnolia Hideout",
+    tags: ["Resort", "Web Design"],
+    description: "A digital sanctuary for a real one. A high-end resort website with stunning visuals and calming UX that mirrors the guest experience.",
+    icon: MapPin,
+    color: "bg-teal-100"
+  }, {
+    title: "Fuel Food",
+    category: "Restaurant App",
+    tags: ["Restaurant", "Dashboard"],
+    description: "Complete digital experience for a restaurant—ordering, checkout, admin dashboard, and all the tasty UI in between.",
+    icon: Utensils,
+    color: "bg-red-100"
+  }, {
+    title: "Ceylon Turtles",
+    category: "Conservation Site",
+    tags: ["Conservation", "Education"],
+    description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
+    icon: Shield,
+    color: "bg-green-100"
+  }];
+  const whyChooseUs = [{
+    title: "More Than Developers — We're Your Digital Co-Founders",
+    description: "We don't just write code. We dive into your business goals, understand your users, and build what makes a difference.",
+    icon: Users
+  }, {
+    title: "Design That Connects",
+    description: "We make your brand feel alive with UI/UX that's as intuitive as it is beautiful.",
+    icon: Heart
+  }, {
+    title: "Full Transparency",
+    description: "You see what we see. Real-time project tracking, open communication, and no mystery meetings.",
+    icon: CheckCircle
+  }, {
+    title: "Built on Collaboration",
+    description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
+    icon: Zap
+  }];
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <HeaderNav />
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -195,22 +168,13 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-8 mb-6 md:mb-0">
-              <img 
-                src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" 
-                alt="Calcera Logo footer" 
-                className="h-10 w-auto select-none"
-                style={{ minWidth: 65 }}
-              />
+              <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo footer" style={{
+              minWidth: 65
+            }} className="h-10 w-auto select-none object-contain" />
               <div className="hidden md:flex space-x-6">
-                {["Home", "About", "Services", "Work", "Contact"].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-slate-600 hover:text-blue-600 transition-colors duration-300"
-                  >
+                {["Home", "About", "Services", "Work", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 transition-colors duration-300">
                     {item}
-                  </a>
-                ))}
+                  </a>)}
               </div>
             </div>
             <div className="text-slate-600 text-center md:text-right">
@@ -219,8 +183,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
