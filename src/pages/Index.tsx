@@ -517,7 +517,7 @@ const Index = () => {
                   </span>
                   <div>
                     <p className="font-medium text-slate-800">Email</p>
-                    <a className="text-slate-600 hover:text-blue-700" href="mailto:hello@calcera.io">hello@calcera.io</a>
+                    <a className="text-slate-600 hover:text-blue-700" href="mailto:hello@calcera.global">hello@calcera.global</a>
                   </div>
                 </div>
                 <div className="flex items-center space-x-5">
