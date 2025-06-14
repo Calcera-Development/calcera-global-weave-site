@@ -57,7 +57,7 @@ const ServicesGrid = () => {
               key={service.title}
               animation="fade-up"
               delay={`${index * 120}ms`}
-              className="flex w-full sm:basis-[calc(50%-1rem)] md:basis-[calc(33.333%-1.3333rem)] lg:basis-[calc(20%-1.6rem)]"
+              className="flex w-full sm:basis-[calc(50%-1rem)] md:basis-[calc(33.333%-1.3333rem)] lg:w-64"
             >
               <Card
                 className={`
@@ -88,7 +88,7 @@ const ServicesGrid = () => {
                     {service.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="px-4 sm:px-6 pb-6 text-slate-600 text-base flex-1">
+                <CardContent className="px-4 sm:px-6 pb-6 text-slate-600 text-base flex-1 text-center">
                   {service.description}
                 </CardContent>
               </Card>
