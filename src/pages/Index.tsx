@@ -1,9 +1,13 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Code, Zap, Users, ArrowRight, Menu, X, CheckCircle, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, Heart } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
+import HeaderNav from "@/components/HeaderNav";
+import ServicesGrid from "@/components/ServicesGrid";
+import PortfolioGrid from "@/components/PortfolioGrid";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import ContactForm from "@/components/ContactForm";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -146,78 +150,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 z-50 shadow-sm transition-all duration-300 hover:shadow-md">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo Section */}
-            <div className="flex items-center space-x-3 group">
-              <img 
-                src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" 
-                alt="Calcera Logo" 
-                className="h-12 w-auto select-none"
-                style={{ minWidth: 85 }}
-              />
-            </div>
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {["Home", "About Us", "Services", "Work"].map((item, index) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 relative group py-3 transform hover:-translate-y-0.5"
-                  style={{ animationDelay: `${index * 80}ms` }}
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform"
-              >
-                Book Free Consultation
-              </Button>
-            </div>
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden text-slate-700 hover:bg-slate-100 rounded-full transition-all duration-300 transform hover:scale-110"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <div className={`transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </div>
-            </Button>
-          </div>
-        </div>
-        {/* Mobile Menu */}
-        <div className={`md:hidden bg-white/98 backdrop-blur-xl border-t border-slate-200/50 shadow-lg transition-all duration-300 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
-          <div className="px-6 py-6 space-y-4">
-            {["Home", "About Us", "Services", "Work"].map((item, index) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(' ', '-')}`}
-                className="block text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 py-3 transform hover:translate-x-2"
-                style={{ animationDelay: `${index * 80}ms` }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
-            <div className="pt-4">
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg rounded-full font-medium transition-all duration-300 transform hover:scale-105"
-              >
-                Book Free Consultation
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <HeaderNav />
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center">
@@ -253,216 +186,10 @@ const Index = () => {
           </AnimatedWrapper>
         </div>
       </section>
-
-      {/* Services Section */}
-      <section id="services" className="py-20 px-2 xs:px-4 md:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedWrapper animation="fade-up" className="text-center mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-800 mb-3">
-              Our Core Services
-            </h2>
-            <p className="text-xl md:text-2xl text-slate-600">What we're great at—so you can be even greater.</p>
-          </AnimatedWrapper>
-          {/* Responsive, aesthetic grid with nice spacing and smooth hover */}
-          <div
-            className="
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              md:grid-cols-3
-              lg:grid-cols-5
-              gap-6
-              sm:gap-8
-              md:gap-8
-            "
-          >
-            {services.map((service, index) => (
-              <AnimatedWrapper
-                key={service.title}
-                animation="fade-up"
-                delay={`${index * 120}ms`}
-                className="h-full"
-              >
-                <Card
-                  className={`
-                    ${service.color}
-                    border-none
-                    shadow-none
-                    h-full
-                    flex flex-col
-                    transition-all
-                    duration-300
-                    hover:shadow-lg
-                    hover:scale-[1.035]
-                    focus-within:scale-105
-                    focus-within:shadow-xl
-                    active:scale-100
-                    group
-                  `}
-                >
-                  <CardHeader className="text-center p-7 md:p-8 flex flex-col items-center">
-                    <service.icon
-                      className={`h-10 w-10 mb-4
-                        ${
-                          service.color === "bg-blue-50"
-                            ? "text-blue-500"
-                            : service.color === "bg-purple-50"
-                            ? "text-purple-500"
-                            : service.color === "bg-emerald-50"
-                            ? "text-emerald-500"
-                            : service.color === "bg-violet-50"
-                            ? "text-violet-500"
-                            : "text-orange-500"
-                        }
-                        transition-colors duration-300
-                        group-hover:scale-110
-                        group-hover:drop-shadow-md
-                      `}
-                    />
-                    <CardTitle className="text-lg sm:text-xl text-slate-800 font-semibold">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-6 sm:px-8 pb-7 md:pb-8 text-slate-600 text-base flex-1">
-                    {service.description}
-                  </CardContent>
-                </Card>
-              </AnimatedWrapper>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio Section */}
-      <section id="work" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-50 to-blue-50">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedWrapper animation="fade-up" className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-800 mb-3">
-              Work We're Proud Of
-            </h2>
-            <p className="text-xl text-slate-600">A glimpse into our digital playground.</p>
-          </AnimatedWrapper>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolio.map((project, index) => (
-              <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 100}ms`}>
-                <Card className="bg-white border-none shadow hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
-                  <CardHeader className="p-8 pb-3 flex-grow">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className={`p-2 rounded-lg ${project.color}`}>
-                        <project.icon className="h-6 w-6 text-slate-700" />
-                      </div>
-                      <p className="font-medium text-sm text-slate-500 uppercase tracking-wider">{project.category}</p>
-                    </div>
-                    <CardTitle className="text-lg font-semibold mb-1 text-slate-800">{project.title}</CardTitle>
-                    <CardDescription className="mb-2 text-slate-700 text-base">
-                      {project.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </AnimatedWrapper>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedWrapper animation="fade-up" className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-800 mb-3">Why Calcera?</h2>
-            <p className="text-xl text-slate-600">Because building with love and logic matters.</p>
-          </AnimatedWrapper>
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
-            {whyChooseUs.map((item, index) => (
-              <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 150}ms`}>
-                <div className="flex items-start space-x-6">
-                  <div className={`p-3 rounded-full bg-blue-100 flex-shrink-0`}>
-                    <item.icon className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-slate-800 mb-2">{item.title}</h3>
-                    <p className="text-slate-600 text-base leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              </AnimatedWrapper>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-blue-50">
-        <div className="max-w-5xl mx-auto">
-          <AnimatedWrapper animation="fade-up" className="text-center mb-14">
-            <h2 className="text-4xl font-light text-slate-800 mb-6">Let's Make Something Great Together</h2>
-            <p className="text-2xl text-slate-600">We’d love to hear what you’re building. Let’s turn your ideas into beautifully built reality.</p>
-          </AnimatedWrapper>
-          <div className="grid md:grid-cols-2 gap-14">
-            <AnimatedWrapper animation="slide-in-from-left">
-              <div className="space-y-8">
-                <h3 className="text-2xl font-medium text-slate-800 mb-6">Tell Us About Your Project</h3>
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-slate-700 font-medium mb-2">Your Name</label>
-                    <input type="text" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
-                  </div>
-                  <div>
-                    <label className="block text-slate-700 font-medium mb-2">Email or Phone Number</label>
-                    <input type="text" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
-                  </div>
-                  <div>
-                    <label className="block text-slate-700 font-medium mb-2">Quick Summary of Your Idea</label>
-                    <textarea rows={4} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"></textarea>
-                  </div>
-                  <Button size="lg" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg text-lg py-4 rounded-full">
-                    Book Free Consultation
-                    <ArrowRight className="ml-3 h-6 w-6" />
-                  </Button>
-                </div>
-              </div>
-            </AnimatedWrapper>
-            <AnimatedWrapper animation="slide-in-from-right">
-              <div className="space-y-8">
-                <h3 className="text-2xl font-medium text-slate-800 mb-6">Or Say Hi Anytime!</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-5">
-                    <span className="p-2 bg-blue-100 rounded-full">
-                      <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="font-medium text-slate-800">Phone</p>
-                      <p className="text-slate-600">+94 77 123 9037</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-5">
-                    <span className="p-2 bg-purple-100 rounded-full">
-                      <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="font-medium text-slate-800">Email</p>
-                      <a className="text-slate-600 hover:text-blue-700" href="mailto:hello@calcera.global">hello@calcera.global</a>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-5">
-                    <span className="p-2 bg-emerald-100 rounded-full">
-                      <MapPin className="h-6 w-6 text-emerald-600" />
-                    </span>
-                    <div>
-                      <p className="font-medium text-slate-800">Location</p>
-                      <p className="text-slate-600">Colombo, Sri Lanka</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedWrapper>
-          </div>
-        </div>
-      </section>
-
+      <ServicesGrid />
+      <PortfolioGrid />
+      <WhyChooseUs />
+      <ContactForm />
       {/* Footer */}
       <footer className="py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-100 to-blue-100 border-t border-blue-200">
         <div className="max-w-7xl mx-auto">
@@ -497,4 +224,3 @@ const Index = () => {
 };
 
 export default Index;
-
