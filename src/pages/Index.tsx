@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,8 +18,8 @@ const Index = () => {
     },
     {
       icon: Brain,
-      title: "AI & Automation", 
-      description: "Smarter workflows, better insights. We infuse AI to help your business think ahead.",
+      title: "AI-Powered Web Applications",
+      description: "We solve real-world business problems with intelligent applications. Our in-house R&D team designs custom technical solutions, even if you're starting without a clear idea.",
       features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
       color: "bg-purple-50"
     },
