@@ -506,7 +506,7 @@ const Index = () => {
                   </span>
                   <div>
                     <p className="font-medium text-slate-800">Phone</p>
-                    <p className="text-slate-600">+94 XXX XXX XXX</p>
+                    <p className="text-slate-600">+94 77 123 9037</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-5">
