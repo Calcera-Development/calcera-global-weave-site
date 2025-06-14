@@ -1,4 +1,3 @@
-
 import { Code, Brain, Zap, ShoppingCart, Users } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
@@ -67,17 +66,22 @@ const ServicesGrid = () => {
               <div
                 key={i}
                 className={
-                  // On md+ up: grid for normal rows, flex+center for short last row
+                  // Mobile: always grid. Desktop: grid normally, flex-center for short last row.
                   shouldCenter
-                    ? "mt-0 mb-0 grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8 lg:grid-cols-5"
-                    : "mt-0 mb-0 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8"
+                    ? "grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8 mb-0"
+                    : "grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 mb-0"
                 }
+                style={{
+                  // Remove negative margin or overlap at the section edges
+                  marginTop: 0,
+                  marginBottom: 0,
+                }}
               >
                 {row.map((service, rowIdx) => (
                   <AnimatedWrapper
                     key={service.title}
                     animation="fade-up"
-                    delay={`${(i*3 + rowIdx) * 120}ms`}
+                    delay={`${(i * 3 + rowIdx) * 120}ms`}
                     className="h-full"
                   >
                     <Card
@@ -125,4 +129,3 @@ const ServicesGrid = () => {
 };
 
 export default ServicesGrid;
-
