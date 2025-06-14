@@ -19,9 +19,16 @@ const Index = () => {
     {
       icon: Brain,
       title: "AI-Powered Web Applications",
-      description: "We solve real-world business problems with intelligent applications. Our in-house R&D team designs custom technical solutions, even if you're starting without a clear idea.",
+      description: "We create intelligent web solutions that automate, analyze, and drive results using the latest in machine learning and AI—solving real-world business problems through innovation.",
       features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
       color: "bg-purple-50"
+    },
+    {
+      icon: Zap,
+      title: "In-house R&D & Technical Solutions",
+      description: "Our R&D team turns even a spark of an idea into a technical blueprint and a working product—perfect for founders who want a solution but need guidance from concept to reality.",
+      features: ["Discovery Workshops", "Prototype & MVP", "Emerging Tech Consulting", "Custom Integration"],
+      color: "bg-violet-50"
     },
     {
       icon: ShoppingCart,
@@ -248,28 +255,43 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="services" className="py-20 px-2 sm:px-4 md:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <AnimatedWrapper animation="fade-up" className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-800 mb-3">
+          <AnimatedWrapper animation="fade-up" className="text-center mb-12 md:mb-16">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-800 mb-3">
               Our Core Services
             </h2>
-            <p className="text-xl text-slate-600">What we're great at—so you can be even greater.</p>
+            <p className="text-xl md:text-2xl text-slate-600">What we're great at—so you can be even greater.</p>
           </AnimatedWrapper>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Responsive smooth grid for services */}
+          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 md:gap-8">
             {services.map((service, index) => (
-              <AnimatedWrapper key={service.title} animation="fade-up" delay={`${index * 100}ms`}>
-                <Card className={`${service.color} border-none shadow-none h-full`}>
-                  <CardHeader className="text-center p-8">
-                    <service.icon className={`h-10 w-10 mx-auto mb-4 ${
-                      service.color === "bg-blue-50" ? "text-blue-500" :
-                      service.color === "bg-purple-50" ? "text-purple-500" :
-                      service.color === "bg-emerald-50" ? "text-emerald-500" :
-                      "text-orange-500"
-                    }`} />
-                    <CardTitle className="text-xl text-slate-800">{service.title}</CardTitle>
+              <AnimatedWrapper
+                key={service.title}
+                animation="fade-up"
+                delay={`${index * 120}ms`}
+                className="h-full"
+              >
+                <Card className={`${service.color} border-none shadow-none h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:scale-[1.03]`}>
+                  <CardHeader className="text-center p-7 md:p-8 flex flex-col items-center">
+                    <service.icon
+                      className={`h-10 w-10 mb-4 ${
+                        service.color === "bg-blue-50"
+                          ? "text-blue-500"
+                          : service.color === "bg-purple-50"
+                          ? "text-purple-500"
+                          : service.color === "bg-emerald-50"
+                          ? "text-emerald-500"
+                          : service.color === "bg-violet-50"
+                          ? "text-violet-500"
+                          : "text-orange-500"
+                      } transition-colors duration-300`}
+                    />
+                    <CardTitle className="text-lg sm:text-xl text-slate-800 font-semibold">
+                      {service.title}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="px-8 pb-8 text-slate-600 text-base">
+                  <CardContent className="px-6 sm:px-8 pb-7 md:pb-8 text-slate-600 text-base flex-1">
                     {service.description}
                   </CardContent>
                 </Card>
@@ -443,3 +465,4 @@ const Index = () => {
 };
 
 export default Index;
+
