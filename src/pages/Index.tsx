@@ -123,66 +123,66 @@ const Index = () => {
     icon: Zap
   }];
   return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <HeaderNav />
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-3xl mx-auto text-center">
-          <AnimatedWrapper animation="fade-up">
-            <h1 className="text-5xl md:text-7xl font-light text-slate-800 mb-5 leading-tight">
-              <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Design.</span><br />
-              <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">We Build.</span><br />
-              <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Elevate.</span>
-            </h1>
-          </AnimatedWrapper>
-          <AnimatedWrapper animation="fade-up" delay="200ms">
-            <p className="text-2xl text-slate-600 mb-5 max-w-2xl mx-auto leading-relaxed">
-              Beautiful code. Intelligent design. Seamless solutions.
-            </p>
-          </AnimatedWrapper>
-          <AnimatedWrapper animation="fade-up" delay="400ms">
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-7">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg shadow hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                Book Free Consultation
-              </Button>
-              <Button variant="outline" size="lg" className="border-blue-400 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                View Our Work
-              </Button>
-            </div>
-          </AnimatedWrapper>
-          <AnimatedWrapper animation="fade-up" delay="600ms">
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-2">
-              Crafting technology that feels effortless.
-            </p>
-            <p className="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
-            </p>
-          </AnimatedWrapper>
-        </div>
-      </section>
-      <ServicesGrid />
-      <PortfolioGrid />
-      <WhyChooseUs />
-      <ContactForm />
-      {/* Footer */}
-      <footer className="py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-100 to-blue-100 border-t border-blue-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-8 mb-6 md:mb-0">
-              <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo footer" style={{
+    <HeaderNav />
+    {/* Hero Section */}
+    <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center">
+        <AnimatedWrapper animation="fade-up">
+          <h1 className="text-5xl md:text-7xl font-light text-slate-800 mb-5 leading-tight">
+            <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Design.</span><br />
+            <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">We Build.</span><br />
+            <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Elevate.</span>
+          </h1>
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="fade-up" delay="200ms">
+          <p className="text-2xl text-slate-600 mb-5 max-w-2xl mx-auto leading-relaxed">
+            Beautiful code. Intelligent design. Seamless solutions.
+          </p>
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="fade-up" delay="400ms">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-7">
+            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg shadow hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              Book Free Consultation
+            </Button>
+            <Button variant="outline" size="lg" className="border-blue-400 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              View Our Work
+            </Button>
+          </div>
+        </AnimatedWrapper>
+        <AnimatedWrapper animation="fade-up" delay="600ms">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-2">
+            Crafting technology that feels effortless.
+          </p>
+          <p className="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
+          </p>
+        </AnimatedWrapper>
+      </div>
+    </section>
+    <ServicesGrid />
+    <PortfolioGrid />
+    <WhyChooseUs />
+    <ContactForm />
+    {/* Footer */}
+    <footer className="py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-100 to-blue-100 border-t border-blue-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+          <div className="flex items-center space-x-8">
+            <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo footer" style={{
               minWidth: 65
             }} className="h-10 w-auto select-none object-contain" />
-              <div className="hidden md:flex space-x-6">
-                {["Home", "About", "Services", "Work", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 transition-colors duration-300">
-                    {item}
-                  </a>)}
-              </div>
-            </div>
-            <div className="text-slate-600 text-center md:text-right">
-              <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
+            <div className="hidden md:flex space-x-6">
+              {["Home", "About", "Services", "Work", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 transition-colors duration-300">
+                {item}
+              </a>)}
             </div>
           </div>
+          <div className="text-slate-600 text-center md:text-right">
+            <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
+          </div>
         </div>
-      </footer>
-    </div>;
+      </div>
+    </footer>
+  </div>;
 };
 export default Index;
