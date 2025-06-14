@@ -49,7 +49,10 @@ const ServicesGrid = () => {
   const rows = chunkArray(services, 3);
 
   return (
-    <section id="services" className="py-16 px-2 xs:px-4 md:px-6 lg:px-8">
+    <section
+      id="services"
+      className="py-16 mt-20 px-2 xs:px-4 md:px-6 lg:px-8"
+    >
       <div className="max-w-6xl mx-auto">
         <AnimatedWrapper animation="fade-up" className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-800 mb-3">
@@ -63,17 +66,15 @@ const ServicesGrid = () => {
           {rows.map((row, i) => {
             const isLastRow = i === rows.length - 1;
             const shouldCenter = isLastRow && row.length < 3;
+
+            // For last row, use grid on mobile with correct cols/gaps, flex centering only on desktop+
+            let rowClass =
+              shouldCenter
+                ? "grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-8 md:flex md:justify-center md:gap-8"
+                : "grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-8 md:gap-x-8 md:gap-y-8";
+
             return (
-              <div
-                key={i}
-                className={
-                  shouldCenter
-                    ? // For last row with <3 cards: center items in flex (desktop), use grid for mobile
-                      "grid grid-cols-1 xs:grid-cols-2 md:flex md:justify-center md:gap-8"
-                    : // For full rows: use responsive grid with consistent gaps
-                      "grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8"
-                }
-              >
+              <div key={i} className={rowClass}>
                 {row.map((service, rowIdx) => (
                   <AnimatedWrapper
                     key={service.title}
@@ -126,3 +127,4 @@ const ServicesGrid = () => {
 };
 
 export default ServicesGrid;
+
