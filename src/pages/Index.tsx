@@ -24,7 +24,7 @@ const Index = () => {
     color: "bg-purple-50"
   }, {
     icon: Zap,
-    title: "In-house R&D & Technical Solutions",
+    title: "In-house R&D Team",
     description: "Our expert R&D team goes from idea discovery to technical blueprint, guiding founders who don’t have a tech plan yet into a working product.",
     features: ["Discovery Workshops", "Prototype & MVP", "Emerging Tech Consulting", "Custom Integration"],
     color: "bg-violet-50"
