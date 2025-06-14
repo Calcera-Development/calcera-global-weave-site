@@ -82,7 +82,7 @@ const PortfolioGrid = () => (
         {portfolio.map((project, index) => (
           <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 100}ms`} className="flex w-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)]">
             <Card className="bg-white border-none shadow hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col w-full">
-              <CardHeader className="p-8 pb-3 flex-grow">
+              <CardHeader className="p-8 pb-3 flex-grow flex flex-col items-center text-center">
                 <div className="flex items-center gap-4 mb-3">
                   <div className={`p-2 rounded-lg ${project.color}`}>
                     <project.icon className="h-6 w-6 text-slate-700" />
