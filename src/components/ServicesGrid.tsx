@@ -36,62 +36,68 @@ const services = [
   }
 ];
 
-const ServicesGrid = () => (
-  <section id="services" className="py-16 px-2 xs:px-4 md:px-6 lg:px-8">
-    <div className="max-w-6xl mx-auto">
-      <AnimatedWrapper animation="fade-up" className="text-center mb-10 md:mb-12">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-800 mb-3">
-          Our Core Services
-        </h2>
-        <p className="text-lg sm:text-xl md:text-2xl text-slate-600">
-          What we're great at—so you can be even greater.
-        </p>
-      </AnimatedWrapper>
-      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
-        {services.map((service, index) => (
-          <AnimatedWrapper
-            key={service.title}
-            animation="fade-up"
-            delay={`${index * 120}ms`}
-            className="h-full"
-          >
-            <Card
-              className={`
-                ${service.color}
-                border-none shadow-none h-full flex flex-col
-                transition-all duration-300
-                hover:shadow-lg hover:scale-[1.035] group
-              `}
+const ServicesGrid = () => {
+  return (
+    <section
+      id="services"
+      className="py-16 mt-20 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="max-w-7xl mx-auto">
+        <AnimatedWrapper animation="fade-up" className="text-center mb-10 md:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-800 mb-3">
+            Our Core Services
+          </h2>
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-600">
+            What we're great at—so you can be even greater.
+          </p>
+        </AnimatedWrapper>
+        <div className="flex flex-wrap justify-center gap-8">
+          {services.map((service, index) => (
+            <AnimatedWrapper
+              key={service.title}
+              animation="fade-up"
+              delay={`${index * 120}ms`}
+              className="flex w-full sm:basis-[calc(50%-1rem)] md:basis-[calc(33.333%-1.3333rem)] lg:w-64"
             >
-              <CardHeader className="text-center p-6 flex flex-col items-center">
-                <service.icon
-                  className={`h-10 w-10 mb-4
-                    ${service.color === "bg-blue-50"
-                      ? "text-blue-500"
-                      : service.color === "bg-purple-50"
-                      ? "text-purple-500"
-                      : service.color === "bg-emerald-50"
-                      ? "text-emerald-500"
-                      : service.color === "bg-violet-50"
-                      ? "text-violet-500"
-                      : "text-orange-500"
-                    }
-                    transition-colors duration-300
-                  `}
-                />
-                <CardTitle className="text-lg sm:text-xl text-slate-800 font-semibold">
-                  {service.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="px-4 sm:px-6 pb-6 text-slate-600 text-base flex-1">
-                {service.description}
-              </CardContent>
-            </Card>
-          </AnimatedWrapper>
-        ))}
+              <Card
+                className={`
+                  ${service.color}
+                  border-none shadow-none w-full h-full flex flex-col
+                  transition-all duration-300
+                  hover:shadow-lg hover:scale-[1.035] group
+                `}
+              >
+                <CardHeader className="text-center p-6 flex flex-col items-center">
+                  <service.icon
+                    className={`h-10 w-10 mb-4
+                      ${
+                        service.color === "bg-blue-50"
+                          ? "text-blue-500"
+                          : service.color === "bg-purple-50"
+                          ? "text-purple-500"
+                          : service.color === "bg-emerald-50"
+                          ? "text-emerald-500"
+                          : service.color === "bg-violet-50"
+                          ? "text-violet-500"
+                          : "text-orange-500"
+                      }
+                      transition-colors duration-300
+                    `}
+                  />
+                  <CardTitle className="text-lg sm:text-xl text-slate-800 font-semibold">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="px-4 sm:px-6 pb-6 text-slate-600 text-base flex-1 text-center">
+                  {service.description}
+                </CardContent>
+              </Card>
+            </AnimatedWrapper>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ServicesGrid;

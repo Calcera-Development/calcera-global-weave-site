@@ -8,6 +8,8 @@ import ServicesGrid from "@/components/ServicesGrid";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
+import React from "react";
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const services = [{
@@ -122,10 +124,33 @@ const Index = () => {
     description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
     icon: Zap
   }];
-  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <HeaderNav />
+
+  // Section refs for smooth scroll
+  const heroRef = React.useRef<HTMLDivElement>(null);
+  const servicesRef = React.useRef<HTMLElement>(null);
+  const workRef = React.useRef<HTMLElement>(null);
+  const contactRef = React.useRef<HTMLElement>(null);
+
+  // Helper scroll function
+  const scrollToSection = (ref: React.RefObject<HTMLElement | HTMLDivElement>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  // Expose scroll functions for navigation
+  const navScrollFns = {
+    home: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+    services: () => scrollToSection(servicesRef),
+    work: () => scrollToSection(workRef),
+    contact: () => scrollToSection(contactRef),
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <HeaderNav navScrollFns={navScrollFns} />
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section ref={heroRef} className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedWrapper animation="fade-up">
             <h1 className="text-5xl md:text-7xl font-light text-slate-800 mb-5 leading-tight">
@@ -141,10 +166,19 @@ const Index = () => {
           </AnimatedWrapper>
           <AnimatedWrapper animation="fade-up" delay="400ms">
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-7">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg shadow hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg shadow hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                onClick={() => scrollToSection(contactRef)}
+              >
                 Book Free Consultation
               </Button>
-              <Button variant="outline" size="lg" className="border-blue-400 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-blue-400 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                onClick={() => scrollToSection(workRef)}
+              >
                 View Our Work
               </Button>
             </div>
@@ -159,30 +193,50 @@ const Index = () => {
           </AnimatedWrapper>
         </div>
       </section>
-      <ServicesGrid />
-      <PortfolioGrid />
+      <section ref={servicesRef}>
+        <ServicesGrid />
+      </section>
+      <section ref={workRef}>
+        <PortfolioGrid />
+      </section>
       <WhyChooseUs />
-      <ContactForm />
+      <section ref={contactRef}>
+        <ContactForm />
+      </section>
       {/* Footer */}
       <footer className="py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-100 to-blue-100 border-t border-blue-200">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-8 mb-6 md:mb-0">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-0">
+            <div className="flex items-center space-x-8">
               <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo footer" style={{
-              minWidth: 65
-            }} className="h-10 w-auto select-none object-contain" />
-              <div className="hidden md:flex space-x-6">
-                {["Home", "About", "Services", "Work", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-slate-600 hover:text-blue-600 transition-colors duration-300">
+                minWidth: 65
+              }} className="h-10 w-auto select-none object-contain" />
+              <div className="hidden lg:flex space-x-6">
+                {["Home", "Services", "Work", "Contact"].map(item => (
+                  <a
+                    key={item}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" });
+                      else if (item === "Services") scrollToSection(servicesRef);
+                      else if (item === "Work") scrollToSection(workRef);
+                      else if (item === "Contact") scrollToSection(contactRef);
+                    }}
+                    className="text-slate-600 hover:text-blue-600 transition-colors duration-300"
+                  >
                     {item}
-                  </a>)}
+                  </a>
+                ))}
               </div>
             </div>
-            <div className="text-slate-600 text-center md:text-right">
+            <div className="text-slate-600 text-center lg:text-right">
               <p className="transition-colors duration-300 hover:text-slate-700 text-lg">&copy; 2025 — Calcera Global. Built with logic and love.</p>
             </div>
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
 export default Index;

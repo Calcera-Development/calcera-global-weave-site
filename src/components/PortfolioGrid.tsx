@@ -1,5 +1,5 @@
 
-import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield } from "lucide-react";
+import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, PhoneCall, BookOpen } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 
@@ -66,6 +66,22 @@ const portfolio = [
     description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
     icon: Shield,
     color: "bg-green-100"
+  },
+  // New AI QA project card
+  {
+    title: "CallQA Insight",
+    category: "AI Customer Service QA",
+    description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
+    icon: PhoneCall,
+    color: "bg-orange-100"
+  },
+  // New AI Comic Book card
+  {
+    title: "AI Comic Book",
+    category: "AI Storybook for Kids",
+    description: "A playful AI-powered storybook app where children upload their own photo to become the main hero—instantly starring in beautifully illustrated stories. Kids (and parents) can buy personalized books in both print and digital formats for a truly magical reading experience.",
+    icon: BookOpen,
+    color: "bg-pink-100"
   }
 ];
 
@@ -78,11 +94,11 @@ const PortfolioGrid = () => (
         </h2>
         <p className="text-lg sm:text-xl text-slate-600">A glimpse into our digital playground.</p>
       </AnimatedWrapper>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {portfolio.map((project, index) => (
-          <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 100}ms`}>
-            <Card className="bg-white border-none shadow hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
-              <CardHeader className="p-8 pb-3 flex-grow">
+          <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 100}ms`} className="flex w-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)]">
+            <Card className="bg-white border-none shadow hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col w-full">
+              <CardHeader className="p-8 pb-3 flex-grow flex flex-col items-center text-center">
                 <div className="flex items-center gap-4 mb-3">
                   <div className={`p-2 rounded-lg ${project.color}`}>
                     <project.icon className="h-6 w-6 text-slate-700" />
