@@ -5,6 +5,18 @@ import AnimatedWrapper from "@/components/AnimatedWrapper";
 
 const services = [
   {
+    icon: ShoppingCart,
+    title: "Ecommerce Solutions",
+    description: "From Shopify to custom storefronts, we build systems that grow with you.",
+    color: "bg-emerald-50"
+  },
+  {
+    icon: Users,
+    title: "UI/UX Design",
+    description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
+    color: "bg-orange-50"
+  },
+  {
     icon: Code,
     title: "Web Development",
     description: "Powerful, scalable, and future-ready web applications tailored to your vision.",
@@ -21,18 +33,6 @@ const services = [
     title: "In-house R&D Team",
     description: "Our expert R&D team goes from idea discovery to technical blueprint, guiding founders who don’t have a tech plan yet into a working product.",
     color: "bg-violet-50"
-  },
-  {
-    icon: ShoppingCart,
-    title: "Ecommerce Solutions",
-    description: "From Shopify to custom storefronts, we build systems that grow with you.",
-    color: "bg-emerald-50"
-  },
-  {
-    icon: Users,
-    title: "UI/UX Design",
-    description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
-    color: "bg-orange-50"
   }
 ];
 
