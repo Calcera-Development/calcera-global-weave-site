@@ -48,9 +48,9 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Use Mailjet-verified sender as FROM, send TO the user, Reply-To also set for easy reply
+    // Always send to your internal business address
     const FROM_EMAIL = "hello@calcera.global"; // must match Mailjet-verified sender
-    const TO_EMAIL = email; // Send TO the user's address
+    const TO_EMAIL = "hello@calcera.global";   // Always send incoming requests here!
 
     const data = {
       Messages: [
@@ -62,23 +62,21 @@ const handler = async (req: Request): Promise<Response> => {
           To: [
             {
               Email: TO_EMAIL,
-              Name: name
+              Name: "Calcera"
             }
           ],
           ReplyTo: {
             Email: email,
             Name: name
           },
-          Subject: "Thank you for contacting Calcera!",
+          Subject: "New Consultation Request from Calcera Website",
           HTMLPart: `
             <div>
-              <p>Hi ${name},</p>
-              <p>Thank you for reaching out about your project.</p>
               <p><b>Name:</b> ${name}</p>
               <p><b>Contact:</b> ${contact}</p>
               <p><b>User Email:</b> ${email}</p>
               <p><b>Summary:</b><br/>${typeof message === "string" ? message.replace(/\n/g, "<br/>") : ""}</p>
-              <p>We will get back to you as soon as possible.<br><br>Best,<br>Team Calcera</p>
+              <p>Sent via Calcera website contact form.</p>
             </div>
           `
         }
