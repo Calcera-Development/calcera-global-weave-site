@@ -1,17 +1,28 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAILJET_API_KEY = Deno.env.get("MAILJET_API_KEY");
+const MAILJET_API_SECRET = Deno.env.get("MAILJET_API_SECRET");
+
+// Mailjet API endpoint for sending emails (v3.1)
+const MAILJET_SEND_URL = "https://api.mailjet.com/v3.1/send";
+
 const handler = async (req: Request): Promise<Response> => {
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (!MAILJET_API_KEY || !MAILJET_API_SECRET) {
+    return new Response(
+      JSON.stringify({ error: "Mailjet API keys not set" }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
   }
 
   try {
@@ -25,24 +36,51 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const emailHtml = `
-      <div>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Contact:</b> ${contact}</p>
-        <p><b>Summary:</b><br/>${(typeof message === "string") ? message.replace(/\n/g, "<br/>") : ""}</p>
-      </div>
-    `;
+    // Set your verified sender email here or get it from a secret!
+    const FROM_EMAIL = "hello@calcera.global";
+    const TO_EMAIL = "hello@calcera.global";
 
-    const emailResponse = await resend.emails.send({
-      from: "info@calcera.global",
-      to: ["hello@calcera.global"],
-      subject: "New Consultation Request from Calcera Website",
-      html: emailHtml,
+    const data = {
+      Messages:[
+        {
+          From: {
+            Email: FROM_EMAIL,
+            Name: "Calcera Website"
+          },
+          To: [{
+            Email: TO_EMAIL,
+            Name: "Calcera"
+          }],
+          Subject: "New Consultation Request from Calcera Website",
+          HTMLPart: `
+            <div>
+              <p><b>Name:</b> ${name}</p>
+              <p><b>Contact:</b> ${contact}</p>
+              <p><b>Summary:</b><br/>${(typeof message === "string") ? message.replace(/\n/g, "<br/>") : ""}</p>
+            </div>
+          `
+        }
+      ]
+    };
+
+    // Use basic auth with API key and secret
+    const auth = "Basic " + btoa(`${MAILJET_API_KEY}:${MAILJET_API_SECRET}`);
+
+    const mailjetResponse = await fetch(MAILJET_SEND_URL, {
+      method: "POST",
+      headers: {
+        "Authorization": auth,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
     });
 
-    if (emailResponse.error) {
+    const responseJson = await mailjetResponse.json();
+
+    if (!mailjetResponse.ok || responseJson.Messages?.[0]?.Status !== "success") {
+      const errorDetail = responseJson.Messages?.[0]?.Errors?.[0]?.ErrorMessage || responseJson;
       return new Response(
-        JSON.stringify({ error: emailResponse.error.message || "Failed to send email." }),
+        JSON.stringify({ error: errorDetail || "Failed to send email" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
