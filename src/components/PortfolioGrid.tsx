@@ -1,5 +1,5 @@
 
-import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, PhoneCall } from "lucide-react";
+import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, PhoneCall, BookOpen } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 
@@ -74,6 +74,14 @@ const portfolio = [
     description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
     icon: PhoneCall,
     color: "bg-orange-100"
+  },
+  // New AI Comic Book card
+  {
+    title: "AI Comic Book",
+    category: "AI Storybook for Kids",
+    description: "A playful AI-powered storybook app where children upload their own photo to become the main hero—instantly starring in beautifully illustrated stories. Kids (and parents) can buy personalized books in both print and digital formats for a truly magical reading experience.",
+    icon: BookOpen,
+    color: "bg-pink-100"
   }
 ];
 
