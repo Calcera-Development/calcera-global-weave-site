@@ -16,6 +16,7 @@ const initialState = {
 const ContactForm = () => {
   const [fields, setFields] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const [resendApiKey, setResendApiKey] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({
@@ -34,15 +35,37 @@ const ContactForm = () => {
       });
       return;
     }
+    if (!resendApiKey.trim()) {
+      toast({
+        title: "Missing Resend API Key",
+        description: "Please provide your (public) Resend API Key to send the email.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     setLoading(true);
 
-    // In production: Backend handles email sending via Resend/Supabase/edge function
     try {
-      const response = await fetch("/api/send-contact", {
+      // Direct call to Resend API for demo ONLY - do not use in production.
+      const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields),
+        headers: {
+          "Authorization": `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "info@calcera.global",
+          to: ["hello@calcera.global"],
+          subject: "New Consultation Request from Calcera Website",
+          html: `
+            <div>
+              <p><b>Name:</b> ${fields.name}</p>
+              <p><b>Contact:</b> ${fields.contact}</p>
+              <p><b>Summary:</b><br/>${fields.message.replace(/\n/g, "<br/>")}</p>
+            </div>
+          `,
+        }),
       });
 
       if (response.ok) {
@@ -55,7 +78,7 @@ const ContactForm = () => {
         const err = await response.json().catch(() => ({}));
         toast({
           title: "Failed to send message",
-          description: err.error?.message || "Something went wrong. Please try again.",
+          description: err.error?.message || "Something went wrong. Please check your API key and try again.",
           variant: "destructive",
         });
       }
@@ -76,19 +99,23 @@ const ContactForm = () => {
       <div className="max-w-5xl mx-auto">
         <AnimatedWrapper animation="fade-up" className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-light text-slate-800 mb-6">
-            Let's Make Something Great Together
+            {`Let's Make Something Great Together`}
           </h2>
           <p className="text-xl sm:text-2xl text-slate-600">
-            We’d love to hear what you’re building. Let’s turn your ideas into beautifully built reality.
+            {`We’d love to hear what you’re building. Let’s turn your ideas into beautifully built reality.`}
           </p>
         </AnimatedWrapper>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <AnimatedWrapper animation="slide-in-from-left">
             <form className="space-y-8" onSubmit={handleSubmit}>
-              <h3 className="text-xl sm:text-2xl font-medium text-slate-800 mb-4">Tell Us About Your Project</h3>
+              <h3 className="text-xl sm:text-2xl font-medium text-slate-800 mb-4">
+                Tell Us About Your Project
+              </h3>
               <div className="space-y-5">
                 <div>
-                  <Label htmlFor="cf-name" className="block text-slate-700 mb-2">Your Name</Label>
+                  <Label htmlFor="cf-name" className="block text-slate-700 mb-2">
+                    Your Name
+                  </Label>
                   <Input
                     id="cf-name"
                     name="name"
@@ -101,7 +128,9 @@ const ContactForm = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="cf-contact" className="block text-slate-700 mb-2">Email or Phone Number</Label>
+                  <Label htmlFor="cf-contact" className="block text-slate-700 mb-2">
+                    Email or Phone Number
+                  </Label>
                   <Input
                     id="cf-contact"
                     name="contact"
@@ -114,7 +143,9 @@ const ContactForm = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="cf-message" className="block text-slate-700 mb-2">Quick Summary of Your Idea</Label>
+                  <Label htmlFor="cf-message" className="block text-slate-700 mb-2">
+                    Quick Summary of Your Idea
+                  </Label>
                   <Textarea
                     id="cf-message"
                     name="message"
@@ -124,6 +155,22 @@ const ContactForm = () => {
                     disabled={loading}
                     placeholder="Describe your project or idea (e.g. 'I’d like to build an AI-powered web app for...')"
                   />
+                </div>
+                <div>
+                  <Label htmlFor="resend-key" className="block text-slate-600 mb-2">
+                    Resend API Key (demo, required to send email)
+                  </Label>
+                  <Input
+                    id="resend-key"
+                    type="password"
+                    value={resendApiKey}
+                    onChange={e => setResendApiKey(e.target.value)}
+                    placeholder="re_123456789..."
+                    disabled={loading}
+                  />
+                  <div className="text-xs text-gray-400 mt-2">
+                    Your key is only used in your browser for demo purposes. For production, backend handling is required.
+                  </div>
                 </div>
                 <Button
                   size="lg"
@@ -170,7 +217,7 @@ const ContactForm = () => {
                   <span className="p-2 bg-purple-100 rounded-full">
                     {/* email svg */}
                     <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 012.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </span>
                   <div>
