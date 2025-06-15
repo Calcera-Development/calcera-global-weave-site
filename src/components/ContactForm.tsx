@@ -10,12 +10,18 @@ import AnimatedWrapper from "@/components/AnimatedWrapper";
 const initialState = {
   name: "",
   contact: "",
+  email: "",
   message: "",
 };
 
 const ContactForm = () => {
   const [fields, setFields] = useState(initialState);
   const [loading, setLoading] = useState(false);
+
+  function validateEmail(email: string) {
+    // Simple email regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({
@@ -27,9 +33,16 @@ const ContactForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     // Validation
-    if (!fields.name.trim() || !fields.contact.trim() || !fields.message.trim()) {
+    if (!fields.name.trim() || !fields.contact.trim() || !fields.email.trim() || !fields.message.trim()) {
       toast({
         title: "All fields are required.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!validateEmail(fields.email.trim())) {
+      toast({
+        title: "Please enter a valid email.",
         variant: "destructive",
       });
       return;
@@ -106,7 +119,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <Label htmlFor="cf-contact" className="block text-slate-700 mb-2">
-                    Email or Phone Number
+                    Phone Number
                   </Label>
                   <Input
                     id="cf-contact"
@@ -115,7 +128,22 @@ const ContactForm = () => {
                     value={fields.contact}
                     onChange={handleChange}
                     disabled={loading}
-                    placeholder="your@email.com or +12 345 678 9012"
+                    placeholder="+12 345 678 9012"
+                    autoComplete="tel"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="cf-email" className="block text-slate-700 mb-2">
+                    Your Email Address
+                  </Label>
+                  <Input
+                    id="cf-email"
+                    name="email"
+                    type="email"
+                    value={fields.email}
+                    onChange={handleChange}
+                    disabled={loading}
+                    placeholder="your@email.com"
                     autoComplete="email"
                   />
                 </div>

@@ -12,6 +12,11 @@ const MAILJET_API_SECRET = Deno.env.get("MAILJET_API_SECRET");
 // Mailjet API endpoint for sending emails (v3.1)
 const MAILJET_SEND_URL = "https://api.mailjet.com/v3.1/send";
 
+function isValidEmail(email: string): boolean {
+  // Basic RFC 5322 email regex
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -27,25 +32,34 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const body = await req.json();
-    const { name, contact, message } = body;
+    const { name, contact, email, message } = body;
 
-    if (!name || !contact || !message) {
+    if (!name || !contact || !email || !message) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    // Set your verified sender email here or get it from a secret!
-    const FROM_EMAIL = "hello@calcera.global";
+    if (!isValidEmail(email)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email address." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Fixed recipient
     const TO_EMAIL = "hello@calcera.global";
+
+    // You should verify sender emails in Mailjet for highest deliverability.
+    // However, Mailjet supports sending on behalf of users as long as sender domain is validated.
 
     const data = {
       Messages:[
         {
           From: {
-            Email: FROM_EMAIL,
-            Name: "Calcera Website"
+            Email: email,
+            Name: name
           },
           To: [{
             Email: TO_EMAIL,
@@ -56,6 +70,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div>
               <p><b>Name:</b> ${name}</p>
               <p><b>Contact:</b> ${contact}</p>
+              <p><b>Email:</b> ${email}</p>
               <p><b>Summary:</b><br/>${(typeof message === "string") ? message.replace(/\n/g, "<br/>") : ""}</p>
             </div>
           `
