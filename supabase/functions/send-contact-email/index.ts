@@ -1,3 +1,4 @@
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
@@ -48,21 +49,23 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Always send to your internal business address
-    const FROM_EMAIL = "hello@calcera.global"; // must match Mailjet-verified sender
-    const TO_EMAIL = "hello@calcera.global";   // Always send incoming requests here!
+    // FROM will be the user's input email (may bounce if not an authorized sender!)
+    const FROM_EMAIL = email; // User's entered email
+    const FROM_NAME = name;   // User's entered name
+    const TO_EMAIL = "hello@calcera.global"; // Your business address
+    const TO_NAME = "Calcera";
 
     const data = {
       Messages: [
         {
           From: {
             Email: FROM_EMAIL,
-            Name: "Calcera Website"
+            Name: FROM_NAME
           },
           To: [
             {
               Email: TO_EMAIL,
-              Name: "Calcera"
+              Name: TO_NAME
             }
           ],
           ReplyTo: {
@@ -130,3 +133,4 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
+
