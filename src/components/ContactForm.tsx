@@ -16,7 +16,6 @@ const initialState = {
 const ContactForm = () => {
   const [fields, setFields] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [resendApiKey, setResendApiKey] = useState(""); // for demo only
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({
@@ -35,36 +34,15 @@ const ContactForm = () => {
       });
       return;
     }
-    if (!resendApiKey.trim()) {
-      toast({
-        title: "Missing Resend API Key",
-        description: "Please provide your Resend (public) API Key to test email sending.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     setLoading(true);
-    // Resend API: https://resend.com/docs/send-with-rest-api
+
+    // In production: Backend handles email sending via Resend/Supabase/edge function
     try {
-      const response = await fetch("https://api.resend.com/emails", {
+      const response = await fetch("/api/send-contact", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "info@calcera.global", // The sender (must be a verified domain in Resend dashboard for production)
-          to: ["hello@calcera.global"],
-          subject: "New Consultation Request from Calcera Website",
-          html: `
-            <div>
-              <p><b>Name:</b> ${fields.name}</p>
-              <p><b>Contact:</b> ${fields.contact}</p>
-              <p><b>Summary:</b><br/>${fields.message.replace(/\n/g, "<br/>")}</p>
-            </div>
-          `,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
       });
 
       if (response.ok) {
@@ -118,7 +96,7 @@ const ContactForm = () => {
                     value={fields.name}
                     onChange={handleChange}
                     disabled={loading}
-                    placeholder="Jane Doe"
+                    placeholder="Your full name"
                     autoComplete="name"
                   />
                 </div>
@@ -131,7 +109,7 @@ const ContactForm = () => {
                     value={fields.contact}
                     onChange={handleChange}
                     disabled={loading}
-                    placeholder="jane@example.com / +12 345 678 9012"
+                    placeholder="your@email.com or +12 345 678 9012"
                     autoComplete="email"
                   />
                 </div>
@@ -144,22 +122,8 @@ const ContactForm = () => {
                     value={fields.message}
                     onChange={handleChange}
                     disabled={loading}
-                    placeholder="Describe your project idea in a few sentences..."
+                    placeholder="Describe your project or idea (e.g. 'I’d like to build an AI-powered web app for...')"
                   />
-                </div>
-                <div>
-                  <Label htmlFor="resend-key" className="block text-slate-600 mb-2">Resend API Key (demo, required to send email)</Label>
-                  <Input
-                    id="resend-key"
-                    type="password"
-                    value={resendApiKey}
-                    onChange={e => setResendApiKey(e.target.value)}
-                    placeholder="re_123456789..."
-                    disabled={loading}
-                  />
-                  <div className="text-xs text-gray-400 mt-2">
-                    Your key is used only in your browser. For production, move this logic to a backend (Supabase Edge Function).
-                  </div>
                 </div>
                 <Button
                   size="lg"
