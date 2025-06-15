@@ -4,6 +4,22 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 
 const portfolio = [
+  // Move the last two cards to the top:
+  {
+    title: "CallQA Insight",
+    category: "AI Customer Service QA",
+    description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
+    icon: PhoneCall,
+    color: "bg-orange-100"
+  },
+  {
+    title: "AI Comic Book",
+    category: "AI Storybook for Kids",
+    description: "A playful AI-powered storybook app where children upload their own photo to become the main hero—instantly starring in beautifully illustrated stories. Kids (and parents) can buy personalized books in both print and digital formats for a truly magical reading experience.",
+    icon: BookOpen,
+    color: "bg-pink-100"
+  },
+  // Then the rest, in the existing order:
   {
     title: "Chat Companion",
     category: "AI + WhatsApp",
@@ -66,22 +82,6 @@ const portfolio = [
     description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
     icon: Shield,
     color: "bg-green-100"
-  },
-  // New AI QA project card
-  {
-    title: "CallQA Insight",
-    category: "AI Customer Service QA",
-    description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
-    icon: PhoneCall,
-    color: "bg-orange-100"
-  },
-  // New AI Comic Book card
-  {
-    title: "AI Comic Book",
-    category: "AI Storybook for Kids",
-    description: "A playful AI-powered storybook app where children upload their own photo to become the main hero—instantly starring in beautifully illustrated stories. Kids (and parents) can buy personalized books in both print and digital formats for a truly magical reading experience.",
-    icon: BookOpen,
-    color: "bg-pink-100"
   }
 ];
 
