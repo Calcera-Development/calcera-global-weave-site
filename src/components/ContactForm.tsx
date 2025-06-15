@@ -16,7 +16,6 @@ const initialState = {
 const ContactForm = () => {
   const [fields, setFields] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [resendApiKey, setResendApiKey] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({
@@ -35,37 +34,15 @@ const ContactForm = () => {
       });
       return;
     }
-    if (!resendApiKey.trim()) {
-      toast({
-        title: "Missing Resend API Key",
-        description: "Please provide your (public) Resend API Key to send the email.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     setLoading(true);
 
     try {
-      // Direct call to Resend API for demo ONLY - do not use in production.
-      const response = await fetch("https://api.resend.com/emails", {
+      // Send data to Supabase Edge Function (secure backend)
+      const response = await fetch("https://oayloknboqllzgbnyjzh.supabase.co/functions/v1/send-contact-email", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "info@calcera.global",
-          to: ["hello@calcera.global"],
-          subject: "New Consultation Request from Calcera Website",
-          html: `
-            <div>
-              <p><b>Name:</b> ${fields.name}</p>
-              <p><b>Contact:</b> ${fields.contact}</p>
-              <p><b>Summary:</b><br/>${fields.message.replace(/\n/g, "<br/>")}</p>
-            </div>
-          `,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields)
       });
 
       if (response.ok) {
@@ -78,7 +55,7 @@ const ContactForm = () => {
         const err = await response.json().catch(() => ({}));
         toast({
           title: "Failed to send message",
-          description: err.error?.message || "Something went wrong. Please check your API key and try again.",
+          description: err.error || "Something went wrong. Please try again.",
           variant: "destructive",
         });
       }
@@ -155,22 +132,6 @@ const ContactForm = () => {
                     disabled={loading}
                     placeholder="Describe your project or idea (e.g. 'I’d like to build an AI-powered web app for...')"
                   />
-                </div>
-                <div>
-                  <Label htmlFor="resend-key" className="block text-slate-600 mb-2">
-                    Resend API Key (demo, required to send email)
-                  </Label>
-                  <Input
-                    id="resend-key"
-                    type="password"
-                    value={resendApiKey}
-                    onChange={e => setResendApiKey(e.target.value)}
-                    placeholder="re_123456789..."
-                    disabled={loading}
-                  />
-                  <div className="text-xs text-gray-400 mt-2">
-                    Your key is only used in your browser for demo purposes. For production, backend handling is required.
-                  </div>
                 </div>
                 <Button
                   size="lg"
