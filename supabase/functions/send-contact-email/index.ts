@@ -9,11 +9,9 @@ const corsHeaders = {
 const MAILJET_API_KEY = Deno.env.get("MAILJET_API_KEY");
 const MAILJET_API_SECRET = Deno.env.get("MAILJET_API_SECRET");
 
-// Mailjet API endpoint for sending emails (v3.1)
 const MAILJET_SEND_URL = "https://api.mailjet.com/v3.1/send";
 
 function isValidEmail(email: string): boolean {
-  // Basic RFC 5322 email regex
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -48,29 +46,33 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Fixed recipient
+    // Send from your verified sender
+    const FROM_EMAIL = "hello@calcera.global"; // must match your Mailjet-verified sender
     const TO_EMAIL = "hello@calcera.global";
 
-    // You should verify sender emails in Mailjet for highest deliverability.
-    // However, Mailjet supports sending on behalf of users as long as sender domain is validated.
-
     const data = {
-      Messages:[
+      Messages: [
         {
           From: {
+            Email: FROM_EMAIL,
+            Name: "Calcera Website"
+          },
+          To: [
+            {
+              Email: TO_EMAIL,
+              Name: "Calcera"
+            }
+          ],
+          ReplyTo: {
             Email: email,
             Name: name
           },
-          To: [{
-            Email: TO_EMAIL,
-            Name: "Calcera"
-          }],
           Subject: "New Consultation Request from Calcera Website",
           HTMLPart: `
             <div>
               <p><b>Name:</b> ${name}</p>
               <p><b>Contact:</b> ${contact}</p>
-              <p><b>Email:</b> ${email}</p>
+              <p><b>User Email:</b> ${email}</p>
               <p><b>Summary:</b><br/>${(typeof message === "string") ? message.replace(/\n/g, "<br/>") : ""}</p>
             </div>
           `
@@ -78,7 +80,6 @@ const handler = async (req: Request): Promise<Response> => {
       ]
     };
 
-    // Use basic auth with API key and secret
     const auth = "Basic " + btoa(`${MAILJET_API_KEY}:${MAILJET_API_SECRET}`);
 
     const mailjetResponse = await fetch(MAILJET_SEND_URL, {
@@ -113,3 +114,4 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
+
