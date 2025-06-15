@@ -54,6 +54,7 @@ const handler = async (req: Request): Promise<Response> => {
     const TO_EMAIL = "hello@calcera.global";
     const TO_NAME = "Calcera";
 
+    // --- PROFESSIONAL EMAIL TEMPLATE STARTS HERE ---
     const data = {
       Messages: [
         {
@@ -73,12 +74,37 @@ const handler = async (req: Request): Promise<Response> => {
           },
           Subject: "New Consultation Request from Calcera Website",
           HTMLPart: `
-            <div>
-              <p><b>Name:</b> ${name}</p>
-              <p><b>Contact:</b> ${contact}</p>
-              <p><b>User Email:</b> ${email}</p>
-              <p><b>Summary:</b><br/>${typeof message === "string" ? message.replace(/\n/g, "<br/>") : ""}</p>
-              <p>Sent via Calcera website contact form.</p>
+            <div style="font-family:Segoe UI, Arial, sans-serif; color:#222; font-size:1rem; line-height:1.6;">
+              <p>Dear Calcera Global Team,</p>
+              <p>
+                You have received a new consultation request via the website contact form. Please find the details below:
+              </p>
+              <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td style="font-weight:bold;">Name:</td>
+                  <td>${name}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:bold;">Contact:</td>
+                  <td>${contact}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:bold;">Email:</td>
+                  <td>${email}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:bold; vertical-align:top;">Summary:</td>
+                  <td>${typeof message === "string" ? message.replace(/\n/g, "<br/>") : ""}</td>
+                </tr>
+              </table>
+              <br/>
+              <p>
+                Kindly reach out to the client as soon as possible to discuss their project needs.<br>
+                <br>
+                Best regards,<br>
+                The Calcera Global Website<br>
+                <small style="color:#888;">This message was sent automatically from the Calcera Global contact form.</small>
+              </p>
             </div>
           `
         }
