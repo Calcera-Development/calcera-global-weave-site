@@ -1,5 +1,5 @@
 
-import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield } from "lucide-react";
+import { MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, PhoneCall } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 
@@ -66,6 +66,14 @@ const portfolio = [
     description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
     icon: Shield,
     color: "bg-green-100"
+  },
+  // New AI QA project card
+  {
+    title: "CallQA Insight",
+    category: "AI Customer Service QA",
+    description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
+    icon: PhoneCall,
+    color: "bg-orange-100"
   }
 ];
 
