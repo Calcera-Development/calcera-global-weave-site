@@ -48,9 +48,9 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send from your verified sender
-    const FROM_EMAIL = "hello@calcera.global"; // must match your Mailjet-verified sender
-    const TO_EMAIL = "hello@calcera.global";
+    // Use Mailjet-verified sender as FROM, send TO the user, Reply-To also set for easy reply
+    const FROM_EMAIL = "hello@calcera.global"; // must match Mailjet-verified sender
+    const TO_EMAIL = email; // Send TO the user's address
 
     const data = {
       Messages: [
@@ -62,20 +62,23 @@ const handler = async (req: Request): Promise<Response> => {
           To: [
             {
               Email: TO_EMAIL,
-              Name: "Calcera"
+              Name: name
             }
           ],
           ReplyTo: {
             Email: email,
             Name: name
           },
-          Subject: "New Consultation Request from Calcera Website",
+          Subject: "Thank you for contacting Calcera!",
           HTMLPart: `
             <div>
+              <p>Hi ${name},</p>
+              <p>Thank you for reaching out about your project.</p>
               <p><b>Name:</b> ${name}</p>
               <p><b>Contact:</b> ${contact}</p>
               <p><b>User Email:</b> ${email}</p>
-              <p><b>Summary:</b><br/>${(typeof message === "string") ? message.replace(/\n/g, "<br/>") : ""}</p>
+              <p><b>Summary:</b><br/>${typeof message === "string" ? message.replace(/\n/g, "<br/>") : ""}</p>
+              <p>We will get back to you as soon as possible.<br><br>Best,<br>Team Calcera</p>
             </div>
           `
         }
@@ -100,11 +103,9 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       responseJson = JSON.parse(responseText);
     } catch (e) {
-      // keep as object with text fallback
       responseJson = { raw: responseText };
     }
 
-    // Log the status and entire response payload
     console.log("Mailjet response status:", mailjetResponse.status);
     console.log("Mailjet response JSON/text:", responseJson);
 
