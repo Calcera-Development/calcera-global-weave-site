@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
@@ -22,6 +21,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   if (!MAILJET_API_KEY || !MAILJET_API_SECRET) {
+    console.error("Mailjet API keys not set.");
     return new Response(
       JSON.stringify({ error: "Mailjet API keys not set" }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -33,6 +33,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { name, contact, email, message } = body;
 
     if (!name || !contact || !email || !message) {
+      console.error("Missing required fields:", { name, contact, email, message });
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -40,6 +41,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     if (!isValidEmail(email)) {
+      console.error("Invalid email address:", email);
       return new Response(
         JSON.stringify({ error: "Invalid email address." }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -80,6 +82,8 @@ const handler = async (req: Request): Promise<Response> => {
       ]
     };
 
+    console.log("Attempting to send email via Mailjet. Payload:", JSON.stringify(data, null, 2));
+
     const auth = "Basic " + btoa(`${MAILJET_API_KEY}:${MAILJET_API_SECRET}`);
 
     const mailjetResponse = await fetch(MAILJET_SEND_URL, {
@@ -91,10 +95,22 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify(data),
     });
 
-    const responseJson = await mailjetResponse.json();
+    let responseText = await mailjetResponse.text();
+    let responseJson = {};
+    try {
+      responseJson = JSON.parse(responseText);
+    } catch (e) {
+      // keep as object with text fallback
+      responseJson = { raw: responseText };
+    }
 
-    if (!mailjetResponse.ok || responseJson.Messages?.[0]?.Status !== "success") {
-      const errorDetail = responseJson.Messages?.[0]?.Errors?.[0]?.ErrorMessage || responseJson;
+    // Log the status and entire response payload
+    console.log("Mailjet response status:", mailjetResponse.status);
+    console.log("Mailjet response JSON/text:", responseJson);
+
+    if (!mailjetResponse.ok || responseJson['Messages']?.[0]?.Status !== "success") {
+      const errorDetail = responseJson['Messages']?.[0]?.Errors?.[0]?.ErrorMessage || responseJson;
+      console.error("Mailjet returned an error:", errorDetail);
       return new Response(
         JSON.stringify({ error: errorDetail || "Failed to send email" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -106,6 +122,7 @@ const handler = async (req: Request): Promise<Response> => {
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
+    console.error("Unhandled error in contact email function:", error);
     return new Response(
       JSON.stringify({ error: error.message ?? "Internal server error." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -114,4 +131,3 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
-
