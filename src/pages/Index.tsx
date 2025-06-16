@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Code, Zap, Users, ArrowRight, Menu, X, CheckCircle, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, Heart } from "lucide-react";
+import { Brain, Code, Zap, Users, ArrowRight, Menu, X, CheckCircle, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, Heart, Sparkles, Rocket, Star } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
 import ServicesGrid from "@/components/ServicesGrid";
@@ -149,60 +150,95 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <HeaderNav navScrollFns={navScrollFns} />
-      {/* Hero Section */}
-      <section ref={heroRef} className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* Enhanced Hero Section */}
+      <section ref={heroRef} className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        {/* Enhanced background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated gradient orbs */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full animate-pulse blur-xl"></div>
+          <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full animate-bounce blur-2xl" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-r from-teal-400/25 to-blue-400/25 rounded-full animate-pulse blur-xl" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-20 right-1/3 w-36 h-36 bg-gradient-to-r from-indigo-400/30 to-purple-400/30 rounded-full animate-bounce blur-xl" style={{animationDelay: '0.5s'}}></div>
+          
+          {/* Floating geometric shapes */}
+          <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-blue-500 rotate-45 animate-spin" style={{animationDuration: '3s'}}></div>
+          <div className="absolute top-3/4 right-1/4 w-6 h-6 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-1/2 left-3/4 w-3 h-3 bg-teal-500 rotate-45 animate-pulse" style={{animationDelay: '0.8s'}}></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedWrapper animation="fade-up">
-            <h1 className="text-5xl md:text-7xl font-light text-slate-800 mb-5 leading-tight">
+            <div className="flex justify-center items-center gap-2 mb-6">
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 animate-pulse" />
+              <span className="text-sm sm:text-base font-medium text-blue-600 uppercase tracking-wider">Digital Innovation Studio</span>
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 animate-pulse" style={{animationDelay: '0.5s'}} />
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-light text-slate-800 mb-6 leading-tight">
               <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Design.</span><br />
               <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">We Build.</span><br />
               <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text">We Elevate.</span>
             </h1>
           </AnimatedWrapper>
+          
           <AnimatedWrapper animation="fade-up" delay="200ms">
-            <p className="text-2xl text-slate-600 mb-5 max-w-2xl mx-auto leading-relaxed">
-              Beautiful code. Intelligent design. Seamless solutions.
-            </p>
+            <div className="relative">
+              <p className="text-xl sm:text-2xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
+                Beautiful code. Intelligent design. Seamless solutions.
+              </p>
+              <div className="absolute -top-2 -left-2 w-8 h-8 border-2 border-blue-400 rounded-full animate-ping opacity-30"></div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-2 border-purple-400 rounded-full animate-ping opacity-30" style={{animationDelay: '1s'}}></div>
+            </div>
           </AnimatedWrapper>
+
           <AnimatedWrapper animation="fade-up" delay="400ms">
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-7">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-8">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg shadow hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
                 onClick={() => scrollToSection(contactRef)}
               >
+                <Rocket className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-12 transition-transform duration-300" />
                 Book Free Consultation
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-blue-400 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="border-2 border-blue-400 bg-white/80 backdrop-blur-sm text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group"
                 onClick={() => scrollToSection(workRef)}
               >
+                <Star className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-12 transition-transform duration-300" />
                 View Our Work
               </Button>
             </div>
           </AnimatedWrapper>
+
           <AnimatedWrapper animation="fade-up" delay="600ms">
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-2">
-              Crafting technology that feels effortless.
-            </p>
-            <p className="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
-            </p>
+            <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-white/20 max-w-3xl mx-auto">
+              <div className="absolute -top-1 -left-1 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              
+              <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-3">
+                Crafting technology that feels effortless.
+              </p>
+              <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+                At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
+              </p>
+            </div>
           </AnimatedWrapper>
         </div>
       </section>
+
       <section ref={servicesRef}>
         <ServicesGrid />
       </section>
       <section ref={workRef}>
-        <PortfolioGrid />
+        <PortfolioGrid onContactClick={() => scrollToSection(contactRef)} />
       </section>
       <WhyChooseUs />
       <section ref={contactRef}>
         <ContactForm />
       </section>
+      
       {/* Footer */}
       <footer className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
         {/* Animated background elements */}
