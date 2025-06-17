@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -151,6 +152,18 @@ const Index = () => {
       <HeaderNav navScrollFns={navScrollFns} />
       {/* Enhanced Hero Section */}
       <section ref={heroRef} className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        {/* Animated grid background */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(to right, #3b82f6 1px, transparent 1px),
+              linear-gradient(to bottom, #3b82f6 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+            animation: 'grid-move 20s linear infinite'
+          }}></div>
+        </div>
+
         {/* Enhanced background elements - removed interfering floating elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Simplified gradient orbs - positioned to not interfere with content */}
