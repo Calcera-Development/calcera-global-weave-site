@@ -151,25 +151,20 @@ const Index = () => {
       <HeaderNav navScrollFns={navScrollFns} />
       {/* Enhanced Hero Section */}
       <section ref={heroRef} className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
-        {/* Enhanced background elements */}
+        {/* Enhanced background elements - removed interfering floating elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Animated gradient orbs */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full animate-pulse blur-xl"></div>
-          <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full animate-bounce blur-2xl" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-r from-teal-400/25 to-blue-400/25 rounded-full animate-pulse blur-xl" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-20 right-1/3 w-36 h-36 bg-gradient-to-r from-indigo-400/30 to-purple-400/30 rounded-full animate-bounce blur-xl" style={{animationDelay: '0.5s'}}></div>
-          
-          {/* Floating geometric shapes */}
-          <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-blue-500 rotate-45 animate-spin" style={{animationDuration: '3s'}}></div>
-          <div className="absolute top-3/4 right-1/4 w-6 h-6 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
-          <div className="absolute top-1/2 left-3/4 w-3 h-3 bg-teal-500 rotate-45 animate-pulse" style={{animationDelay: '0.8s'}}></div>
+          {/* Simplified gradient orbs - positioned to not interfere with content */}
+          <div className="absolute top-10 -left-20 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full animate-pulse blur-3xl"></div>
+          <div className="absolute -top-10 -right-20 w-48 h-48 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full animate-bounce blur-3xl" style={{animationDelay: '1s'}}></div>
+          <div className="absolute -bottom-20 -left-10 w-40 h-40 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-full animate-pulse blur-3xl" style={{animationDelay: '2s'}}></div>
+          <div className="absolute -bottom-10 -right-10 w-36 h-36 bg-gradient-to-r from-indigo-400/25 to-purple-400/25 rounded-full animate-bounce blur-3xl" style={{animationDelay: '0.5s'}}></div>
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <AnimatedWrapper animation="fade-up">
             <div className="flex justify-center items-center gap-2 mb-6">
               <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 animate-pulse" />
-              <span className="text-sm sm:text-base font-medium text-blue-600 uppercase tracking-wider">Product Engineering + Tech Innovation Powerhouse 🚀</span>
+              <span className="text-sm sm:text-base font-medium text-blue-600 uppercase tracking-wider">Product Engineering + Tech Innovation Powerhouse</span>
               <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 animate-pulse" style={{animationDelay: '0.5s'}} />
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-light text-slate-800 mb-6 leading-tight">
@@ -184,8 +179,6 @@ const Index = () => {
               <p className="text-xl sm:text-2xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
                 Build awesome digital products with us!
               </p>
-              <div className="absolute -top-2 -left-2 w-8 h-8 border-2 border-blue-400 rounded-full animate-ping opacity-30"></div>
-              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-2 border-purple-400 rounded-full animate-ping opacity-30" style={{animationDelay: '1s'}}></div>
             </div>
           </AnimatedWrapper>
 
@@ -213,9 +206,6 @@ const Index = () => {
 
           <AnimatedWrapper animation="fade-up" delay="600ms">
             <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-white/20 max-w-3xl mx-auto">
-              <div className="absolute -top-1 -left-1 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              
               <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-3">
                 Crafting technology that feels effortless.
               </p>
