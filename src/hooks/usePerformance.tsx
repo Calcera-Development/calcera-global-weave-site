@@ -6,7 +6,21 @@ export const usePerformance = () => {
     // Monitor Core Web Vitals
     const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log(`Performance metric: ${entry.name}`, entry.value);
+        // Handle different types of performance entries
+        if (entry.entryType === 'paint') {
+          console.log(`Performance metric: ${entry.name}`, entry.startTime);
+        } else if (entry.entryType === 'navigation') {
+          const navEntry = entry as PerformanceNavigationTiming;
+          console.log(`Performance metric: ${entry.name}`, {
+            loadTime: navEntry.loadEventEnd - navEntry.fetchStart,
+            domContentLoaded: navEntry.domContentLoadedEventEnd - navEntry.fetchStart
+          });
+        } else if (entry.entryType === 'largest-contentful-paint') {
+          const lcpEntry = entry as PerformancePaintTiming;
+          console.log(`Performance metric: ${entry.name}`, lcpEntry.startTime);
+        } else {
+          console.log(`Performance metric: ${entry.name}`, entry);
+        }
       }
     });
 
