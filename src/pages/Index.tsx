@@ -1,131 +1,25 @@
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Code, Zap, Users, ArrowRight, Menu, X, CheckCircle, MessageCircle, Mic, Layers, Search, ShoppingCart, Calculator, MapPin, Utensils, Shield, Heart, Sparkles, Rocket, Star } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
-import ServicesGrid from "@/components/ServicesGrid";
-import PortfolioGrid from "@/components/PortfolioGrid";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import ContactForm from "@/components/ContactForm";
 import React from "react";
 
-const Index = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const services = [{
-    icon: Code,
-    title: "Web Development",
-    description: "Powerful, scalable, and future-ready web applications tailored to your vision.",
-    features: ["React & Next.js", "Full-Stack Development", "API Integration", "Performance Optimization"],
-    color: "bg-blue-50"
-  }, {
-    icon: Brain,
-    title: "AI-Powered Web Applications",
-    description: "We build smart automation, GPT and machine learning-based apps that solve real-world problems for businesses, tailored to your unique needs.",
-    features: ["GPT Integration", "Custom AI Models", "Machine Learning", "AI Automation"],
-    color: "bg-purple-50"
-  }, {
-    icon: Zap,
-    title: "In-house R&D Team",
-    description: "Our expert R&D team goes from idea discovery to technical blueprint, guiding founders who don’t have a tech plan yet into a working product.",
-    features: ["Discovery Workshops", "Prototype & MVP", "Emerging Tech Consulting", "Custom Integration"],
-    color: "bg-violet-50"
-  }, {
-    icon: ShoppingCart,
-    title: "Ecommerce Solutions",
-    description: "From Shopify to custom storefronts, we build systems that grow with you.",
-    features: ["Shopify Development", "Payment Integration", "Inventory Management", "Order Processing"],
-    color: "bg-emerald-50"
-  }, {
-    icon: Users,
-    title: "UI/UX Design",
-    description: "Design is more than visuals — it's how your users feel. We craft experiences that click.",
-    features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-    color: "bg-orange-50"
-  }];
-  const portfolio = [{
-    title: "Chat Companion",
-    category: "AI + WhatsApp",
-    tags: ["AI", "WhatsApp"],
-    description: "A relationship wellness chatbot that decodes communication patterns, offering users personalized insights. Powered by GPT, it's like therapy, simplified.",
-    icon: MessageCircle,
-    color: "bg-green-100"
-  }, {
-    title: "MedPod",
-    category: "Podcast AI Platform",
-    tags: ["AI", "Podcast"],
-    description: "AI-driven platform that auto-generates podcasts, simulates interviews, and educates users with interactive AI personas. Fast. Smart. Fun.",
-    icon: Mic,
-    color: "bg-blue-100"
-  }, {
-    title: "MultiLens",
-    category: "AI Debate Engine",
-    tags: ["AI", "Multi-model"],
-    description: "An AI-powered debate and synthesis tool that brings multiple perspectives to life through a collaborative, multi-model interface.",
-    icon: Layers,
-    color: "bg-purple-100"
-  }, {
-    title: "LeadSpark",
-    category: "Smart Prospecting Tool",
-    tags: ["AI", "Lead Generation"],
-    description: "Find untapped leads. With AI filters, real-time web scans, and smart suggestions, LeadSpark uncovers businesses that need your services—before they even know it.",
-    icon: Search,
-    color: "bg-yellow-100"
-  }, {
-    title: "Shopify Inventory Syncer",
-    category: "Ecommerce Tool",
-    tags: ["Shopify", "Automation"],
-    description: "A robust tool that keeps stock levels in perfect sync across product variations—because growing businesses deserve organized chaos, minus the chaos.",
-    icon: ShoppingCart,
-    color: "bg-emerald-100"
-  }, {
-    title: "Financera",
-    category: "Smart Finance Assistant",
-    tags: ["AI", "Finance"],
-    description: "From invoice scanning to expense tracking, Financera uses AI to help businesses manage finances without breaking a sweat.",
-    icon: Calculator,
-    color: "bg-indigo-100"
-  }, {
-    title: "Resort Bliss",
-    category: "Magnolia Hideout",
-    tags: ["Resort", "Web Design"],
-    description: "A digital sanctuary for a real one. A high-end resort website with stunning visuals and calming UX that mirrors the guest experience.",
-    icon: MapPin,
-    color: "bg-teal-100"
-  }, {
-    title: "Fuel Food",
-    category: "Restaurant App",
-    tags: ["Restaurant", "Dashboard"],
-    description: "Complete digital experience for a restaurant—ordering, checkout, admin dashboard, and all the tasty UI in between.",
-    icon: Utensils,
-    color: "bg-red-100"
-  }, {
-    title: "Ceylon Turtles",
-    category: "Conservation Site",
-    tags: ["Conservation", "Education"],
-    description: "An educational platform designed to drive awareness and support for turtle conservation in Sri Lanka.",
-    icon: Shield,
-    color: "bg-green-100"
-  }];
-  const whyChooseUs = [{
-    title: "More Than Developers — We're Your Digital Co-Founders",
-    description: "We don't just write code. We dive into your business goals, understand your users, and build what makes a difference.",
-    icon: Users
-  }, {
-    title: "Design That Connects",
-    description: "We make your brand feel alive with UI/UX that's as intuitive as it is beautiful.",
-    icon: Heart
-  }, {
-    title: "Full Transparency",
-    description: "You see what we see. Real-time project tracking, open communication, and no mystery meetings.",
-    icon: CheckCircle
-  }, {
-    title: "Built on Collaboration",
-    description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
-    icon: Zap
-  }];
+// Lazy load heavy components for better performance
+const ServicesGrid = lazy(() => import("@/components/ServicesGrid"));
+const PortfolioGrid = lazy(() => import("@/components/PortfolioGrid"));
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
+const ContactForm = lazy(() => import("@/components/ContactForm"));
 
+// Loading component for lazy-loaded sections
+const SectionLoader = () => (
+  <div className="flex justify-center items-center py-16">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+);
+
+const Index = () => {
   // Section refs for smooth scroll
   const heroRef = React.useRef<HTMLDivElement>(null);
   const servicesRef = React.useRef<HTMLElement>(null);
@@ -235,19 +129,27 @@ const Index = () => {
         </section>
 
         <section ref={servicesRef} aria-label="Our services">
-          <ServicesGrid />
+          <Suspense fallback={<SectionLoader />}>
+            <ServicesGrid />
+          </Suspense>
         </section>
         
         <section ref={workRef} aria-label="Our portfolio">
-          <PortfolioGrid onContactClick={() => scrollToSection(contactRef)} />
+          <Suspense fallback={<SectionLoader />}>
+            <PortfolioGrid onContactClick={() => scrollToSection(contactRef)} />
+          </Suspense>
         </section>
         
         <section aria-label="Why choose Calcera Global">
-          <WhyChooseUs />
+          <Suspense fallback={<SectionLoader />}>
+            <WhyChooseUs />
+          </Suspense>
         </section>
         
         <section ref={contactRef} aria-label="Contact us">
-          <ContactForm />
+          <Suspense fallback={<SectionLoader />}>
+            <ContactForm />
+          </Suspense>
         </section>
       </main>
       
@@ -272,6 +174,7 @@ const Index = () => {
                   className="h-12 w-auto select-none object-contain hover:scale-110 transition-transform duration-300" 
                   width="48"
                   height="48"
+                  loading="lazy"
                 />
                 <div>
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">

@@ -4,6 +4,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="preload" href="/src/index.css" as="style" />
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//cdn.gpteng.co" />
+    
+    <!-- Preconnect to important origins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
     <title>Calcera Global - AI Software, Web & Digital Partner</title>
     <meta name="description" content="Transform your business with Calcera Global's AI-powered web development, custom software solutions, and digital innovation services. Expert team delivering scalable web applications, AI automation, and cutting-edge technology solutions." />
     <meta name="keywords" content="AI software development, web development agency, custom software solutions, machine learning applications, GPT integration, digital transformation, React development, Next.js, ecommerce solutions, UI UX design, startup technology partner, business automation, SaaS development, calcera global" />
@@ -73,7 +85,7 @@
         "Digital Transformation",
         "Software Consulting"
       ],
-      "areaServed": "Global",
+      "areaServed":  "Global",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Digital Services",
@@ -105,18 +117,31 @@
 
     <link rel="icon" href="/lovable-uploads/3b3156ce-46b8-4b78-96fc-595fa728e0a9.png" type="image/png">
     
-    <!-- CSS Animation for grid -->
+    <!-- Optimized CSS Animation -->
     <style>
       @keyframes grid-move {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(60px, 60px); }
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(60px, 60px, 0); }
+      }
+      
+      /* Critical above-the-fold styles */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      
+      /* Performance hints */
+      .animate-pulse,
+      .animate-bounce {
+        will-change: transform;
+        transform: translateZ(0);
       }
     </style>
   </head>
 
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
