@@ -1,34 +1,14 @@
-
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /private/
-Disallow: /*.json$
-Disallow: /*?*
-
-# Special bot permissions
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Bingbot
-Allow: /
-Crawl-delay: 2
-
-User-agent: facebookexternalhit
 Allow: /
 
 User-agent: Twitterbot
 Allow: /
 
-User-agent: LinkedInBot
+User-agent: facebookexternalhit
 Allow: /
 
-User-agent: WhatsApp
+User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://calcera.global/sitemap.xml
-
-# Cache directive
-Cache-control: public, max-age=86400
