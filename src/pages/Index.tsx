@@ -4,6 +4,7 @@ import { Brain, Code, Zap, Users, ArrowRight, Menu, X, CheckCircle, MessageCircl
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
 import React from "react";
+import calceraLogo from "@/assets/calcera-logo.png";
 
 // Lazy load heavy components for better performance
 const ServicesGrid = lazy(() => import("@/components/ServicesGrid"));
@@ -169,7 +170,7 @@ const Index = () => {
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-4 mb-6">
-                <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Global - AI Software Development Company Logo" className="h-12 w-auto select-none object-contain hover:scale-110 transition-transform duration-300" width="48" height="48" loading="lazy" />
+                <img src={calceraLogo} alt="Calcera Global - AI Software Development Company Logo" className="h-12 w-auto select-none object-contain hover:scale-110 transition-transform duration-300" width="48" height="48" loading="lazy" />
                 <div>
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Calcera Global

@@ -41,7 +41,6 @@ export const usePerformance = () => {
       document.head.appendChild(link);
     };
 
-    // Preload critical images
-    preloadResource('/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png', 'image');
+    // Logo is now bundled and loaded automatically via import
   }, []);
 };

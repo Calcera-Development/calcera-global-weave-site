@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
+import calceraLogo from "@/assets/calcera-logo.png";
 
 interface HeaderNavProps {
   navScrollFns?: {
@@ -43,7 +44,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src="/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png" alt="Calcera Logo" style={{
+            <img src={calceraLogo} alt="Calcera Logo" style={{
               minWidth: 85
             }} className="h-12 w-auto select-none object-contain" />
           </div>
