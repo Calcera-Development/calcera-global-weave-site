@@ -3,15 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Performance optimization: preload critical resources
-const preloadCriticalResources = () => {
-  // Preload the logo image
-  const img = new Image();
-  img.src = '/lovable-uploads/294cbe84-0b39-46b6-a2f7-1ae0d50fa821.png';
-};
-
-// Start preloading immediately
-preloadCriticalResources();
+// Logo is now bundled and preloaded automatically via ES6 imports
 
 // Optimize rendering with concurrent features
 const root = createRoot(document.getElementById("root")!);
