@@ -39,14 +39,14 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 z-50 shadow-sm transition-all duration-300 hover:shadow-md">
+    <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 backdrop-blur-xl border-b border-blue-500/30 z-50 shadow-lg transition-all duration-300 hover:shadow-xl">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src={calceraLogo} alt="Calcera Logo" style={{
-              minWidth: 85
-            }} className="h-12 w-auto select-none object-contain" />
+            <img src={calceraLogo} alt="Calcera Logo" className="h-14 w-auto select-none object-contain brightness-110" style={{
+              minWidth: 120
+            }} />
           </div>
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
@@ -55,22 +55,22 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
                 key={item.key}
                 href="#"
                 onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-                className="text-slate-600 hover:text-blue-600 font-medium text-base transition-all duration-300 relative group py-3"
+                className="text-white/90 hover:text-white font-medium text-base transition-all duration-300 relative group py-3"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
             <Button
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               onClick={handleBookConsultation}
             >
               Book Free Consultation
             </Button>
           </div>
           {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden text-slate-700 hover:bg-slate-100 rounded-full transition-all duration-300" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+          <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/20 rounded-full transition-all duration-300" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
@@ -84,7 +84,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
         transitionProperty: "max-height,opacity"
       }}>
         <div className={`
-            mx-4 mt-3 rounded-2xl shadow-2xl bg-white border border-slate-200
+            mx-4 mt-3 rounded-2xl shadow-2xl bg-gradient-to-br from-blue-600 to-purple-600 border border-blue-400/30
             flex flex-col gap-2 py-4 px-4
             transition-all
             ${isMenuOpen ? "animate-fade-in" : ""}
@@ -94,7 +94,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
               key={item.key}
               href="#"
               onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-              className="block w-full text-slate-700 hover:bg-blue-100 hover:text-blue-700 font-medium text-lg tracking-wide transition-all duration-200 rounded-lg py-3 px-4 text-left"
+              className="block w-full text-white/90 hover:bg-white/20 hover:text-white font-medium text-lg tracking-wide transition-all duration-200 rounded-lg py-3 px-4 text-left"
             >
               {item.label}
             </a>
@@ -102,7 +102,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
           <div className="pt-2">
             <Button
               size="lg"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg rounded-full font-medium transition-all duration-300 py-4 text-lg"
+              className="w-full bg-white text-blue-600 hover:bg-blue-50 shadow-lg rounded-full font-semibold transition-all duration-300 py-4 text-lg"
               onClick={handleBookConsultation}
             >
               Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
