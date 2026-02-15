@@ -45,8 +45,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
-        ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-blue-900/10 border-b border-white/5"
-        : "bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 shadow-lg"
+      ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-blue-900/10 border-b border-white/5"
+      : "bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 shadow-lg"
       }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className={`flex justify-between items-center transition-all duration-500 ${scrolled ? "h-16" : "h-20"}`}>
@@ -103,7 +103,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
         ${isMenuOpen ? "max-h-[600px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"}
       `} style={{ transitionProperty: "max-height,opacity" }}>
         <div className={`
-          mx-3 mt-2 rounded-2xl shadow-2xl bg-slate-900/98 backdrop-blur-2xl border border-white/10
+          mx-3 mt-2 rounded-2xl shadow-2xl bg-slate-950 border border-white/10
           flex flex-col gap-1 py-4 px-3
           transition-all duration-300 transform
           ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"}
@@ -113,7 +113,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
               key={item.key}
               href="#"
               onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-              className="block w-full text-white/80 hover:bg-white/10 hover:text-white font-medium text-base tracking-wide transition-all duration-200 rounded-xl py-3 px-4 text-left"
+              className="block w-full text-white hover:bg-white/10 font-medium text-base tracking-wide transition-all duration-200 rounded-xl py-3.5 px-4 text-left"
             >
               {item.label}
             </a>
