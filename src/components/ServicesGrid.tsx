@@ -66,7 +66,7 @@ const ServicesGrid = () => {
             What we're great at—so you can be even greater.
           </p>
         </AnimatedWrapper>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Our core services">
           {services.map((service, index) => (
             <AnimatedWrapper
               key={service.title}
@@ -74,6 +74,8 @@ const ServicesGrid = () => {
               delay={`${index * 100}ms`}
             >
               <div
+                role="listitem"
+                aria-label={`Service: ${service.title}`}
                 className={`group relative rounded-2xl ${service.bg} border border-slate-200/60 p-6 sm:p-8 transition-all duration-500 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 h-full`}
               >
                 {/* Gradient line at top */}

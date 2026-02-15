@@ -38,10 +38,14 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
         </p>
       </AnimatedWrapper>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" role="list" aria-label="Portfolio projects">
         {portfolio.map((project, index) => (
           <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 150}ms`}>
-            <div className="group glass-card rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 h-full flex flex-col">
+            <article
+              role="listitem"
+              aria-label={`Project: ${project.title}`}
+              className="group glass-card rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 h-full flex flex-col"
+            >
               {/* Gradient header bar */}
               <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
 
@@ -68,7 +72,7 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
                   <ArrowUpRight className="ml-1 h-4 w-4" />
                 </div>
               </div>
-            </div>
+            </article>
           </AnimatedWrapper>
         ))}
       </div>

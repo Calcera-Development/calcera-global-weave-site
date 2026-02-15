@@ -41,10 +41,14 @@ const WhyChooseUs = () => (
           Because building with love and logic matters.
         </p>
       </AnimatedWrapper>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" role="list" aria-label="Reasons to choose Calcera Global">
         {whyChooseUs.map((item, index) => (
           <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 120}ms`}>
-            <div className="group flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1">
+            <div
+              role="listitem"
+              aria-label={item.title}
+              className="group flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1"
+            >
               <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${item.gradient} shadow-lg`}>
                 <item.icon className="h-5 w-5 text-white" />
               </div>
