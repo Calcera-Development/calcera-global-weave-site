@@ -11,13 +11,13 @@ const PortfolioGrid = lazy(() => import("@/components/PortfolioGrid"));
 const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
 const ContactForm = lazy(() => import("@/components/ContactForm"));
 
-const SectionLoader = () => (
-  <div className="flex justify-center items-center py-20">
+const SectionLoader = () =>
+<div className="flex justify-center items-center py-20">
     <div className="relative">
       <div className="h-10 w-10 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
     </div>
-  </div>
-);
+  </div>;
+
 
 const Index = () => {
   const heroRef = React.useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ const Index = () => {
     home: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     services: () => scrollToSection(servicesRef),
     work: () => scrollToSection(workRef),
-    contact: () => scrollToSection(contactRef),
+    contact: () => scrollToSection(contactRef)
   };
 
   return (
@@ -79,8 +79,8 @@ const Index = () => {
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-6 rounded-xl text-base font-semibold shadow-xl shadow-blue-600/20 hover:shadow-2xl hover:shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 group"
                   onClick={() => scrollToSection(contactRef)}
-                  aria-label="Book a free consultation with Calcera Global"
-                >
+                  aria-label="Book a free consultation with Calcera Global">
+
                   <Rocket className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                   Book Free Consultation
                 </Button>
@@ -89,8 +89,8 @@ const Index = () => {
                   size="lg"
                   className="border-2 border-slate-200 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300 px-8 py-6 rounded-xl text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 group"
                   onClick={() => scrollToSection(workRef)}
-                  aria-label="View Calcera Global's portfolio and previous work"
-                >
+                  aria-label="View Calcera Global's portfolio and previous work">
+
                   <Star className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                   View Our Work
                 </Button>
@@ -175,19 +175,19 @@ const Index = () => {
               <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Quick Links</h4>
               <nav aria-label="Footer navigation">
                 <ul className="space-y-4">
-                  {["Home", "Services", "Work", "Contact"].map(item => (
-                    <li key={item}>
-                      <a href="#" onClick={e => {
-                        e.preventDefault();
-                        if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" });
-                        else if (item === "Services") scrollToSection(servicesRef);
-                        else if (item === "Work") scrollToSection(workRef);
-                        else if (item === "Contact") scrollToSection(contactRef);
-                      }} className="text-slate-400 hover:text-white transition-colors duration-300 text-sm">
+                  {["Home", "Services", "Work", "Contact"].map((item) =>
+                  <li key={item}>
+                      <a href="#" onClick={(e) => {
+                      e.preventDefault();
+                      if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" });else
+                      if (item === "Services") scrollToSection(servicesRef);else
+                      if (item === "Work") scrollToSection(workRef);else
+                      if (item === "Contact") scrollToSection(contactRef);
+                    }} className="text-slate-400 hover:text-white transition-colors duration-300 text-sm">
                         {item}
                       </a>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </nav>
             </div>
@@ -209,7 +209,7 @@ const Index = () => {
           <div className="border-t border-white/10 pt-8">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
               <p className="text-slate-400 text-sm">
-                &copy; 2025 Calcera Global. Built with logic and love.
+                © 2026 Calcera Global
               </p>
               <div className="flex items-center gap-6 text-sm text-slate-500">
                 <a href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</a>
@@ -219,7 +219,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 };
 export default Index;
