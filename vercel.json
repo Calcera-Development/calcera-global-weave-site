@@ -1,11 +1,12 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://www.calcera.global" },
+        { "key": "Vary", "value": "Origin" },
+
         { "key": "Strict-Transport-Security", "value": "max-age=63072000" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
@@ -18,4 +19,3 @@
     }
   ]
 }
-
