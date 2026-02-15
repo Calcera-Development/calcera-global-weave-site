@@ -147,7 +147,7 @@ const Index = () => {
             {/* Brand */}
             <div className="lg:col-span-2">
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6 text-center sm:text-left">
-                <img src={calceraLogo} alt="Calcera Global Logo" className="h-10 sm:h-12 w-auto select-none object-contain hover:scale-105 transition-transform duration-300" width="48" height="48" loading="lazy" />
+                <img src={calceraLogo} alt="Calcera Global Logo" className="h-14 sm:h-16 w-auto select-none object-contain hover:scale-105 transition-transform duration-300 rounded-xl" width="64" height="64" loading="lazy" />
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Calcera Global</h3>
                   <p className="text-slate-400 text-xs sm:text-sm">AI-Powered Digital Partner</p>
