@@ -44,7 +44,7 @@ const Index = () => {
 
       <main>
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-[90dvh] flex items-center pt-32 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay [will-change:transform]" aria-label="Hero section">
+        <section ref={heroRef} className="relative min-h-[90dvh] flex items-center pt-32 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay" aria-label="Hero section">
           {/* Floating orbs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
             <div className="absolute top-1/4 -left-20 w-48 h-48 sm:w-72 sm:h-72 bg-blue-400/15 rounded-full blur-3xl animate-float" />

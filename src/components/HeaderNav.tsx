@@ -71,9 +71,9 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:py-6 transition-all duration-500 pointer-events-none [will-change:transform]">
+    <header className="fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:py-6 transition-all duration-500 pointer-events-none">
       <nav
-        className={`mx-auto max-w-7xl transition-all duration-500 pointer-events-auto
+        className={`mx-auto max-w-7xl transition-all duration-500 pointer-events-auto [will-change:padding,background-color]
           ${scrolled
             ? "bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2.5 px-3 sm:px-6 mt-0"
             : "bg-transparent py-2.5 px-3 sm:px-6 mt-0"

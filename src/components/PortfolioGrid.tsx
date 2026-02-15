@@ -67,10 +67,10 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
                   {project.description}
                 </p>
 
-                <div className="mt-6 flex items-center text-blue-600 font-medium text-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 sm:translate-y-2 sm:group-hover:translate-y-0">
+                {/* <div className="mt-6 flex items-center text-blue-600 font-medium text-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 sm:translate-y-2 sm:group-hover:translate-y-0">
                   <span>View Project</span>
                   <ArrowUpRight className="ml-1 h-4 w-4" />
-                </div>
+                </div> */}
               </div>
             </article>
           </AnimatedWrapper>
