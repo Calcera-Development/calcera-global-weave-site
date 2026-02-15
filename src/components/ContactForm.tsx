@@ -147,8 +147,8 @@ const ContactForm = () => {
           </AnimatedWrapper>
 
           <AnimatedWrapper animation="slide-in-from-right" className="lg:col-span-2">
-            <div className="space-y-6 h-full flex flex-col">
-              <div className="glass-card rounded-3xl p-8 shadow-xl flex-grow">
+            <div className="space-y-6">
+              <div className="glass-card rounded-3xl p-8 shadow-xl">
                 <h3 className="text-2xl font-bold text-slate-900 mb-8">
                   Or Say Hi Anytime!
                 </h3>

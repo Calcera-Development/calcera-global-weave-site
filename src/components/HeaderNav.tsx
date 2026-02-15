@@ -71,12 +71,12 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:py-6 transition-all duration-500 pointer-events-none">
+    <header className="fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:py-6 transition-all duration-500 pointer-events-none [will-change:transform]">
       <nav
         className={`mx-auto max-w-7xl transition-all duration-500 pointer-events-auto
           ${scrolled
             ? "bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2.5 px-3 sm:px-6 mt-0"
-            : "bg-transparent py-4 px-2 mt-2 sm:mt-4"
+            : "bg-transparent py-2.5 px-3 sm:px-6 mt-0"
           }`}
       >
         <div className="flex justify-between items-center relative">
@@ -88,8 +88,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
             <img
               src={calceraLogo}
               alt="Calcera Logo"
-              className={`w-auto select-none object-contain transition-all duration-500 
-                ${scrolled ? "h-7 sm:h-9" : "h-9 sm:h-12"} 
+              className={`w-auto select-none object-contain rounded-xl transition-all duration-500 
+                ${scrolled ? "h-8 sm:h-10" : "h-12 sm:h-24"} 
                 group-hover:brightness-125`}
             />
           </button>
@@ -104,8 +104,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
                 onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
                 className={`relative px-5 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-full
                   ${activeSection === item.id
-                    ? "text-white bg-white/15"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? (scrolled ? "text-white bg-white/15" : "text-blue-600 bg-blue-50/80")
+                    : (scrolled ? "text-white/60 hover:text-white hover:bg-white/5" : "text-slate-600 hover:text-blue-600 hover:bg-slate-50/50")
                   }`}
               >
                 {item.label}

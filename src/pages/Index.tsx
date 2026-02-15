@@ -44,7 +44,7 @@ const Index = () => {
 
       <main>
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-[90vh] flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay" aria-label="Hero section">
+        <section ref={heroRef} className="relative min-h-[90dvh] flex items-center pt-32 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay [will-change:transform]" aria-label="Hero section">
           {/* Floating orbs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
             <div className="absolute top-1/4 -left-20 w-48 h-48 sm:w-72 sm:h-72 bg-blue-400/15 rounded-full blur-3xl animate-float" />
@@ -55,7 +55,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto text-center relative z-10">
             <AnimatedWrapper animation="fade-up">
               <div className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 max-w-full">
-                <Sparkles className="h-4 w-4 text-blue-600 flex-shrink-0" aria-hidden="true" />
+                {/* <Sparkles className="h-4 w-4 text-blue-600 flex-shrink-0" aria-hidden="true" /> */}
                 <span className="text-xs sm:text-sm font-medium text-blue-700 tracking-wide truncate">Product Engineering + Tech Innovation Powerhouse</span>
               </div>
               <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
