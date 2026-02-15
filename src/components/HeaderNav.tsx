@@ -44,20 +44,18 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-      scrolled
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
         ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-blue-900/10 border-b border-white/5"
         : "bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 shadow-lg"
-    }`}>
+      }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className={`flex justify-between items-center transition-all duration-500 ${scrolled ? "h-16" : "h-20"}`}>
           {/* Logo */}
-          <button onClick={() => handleNavClick("home")} className="flex items-center space-x-3 group">
+          <button onClick={() => handleNavClick("home")} className="flex items-center space-x-2 sm:space-x-3 group min-w-0 flex-shrink-0">
             <img
               src={calceraLogo}
               alt="Calcera Logo"
-              className={`w-auto select-none object-contain transition-all duration-500 ${scrolled ? "h-10" : "h-14"} group-hover:brightness-125`}
-              style={{ minWidth: 100 }}
+              className={`w-auto select-none object-contain transition-all duration-500 ${scrolled ? "h-8 sm:h-10" : "h-10 sm:h-14"} group-hover:brightness-125 max-w-[120px] sm:max-w-none`}
             />
           </button>
           {/* Desktop Nav */}
@@ -105,10 +103,10 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
         ${isMenuOpen ? "max-h-[600px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"}
       `} style={{ transitionProperty: "max-height,opacity" }}>
         <div className={`
-          mx-3 mt-2 rounded-2xl shadow-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10
-          flex flex-col gap-1 py-3 px-3
-          transition-all
-          ${isMenuOpen ? "animate-fade-in" : ""}
+          mx-3 mt-2 rounded-2xl shadow-2xl bg-slate-900/98 backdrop-blur-2xl border border-white/10
+          flex flex-col gap-1 py-4 px-3
+          transition-all duration-300 transform
+          ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"}
         `}>
           {NAV_ITEMS.map(item => (
             <a

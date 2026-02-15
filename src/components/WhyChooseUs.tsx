@@ -32,19 +32,19 @@ const whyChooseUs = [
 const WhyChooseUs = () => (
   <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/50">
     <div className="max-w-7xl mx-auto">
-      <AnimatedWrapper animation="fade-up" className="text-center mb-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">Why Us</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+      <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2 sm:mb-4">Why Us</p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
           Why Calcera?
         </h2>
-        <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto">
+        <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
           Because building with love and logic matters.
         </p>
       </AnimatedWrapper>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {whyChooseUs.map((item, index) => (
           <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 120}ms`}>
-            <div className="group flex items-start gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1">
+            <div className="group flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1">
               <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${item.gradient} shadow-lg`}>
                 <item.icon className="h-5 w-5 text-white" />
               </div>

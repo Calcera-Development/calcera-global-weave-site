@@ -12,7 +12,7 @@ const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
 const ContactForm = lazy(() => import("@/components/ContactForm"));
 
 const SectionLoader = () =>
-<div className="flex justify-center items-center py-20">
+  <div className="flex justify-center items-center py-20">
     <div className="relative">
       <div className="h-10 w-10 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
     </div>
@@ -41,32 +41,32 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderNav navScrollFns={navScrollFns} />
-      
+
       <main>
         {/* Hero Section */}
         <section ref={heroRef} className="relative min-h-[90vh] flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay" aria-label="Hero section">
           {/* Floating orbs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/15 rounded-full blur-3xl animate-float" />
-            <div className="absolute top-1/3 -right-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-            <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s" }} />
+            <div className="absolute top-1/4 -left-20 w-48 h-48 sm:w-72 sm:h-72 bg-blue-400/15 rounded-full blur-3xl animate-float" />
+            <div className="absolute top-1/3 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-purple-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+            <div className="absolute -bottom-20 left-1/3 w-56 h-56 sm:w-80 sm:h-80 bg-cyan-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s" }} />
           </div>
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
             <AnimatedWrapper animation="fade-up">
-              <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-blue-50 border border-blue-100">
-                <Sparkles className="h-4 w-4 text-blue-600" aria-hidden="true" />
-                <span className="text-sm font-medium text-blue-700 tracking-wide">Product Engineering + Tech Innovation Powerhouse</span>
+              <div className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 max-w-full">
+                <Sparkles className="h-4 w-4 text-blue-600 flex-shrink-0" aria-hidden="true" />
+                <span className="text-xs sm:text-sm font-medium text-blue-700 tracking-wide truncate">Product Engineering + Tech Innovation Powerhouse</span>
               </div>
-              <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-slate-900 mb-8 leading-[0.95] tracking-tight">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
                 <span className="text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text">Design</span>
-                <span className="text-slate-300 mx-3 font-light">·</span>
+                <span className="text-slate-300 mx-1.5 sm:mx-3 font-light">·</span>
                 <span className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">Build</span>
-                <span className="text-slate-300 mx-3 font-light">·</span>
+                <span className="text-slate-300 mx-1.5 sm:mx-3 font-light">·</span>
                 <span className="text-transparent bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">Elevate</span>
               </h1>
             </AnimatedWrapper>
-            
+
             <AnimatedWrapper animation="fade-up" delay="150ms">
               <p className="text-xl sm:text-2xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
                 Build awesome digital products with us!
@@ -98,11 +98,11 @@ const Index = () => {
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="450ms">
-              <div className="glass-card rounded-3xl p-8 sm:p-10 max-w-3xl mx-auto shadow-xl">
-                <p className="text-lg sm:text-xl text-slate-600 leading-relaxed mb-2 font-medium">
+              <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-xl">
+                <p className="text-base sm:text-xl text-slate-600 leading-relaxed mb-2 font-medium">
                   Crafting technology that feels effortless.
                 </p>
-                <p className="text-base text-slate-400 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                   At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
                 </p>
               </div>
@@ -115,48 +115,48 @@ const Index = () => {
             <ServicesGrid />
           </Suspense>
         </section>
-        
+
         <section ref={workRef} aria-label="Our portfolio">
           <Suspense fallback={<SectionLoader />}>
             <PortfolioGrid onContactClick={() => scrollToSection(contactRef)} />
           </Suspense>
         </section>
-        
+
         <section aria-label="Why choose Calcera Global">
           <Suspense fallback={<SectionLoader />}>
             <WhyChooseUs />
           </Suspense>
         </section>
-        
+
         <section ref={contactRef} aria-label="Contact us">
           <Suspense fallback={<SectionLoader />}>
             <ContactForm />
           </Suspense>
         </section>
       </main>
-      
+
       {/* Footer */}
       <footer className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-950 text-white overflow-hidden noise-overlay" role="contentinfo">
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             {/* Brand */}
             <div className="lg:col-span-2">
-              <div className="flex items-center space-x-4 mb-6">
-                <img src={calceraLogo} alt="Calcera Global Logo" className="h-12 w-auto select-none object-contain hover:scale-105 transition-transform duration-300" width="48" height="48" loading="lazy" />
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6 text-center sm:text-left">
+                <img src={calceraLogo} alt="Calcera Global Logo" className="h-10 sm:h-12 w-auto select-none object-contain hover:scale-105 transition-transform duration-300" width="48" height="48" loading="lazy" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Calcera Global</h3>
-                  <p className="text-slate-400 text-sm">AI-Powered Digital Partner</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Calcera Global</h3>
+                  <p className="text-slate-400 text-xs sm:text-sm">AI-Powered Digital Partner</p>
                 </div>
               </div>
-              <p className="text-slate-400 text-base leading-relaxed mb-8 max-w-md">
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8 max-w-md text-center sm:text-left mx-auto sm:mx-0">
                 Transforming ideas into intelligent digital experiences. We craft beautiful, functional solutions that drive real business results.
               </p>
-              <div className="flex space-x-3">
+              <div className="flex justify-center sm:justify-start space-x-3">
                 <a href="https://www.linkedin.com/company/calcera.global/" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-blue-600 p-2.5 rounded-xl transition-all duration-300 hover:scale-110" aria-label="Follow Calcera Global on LinkedIn">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -169,21 +169,21 @@ const Index = () => {
                 </a>
               </div>
             </div>
-            
+
             {/* Quick Links */}
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Quick Links</h4>
+            <div className="text-center sm:text-left">
+              <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Quick Links</h4>
               <nav aria-label="Footer navigation">
                 <ul className="space-y-4">
                   {["Home", "Services", "Work", "Contact"].map((item) =>
-                  <li key={item}>
+                    <li key={item}>
                       <a href="#" onClick={(e) => {
-                      e.preventDefault();
-                      if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" });else
-                      if (item === "Services") scrollToSection(servicesRef);else
-                      if (item === "Work") scrollToSection(workRef);else
-                      if (item === "Contact") scrollToSection(contactRef);
-                    }} className="text-slate-400 hover:text-white transition-colors duration-300 text-sm">
+                        e.preventDefault();
+                        if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" }); else
+                          if (item === "Services") scrollToSection(servicesRef); else
+                            if (item === "Work") scrollToSection(workRef); else
+                              if (item === "Contact") scrollToSection(contactRef);
+                      }} className="text-slate-400 hover:text-white transition-colors duration-300 text-sm">
                         {item}
                       </a>
                     </li>
@@ -191,20 +191,20 @@ const Index = () => {
                 </ul>
               </nav>
             </div>
-            
+
             {/* Services */}
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Our Services</h4>
+            <div className="text-center sm:text-left">
+              <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Our Services</h4>
               <ul className="space-y-4 text-slate-400 text-sm">
                 <li>Web Development</li>
                 <li>AI Solutions</li>
                 <li>UI/UX Design</li>
-                <li>Ecommerce</li>
+                <li>E-Commerce</li>
                 <li>R&D Consulting</li>
               </ul>
             </div>
           </div>
-          
+
           {/* Bottom */}
           <div className="border-t border-white/10 pt-8">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-6">

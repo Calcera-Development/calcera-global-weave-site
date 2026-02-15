@@ -21,4 +21,15 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Temporary scripts
+capture_screenshot.ts
+test_output.txt
+test_results.json
+

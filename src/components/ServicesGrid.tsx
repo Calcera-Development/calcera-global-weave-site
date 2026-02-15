@@ -29,7 +29,7 @@ const services = [
   },
   {
     icon: ShoppingCart,
-    title: "Ecommerce Solutions",
+    title: "E-Commerce Solutions",
     description: "From Shopify to custom storefronts, we build systems that grow with you.",
     gradient: "from-emerald-500 to-teal-400",
     bg: "bg-emerald-500/5 hover:bg-emerald-500/10",
@@ -49,12 +49,12 @@ const ServicesGrid = () => {
   return (
     <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
-        <AnimatedWrapper animation="fade-up" className="text-center mb-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">What We Do</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+        <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2 sm:mb-4">What We Do</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
             Our Core Services
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
             What we're great at—so you can be even greater.
           </p>
         </AnimatedWrapper>
@@ -66,11 +66,11 @@ const ServicesGrid = () => {
               delay={`${index * 100}ms`}
             >
               <div
-                className={`group relative rounded-2xl ${service.bg} border border-slate-200/60 p-8 transition-all duration-500 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 h-full`}
+                className={`group relative rounded-2xl ${service.bg} border border-slate-200/60 p-6 sm:p-8 transition-all duration-500 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 h-full`}
               >
                 {/* Gradient line at top */}
-                <div className={`absolute top-0 left-8 right-8 h-0.5 bg-gradient-to-r ${service.gradient} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
+                <div className={`absolute top-0 left-6 sm:left-8 right-6 sm:right-8 h-0.5 bg-gradient-to-r ${service.gradient} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
                 <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${service.gradient} mb-6 shadow-lg shadow-slate-200/30`}>
                   <service.icon className="h-6 w-6 text-white" />
                 </div>
