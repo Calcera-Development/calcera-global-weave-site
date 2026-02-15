@@ -14,16 +14,54 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// Simple in-memory rate limiter
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX) {
+    return true;
+  }
+  return false;
+}
+
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Rate limiting by IP
+  const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(clientIp)) {
+    return new Response(
+      JSON.stringify({ error: "Too many requests. Please try again later." }),
+      { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
   }
 
   if (!MAILJET_API_KEY || !MAILJET_API_SECRET) {
     console.error("Mailjet API keys not set.");
     return new Response(
-      JSON.stringify({ error: "Mailjet API keys not set" }),
+      JSON.stringify({ error: "Email service is not configured." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
@@ -33,33 +71,47 @@ const handler = async (req: Request): Promise<Response> => {
     const { name, contact, email, message } = body;
 
     if (!name || !contact || !email || !message) {
-      console.error("Missing required fields:", { name, contact, email, message });
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
+    // Validate and limit input lengths
+    if (typeof name !== "string" || name.length > 200 ||
+        typeof contact !== "string" || contact.length > 50 ||
+        typeof email !== "string" || email.length > 255 ||
+        typeof message !== "string" || message.length > 5000) {
+      return new Response(
+        JSON.stringify({ error: "Invalid input." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     if (!isValidEmail(email)) {
-      console.error("Invalid email address:", email);
       return new Response(
         JSON.stringify({ error: "Invalid email address." }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    // Addresses as per your instruction:
-    const FROM_EMAIL = email; // User's provided email
-    const FROM_NAME = name;   // User's provided name
+    // Use a verified sender address; put user email in ReplyTo only
+    const FROM_EMAIL = "hello@calcera.global";
+    const FROM_NAME = "Calcera Website";
     const TO_EMAIL = "hello@calcera.global";
     const TO_NAME = "Calcera";
 
-    // --- PROFESSIONAL EMAIL TEMPLATE STARTS HERE ---
+    // Escape all user inputs for HTML
+    const safeName = escapeHtml(name.trim());
+    const safeContact = escapeHtml(contact.trim());
+    const safeEmail = escapeHtml(email.trim());
+    const safeMessage = escapeHtml(message.trim()).replace(/\n/g, "<br/>");
+
     const data = {
       Messages: [
         {
           From: {
-            Email: FROM_EMAIL, // User's email: MAY CAUSE SPOOF/SPAM
+            Email: FROM_EMAIL,
             Name: FROM_NAME
           },
           To: [
@@ -69,8 +121,8 @@ const handler = async (req: Request): Promise<Response> => {
             }
           ],
           ReplyTo: {
-            Email: email,
-            Name: name
+            Email: email.trim(),
+            Name: name.trim()
           },
           Subject: "New Consultation Request from Calcera Website",
           HTMLPart: `
@@ -82,19 +134,19 @@ const handler = async (req: Request): Promise<Response> => {
               <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;">
                 <tr>
                   <td style="font-weight:bold;">Name:</td>
-                  <td>${name}</td>
+                  <td>${safeName}</td>
                 </tr>
                 <tr>
                   <td style="font-weight:bold;">Contact:</td>
-                  <td>${contact}</td>
+                  <td>${safeContact}</td>
                 </tr>
                 <tr>
                   <td style="font-weight:bold;">Email:</td>
-                  <td>${email}</td>
+                  <td>${safeEmail}</td>
                 </tr>
                 <tr>
                   <td style="font-weight:bold; vertical-align:top;">Summary:</td>
-                  <td>${typeof message === "string" ? message.replace(/\n/g, "<br/>") : ""}</td>
+                  <td>${safeMessage}</td>
                 </tr>
               </table>
               <br/>
@@ -111,8 +163,6 @@ const handler = async (req: Request): Promise<Response> => {
       ]
     };
 
-    console.log("Attempting to send email via Mailjet. Payload:", JSON.stringify(data, null, 2));
-
     const auth = "Basic " + btoa(`${MAILJET_API_KEY}:${MAILJET_API_SECRET}`);
 
     const mailjetResponse = await fetch(MAILJET_SEND_URL, {
@@ -125,21 +175,17 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     let responseText = await mailjetResponse.text();
-    let responseJson = {};
+    let responseJson: Record<string, any> = {};
     try {
       responseJson = JSON.parse(responseText);
-    } catch (e) {
+    } catch (_e) {
       responseJson = { raw: responseText };
     }
 
-    console.log("Mailjet response status:", mailjetResponse.status);
-    console.log("Mailjet response JSON/text:", responseJson);
-
     if (!mailjetResponse.ok || responseJson['Messages']?.[0]?.Status !== "success") {
-      const errorDetail = responseJson['Messages']?.[0]?.Errors?.[0]?.ErrorMessage || responseJson;
-      console.error("Mailjet returned an error:", errorDetail);
+      console.error("Mailjet error:", responseJson['Messages']?.[0]?.Errors?.[0]?.ErrorMessage || responseJson);
       return new Response(
-        JSON.stringify({ error: errorDetail || "Failed to send email" }),
+        JSON.stringify({ error: "Failed to send email" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -151,7 +197,7 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error: any) {
     console.error("Unhandled error in contact email function:", error);
     return new Response(
-      JSON.stringify({ error: error.message ?? "Internal server error." }),
+      JSON.stringify({ error: "Internal server error." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
