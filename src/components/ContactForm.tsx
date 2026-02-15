@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
+import { supabase } from "@/integrations/supabase/client";
 
 const initialState = {
   name: "",
@@ -43,18 +44,20 @@ const ContactForm = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("https://oayloknboqllzgbnyjzh.supabase.co/functions/v1/send-contact-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields)
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: fields,
       });
 
-      if (response.ok) {
+      if (error) {
+        console.error("Consultation form error:", error);
+        toast({
+          title: "Message failed to send",
+          description: error.message || "Something went wrong. Please try again.",
+          variant: "destructive"
+        });
+      } else {
         toast({ title: "Message sent!", description: "Thanks for reaching out. We'll be in touch soon." });
         setFields(initialState);
-      } else {
-        const err = await response.json().catch(() => ({}));
-        toast({ title: "Failed to send message", description: err.error || "Something went wrong. Please try again.", variant: "destructive" });
       }
     } catch (err) {
       console.error(err);
