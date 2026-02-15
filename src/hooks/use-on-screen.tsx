@@ -1,10 +1,12 @@
 
 import { useState, useEffect, RefObject } from 'react';
 
-export function useOnScreen(ref: RefObject<HTMLElement>, options: IntersectionObserverInit = {}) {
+export function useOnScreen(ref: RefObject<HTMLElement>) {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
+    if (!ref.current) return;
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIntersecting(true);
@@ -13,21 +15,16 @@ export function useOnScreen(ref: RefObject<HTMLElement>, options: IntersectionOb
         }
       }
     }, {
-      threshold: 0.1,
-      ...options
+      threshold: 0.05,
+      rootMargin: '0px 0px -50px 0px'
     });
 
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    observer.observe(ref.current);
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      observer.disconnect();
     };
-  }, [ref, options]);
+  }, [ref]);
 
   return isIntersecting;
 }
