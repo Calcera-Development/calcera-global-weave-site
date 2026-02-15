@@ -23,6 +23,7 @@ function escapeHtml(text: string): string {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  console.log(`Email function invoked: ${req.method}`);
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
