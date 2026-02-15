@@ -12,7 +12,7 @@ const initialState = {
   name: "",
   contact: "",
   email: "",
-  message: "",
+  message: ""
 };
 
 const ContactForm = () => {
@@ -26,7 +26,7 @@ const ContactForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 
@@ -65,10 +65,10 @@ const ContactForm = () => {
   }
 
   const contactInfo = [
-    { icon: Phone, label: "Phone", value: "+94 77 123 9037", color: "from-blue-500 to-cyan-400" },
-    { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
-    { icon: MapPin, label: "Location", value: "Colombo, Sri Lanka", color: "from-emerald-500 to-teal-400" },
-  ];
+  { icon: Phone, label: "Phone", value: "+94 77 123 9037", color: "from-blue-500 to-cyan-400" },
+  { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
+  { icon: MapPin, label: "Location", value: "Colombo, Sri Lanka", color: "from-emerald-500 to-teal-400" }];
+
 
   return (
     <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 mesh-gradient relative overflow-hidden">
@@ -95,49 +95,49 @@ const ContactForm = () => {
                     Your Name <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-name" name="name" type="text" value={fields.name} onChange={handleChange} disabled={loading} placeholder="Your full name" autoComplete="name"
-                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
+                  className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
                   <Label htmlFor="cf-contact" className="block text-slate-700 mb-2 font-medium text-sm">
                     Phone Number <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-contact" name="contact" type="text" value={fields.contact} onChange={handleChange} disabled={loading} placeholder="+94 XX XXX XXXX" autoComplete="tel"
-                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
+                  className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
                   <Label htmlFor="cf-email" className="block text-slate-700 mb-2 font-medium text-sm">
                     Your Email Address <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-email" name="email" type="email" value={fields.email} onChange={handleChange} disabled={loading} placeholder="your@email.com" autoComplete="email"
-                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
+                  className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
                   <Label htmlFor="cf-message" className="block text-slate-700 mb-2 font-medium text-sm">
                     Quick Summary of Your Idea <span className="text-rose-500">*</span>
                   </Label>
                   <Textarea id="cf-message" name="message" rows={4} value={fields.message} onChange={handleChange} disabled={loading}
-                    placeholder="Describe your project or idea (e.g. 'I'd like to build an AI-powered web app for...')"
-                    className="rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 resize-none" />
+                  placeholder="Describe your project or idea (e.g. 'I'd like to build an AI-powered web app for...')"
+                  className="rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 resize-none" />
                 </div>
                 <Button
                   size="lg"
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg text-base py-6 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 font-semibold"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <span className="flex items-center justify-center w-full">
+                  disabled={loading}>
+
+                  {loading ?
+                  <span className="flex items-center justify-center w-full">
                       <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                       </svg>
                       Sending...
-                    </span>
-                  ) : (
-                    <>
+                    </span> :
+
+                  <>
                       Book Free Consultation
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </>
-                  )}
+                  }
                 </Button>
               </div>
             </form>
@@ -150,21 +150,21 @@ const ContactForm = () => {
                   Or Say Hi Anytime!
                 </h3>
                 <div className="space-y-6">
-                  {contactInfo.map((info) => (
-                    <div key={info.label} className="flex items-center gap-4 group">
+                  {contactInfo.map((info) =>
+                  <div key={info.label} className="flex items-center gap-4 group">
                       <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${info.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                         <info.icon className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <p className="font-medium text-slate-900 text-sm">{info.label}</p>
-                        {info.href ? (
-                          <a className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm" href={info.href}>{info.value}</a>
-                        ) : (
-                          <p className="text-slate-500 text-sm">{info.value}</p>
-                        )}
+                        {info.href ?
+                      <a className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm" href={info.href}>{info.value}</a> :
+
+                      <p className="text-slate-500 font-sans text-xs">{info.value}</p>
+                      }
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
               
@@ -183,8 +183,8 @@ const ContactForm = () => {
           </AnimatedWrapper>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default ContactForm;
