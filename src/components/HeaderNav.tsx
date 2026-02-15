@@ -145,44 +145,46 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
             </Button>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu Overlay */}
-        <div className={`
-          md:hidden fixed left-4 right-4 top-[84px] z-[100]
-          transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)
-          ${isMenuOpen ? "max-h-[80vh] opacity-100 translate-y-0 pointer-events-auto" : "max-h-0 opacity-0 -translate-y-8 pointer-events-none"}
-        `} style={{ transitionProperty: "max-height, opacity, transform" }}>
-          <div className="rounded-3xl shadow-2xl bg-slate-950/98 backdrop-blur-3xl border border-white/10 overflow-hidden">
-            <div className="flex flex-col p-4 gap-1">
-              {NAV_ITEMS.map(item => (
-                <a
-                  key={item.key}
-                  href={`#${item.id}`}
-                  onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-                  className={`flex items-center justify-between w-full rounded-2xl py-4 px-6 text-left transition-all duration-300
-                    ${activeSection === item.id
-                      ? "text-white bg-white/10"
-                      : "text-white/60 hover:text-white hover:bg-white/5"
-                    }`}
-                >
-                  <span className="text-lg font-medium tracking-tight">{item.label}</span>
-                  {activeSection === item.id && <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />}
-                </a>
-              ))}
-              <div className="mt-4 pt-4 border-t border-white/5">
-                <Button
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl rounded-2xl font-bold py-5 text-lg"
-                  onClick={handleBookConsultation}
-                >
-                  Book Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
+      {/* Mobile Menu Overlay - Move outside nav for better positioning stability */}
+      <div className={`
+        md:hidden fixed left-4 right-4 z-[110]
+        transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)
+        ${scrolled ? "top-[76px]" : "top-[96px]"}
+        ${isMenuOpen ? "max-h-[80vh] opacity-100 translate-y-0 pointer-events-auto" : "max-h-0 opacity-0 -translate-y-8 pointer-events-none shadow-none"}
+      `} style={{ transitionProperty: "max-height, opacity, transform, top" }}>
+        <div className="rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-900 border border-white/10 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 pointer-events-none" />
+          <div className="flex flex-col p-4 gap-1 relative z-10">
+            {NAV_ITEMS.map(item => (
+              <a
+                key={item.key}
+                href={`#${item.id}`}
+                onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
+                className={`flex items-center justify-between w-full rounded-2xl py-4 px-6 text-left transition-all duration-300
+                  ${activeSection === item.id
+                    ? "text-white bg-white/10"
+                    : "text-white/70 hover:text-white hover:bg-white/5"
+                  }`}
+              >
+                <span className="text-lg font-medium tracking-tight">{item.label}</span>
+                {activeSection === item.id && <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />}
+              </a>
+            ))}
+            <div className="mt-4 pt-4 border-t border-white/5">
+              <Button
+                size="lg"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl rounded-2xl font-bold py-5 text-lg"
+                onClick={handleBookConsultation}
+              >
+                Book Consultation
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
         </div>
-      </nav>
+      </div>
     </header>
   );
 };

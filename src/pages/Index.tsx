@@ -201,6 +201,7 @@ const Index = () => {
                 <li>UI/UX Design</li>
                 <li>E-Commerce</li>
                 <li>R&D Consulting</li>
+                <li>SEO Optimization</li>
               </ul>
             </div>
           </div>
