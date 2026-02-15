@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import calceraLogo from "@/assets/calcera-logo.png";
@@ -21,8 +21,14 @@ const NAV_ITEMS = [
 
 const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Handler for navigation item click (desktop+mobile)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleNavClick = (key: string) => {
     setIsMenuOpen(false);
     if (navScrollFns && navScrollFns[key as keyof typeof navScrollFns]) {
@@ -30,7 +36,6 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
     }
   };
 
-  // Handler for Book Free Consultation
   const handleBookConsultation = () => {
     setIsMenuOpen(false);
     if (navScrollFns && navScrollFns.contact) {
@@ -39,73 +44,89 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 backdrop-blur-xl border-b border-blue-500/30 z-50 shadow-lg transition-all duration-300 hover:shadow-xl">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      scrolled
+        ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-blue-900/10 border-b border-white/5"
+        : "bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 shadow-lg"
+    }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className={`flex justify-between items-center transition-all duration-500 ${scrolled ? "h-16" : "h-20"}`}>
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <img src={calceraLogo} alt="Calcera Logo" className="h-14 w-auto select-none object-contain brightness-110" style={{
-              minWidth: 120
-            }} />
-          </div>
+          <button onClick={() => handleNavClick("home")} className="flex items-center space-x-3 group">
+            <img
+              src={calceraLogo}
+              alt="Calcera Logo"
+              className={`w-auto select-none object-contain transition-all duration-500 ${scrolled ? "h-10" : "h-14"} group-hover:brightness-125`}
+              style={{ minWidth: 100 }}
+            />
+          </button>
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-1">
             {NAV_ITEMS.map(item => (
               <a
                 key={item.key}
                 href="#"
                 onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-                className="text-white/90 hover:text-white font-medium text-base transition-all duration-300 relative group py-3"
+                className="text-white/80 hover:text-white font-medium text-sm tracking-wide transition-all duration-300 relative px-5 py-2 rounded-full hover:bg-white/10"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-            <Button
-              size="lg"
-              className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              onClick={handleBookConsultation}
-            >
-              Book Free Consultation
-            </Button>
+            <div className="ml-4">
+              <Button
+                size="sm"
+                className="bg-white text-blue-700 hover:bg-blue-50 shadow-lg px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                onClick={handleBookConsultation}
+              >
+                Book Consultation
+                <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Button>
+            </div>
           </div>
           {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/20 rounded-full transition-all duration-300" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden text-white hover:bg-white/10 rounded-full transition-all duration-300"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <div className="relative w-6 h-6">
+              <X className={`h-6 w-6 absolute inset-0 transition-all duration-300 ${isMenuOpen ? "rotate-0 opacity-100" : "rotate-90 opacity-0"}`} />
+              <Menu className={`h-6 w-6 absolute inset-0 transition-all duration-300 ${isMenuOpen ? "-rotate-90 opacity-0" : "rotate-0 opacity-100"}`} />
+            </div>
           </Button>
         </div>
       </div>
       {/* Mobile Menu */}
       <div className={`
-          block md:hidden fixed left-0 right-0 top-20 z-[100]
-          transition-all duration-300
-          ${isMenuOpen ? "max-h-[600px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"}
-        `} style={{
-        transitionProperty: "max-height,opacity"
-      }}>
+        block md:hidden fixed left-0 right-0 top-16 z-[100]
+        transition-all duration-400
+        ${isMenuOpen ? "max-h-[600px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"}
+      `} style={{ transitionProperty: "max-height,opacity" }}>
         <div className={`
-            mx-4 mt-3 rounded-2xl shadow-2xl bg-gradient-to-br from-blue-600 to-purple-600 border border-blue-400/30
-            flex flex-col gap-2 py-4 px-4
-            transition-all
-            ${isMenuOpen ? "animate-fade-in" : ""}
-          `}>
+          mx-3 mt-2 rounded-2xl shadow-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10
+          flex flex-col gap-1 py-3 px-3
+          transition-all
+          ${isMenuOpen ? "animate-fade-in" : ""}
+        `}>
           {NAV_ITEMS.map(item => (
             <a
               key={item.key}
               href="#"
               onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-              className="block w-full text-white/90 hover:bg-white/20 hover:text-white font-medium text-lg tracking-wide transition-all duration-200 rounded-lg py-3 px-4 text-left"
+              className="block w-full text-white/80 hover:bg-white/10 hover:text-white font-medium text-base tracking-wide transition-all duration-200 rounded-xl py-3 px-4 text-left"
             >
               {item.label}
             </a>
           ))}
-          <div className="pt-2">
+          <div className="pt-2 px-1 pb-1">
             <Button
               size="lg"
-              className="w-full bg-white text-blue-600 hover:bg-blue-50 shadow-lg rounded-full font-semibold transition-all duration-300 py-4 text-lg"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg rounded-full font-semibold transition-all duration-300 py-3.5 text-base"
               onClick={handleBookConsultation}
             >
-              Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
+              Book Consultation <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>

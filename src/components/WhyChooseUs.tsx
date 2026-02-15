@@ -6,44 +6,53 @@ const whyChooseUs = [
   {
     title: "More Than Developers — We're Your Digital Co-Founders",
     description: "We don't just write code. We dive into your business goals, understand your users, and build what makes a difference.",
-    icon: Users
+    icon: Users,
+    gradient: "from-blue-500 to-cyan-400",
   },
   {
     title: "Design That Connects",
     description: "We make your brand feel alive with UI/UX that's as intuitive as it is beautiful.",
-    icon: Heart
+    icon: Heart,
+    gradient: "from-rose-500 to-pink-400",
   },
   {
     title: "Full Transparency",
     description: "You see what we see. Real-time project tracking, open communication, and no mystery meetings.",
-    icon: CheckCircle
+    icon: CheckCircle,
+    gradient: "from-emerald-500 to-teal-400",
   },
   {
     title: "Built on Collaboration",
     description: "Our favorite projects happen when we work together. With Calcera, you're not a client—you're part of the team.",
-    icon: Zap
+    icon: Zap,
+    gradient: "from-violet-500 to-purple-400",
   }
 ];
 
 const WhyChooseUs = () => (
-  <section className="py-16 px-4 sm:px-6 lg:px-8">
+  <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/50">
     <div className="max-w-7xl mx-auto">
-      <AnimatedWrapper animation="fade-up" className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-light text-slate-800 mb-3">
+      <AnimatedWrapper animation="fade-up" className="text-center mb-16">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">Why Us</p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
           Why Calcera?
         </h2>
-        <p className="text-lg sm:text-xl text-slate-600">Because building with love and logic matters.</p>
+        <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto">
+          Because building with love and logic matters.
+        </p>
       </AnimatedWrapper>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {whyChooseUs.map((item, index) => (
-          <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 150}ms`}>
-            <div className="flex items-start space-x-6">
-              <div className="p-3 rounded-full bg-blue-100 flex-shrink-0">
-                <item.icon className="h-6 w-6 text-blue-600" />
+          <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 120}ms`}>
+            <div className="group flex items-start gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1">
+              <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${item.gradient} shadow-lg`}>
+                <item.icon className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-medium text-slate-800 mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-base leading-relaxed">{item.description}</p>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+                  {item.title}
+                </h3>
+                <p className="text-slate-500 text-base leading-relaxed">{item.description}</p>
               </div>
             </div>
           </AnimatedWrapper>

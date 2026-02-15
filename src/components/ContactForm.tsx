@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,7 +20,6 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
 
   function validateEmail(email: string) {
-    // Simple email regex
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
@@ -33,26 +32,17 @@ const ContactForm = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Validation
     if (!fields.name.trim() || !fields.contact.trim() || !fields.email.trim() || !fields.message.trim()) {
-      toast({
-        title: "All fields are required.",
-        variant: "destructive",
-      });
+      toast({ title: "All fields are required.", variant: "destructive" });
       return;
     }
     if (!validateEmail(fields.email.trim())) {
-      toast({
-        title: "Please enter a valid email.",
-        variant: "destructive",
-      });
+      toast({ title: "Please enter a valid email.", variant: "destructive" });
       return;
     }
 
     setLoading(true);
-
     try {
-      // Send data to Supabase Edge Function (secure backend)
       const response = await fetch("https://oayloknboqllzgbnyjzh.supabase.co/functions/v1/send-contact-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,128 +50,83 @@ const ContactForm = () => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thanks for reaching out. We'll be in touch soon.",
-        });
+        toast({ title: "Message sent!", description: "Thanks for reaching out. We'll be in touch soon." });
         setFields(initialState);
       } else {
         const err = await response.json().catch(() => ({}));
-        toast({
-          title: "Failed to send message",
-          description: err.error || "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
+        toast({ title: "Failed to send message", description: err.error || "Something went wrong. Please try again.", variant: "destructive" });
       }
     } catch (err) {
       console.error(err);
-      toast({
-        title: "Something went wrong.",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
+      toast({ title: "Something went wrong.", description: "Please try again later.", variant: "destructive" });
     } finally {
       setLoading(false);
     }
   }
 
+  const contactInfo = [
+    { icon: Phone, label: "Phone", value: "+94 77 123 9037", color: "from-blue-500 to-cyan-400" },
+    { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
+    { icon: MapPin, label: "Location", value: "Colombo, Sri Lanka", color: "from-emerald-500 to-teal-400" },
+  ];
+
   return (
-    <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-blue-50 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-blue-200 rounded-full animate-pulse"></div>
-        <div className="absolute top-32 right-20 w-16 h-16 bg-purple-200 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-indigo-200 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-32 right-1/3 w-14 h-14 bg-pink-200 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-      </div>
-      
-      <div className="max-w-5xl mx-auto relative z-10">
-        <AnimatedWrapper animation="fade-up" className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-light text-slate-800 mb-6">
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 mesh-gradient relative overflow-hidden">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <AnimatedWrapper animation="fade-up" className="text-center mb-16">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">Contact</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             {`Let's Make Something Great Together`}
           </h2>
-          <p className="text-xl sm:text-2xl text-slate-600">
+          <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto">
             {`We'd love to hear what you're building. Let's turn your ideas into beautifully built reality.`}
           </p>
         </AnimatedWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <AnimatedWrapper animation="slide-in-from-left">
-            <form className="space-y-8 bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/20" onSubmit={handleSubmit}>
-              <h3 className="text-xl sm:text-2xl font-medium text-slate-800 mb-4">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+          <AnimatedWrapper animation="slide-in-from-left" className="lg:col-span-3">
+            <form className="glass-card rounded-3xl p-8 sm:p-10 shadow-xl" onSubmit={handleSubmit}>
+              <h3 className="text-2xl font-bold text-slate-900 mb-8">
                 Tell Us About Your Project
               </h3>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
-                  <Label htmlFor="cf-name" className="block text-slate-700 mb-2 font-medium">
-                    Your Name <span className="text-red-500">*</span>
+                  <Label htmlFor="cf-name" className="block text-slate-700 mb-2 font-medium text-sm">
+                    Your Name <span className="text-rose-500">*</span>
                   </Label>
-                  <Input
-                    id="cf-name"
-                    name="name"
-                    type="text"
-                    value={fields.name}
-                    onChange={handleChange}
-                    disabled={loading}
-                    placeholder="Your full name"
-                    autoComplete="name"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
+                  <Input id="cf-name" name="name" type="text" value={fields.name} onChange={handleChange} disabled={loading} placeholder="Your full name" autoComplete="name"
+                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
-                  <Label htmlFor="cf-contact" className="block text-slate-700 mb-2 font-medium">
-                    Phone Number <span className="text-red-500">*</span>
+                  <Label htmlFor="cf-contact" className="block text-slate-700 mb-2 font-medium text-sm">
+                    Phone Number <span className="text-rose-500">*</span>
                   </Label>
-                  <Input
-                    id="cf-contact"
-                    name="contact"
-                    type="text"
-                    value={fields.contact}
-                    onChange={handleChange}
-                    disabled={loading}
-                    placeholder="+94 XX XXX XXXX"
-                    autoComplete="tel"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
+                  <Input id="cf-contact" name="contact" type="text" value={fields.contact} onChange={handleChange} disabled={loading} placeholder="+94 XX XXX XXXX" autoComplete="tel"
+                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
-                  <Label htmlFor="cf-email" className="block text-slate-700 mb-2 font-medium">
-                    Your Email Address <span className="text-red-500">*</span>
+                  <Label htmlFor="cf-email" className="block text-slate-700 mb-2 font-medium text-sm">
+                    Your Email Address <span className="text-rose-500">*</span>
                   </Label>
-                  <Input
-                    id="cf-email"
-                    name="email"
-                    type="email"
-                    value={fields.email}
-                    onChange={handleChange}
-                    disabled={loading}
-                    placeholder="your@email.com"
-                    autoComplete="email"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
+                  <Input id="cf-email" name="email" type="email" value={fields.email} onChange={handleChange} disabled={loading} placeholder="your@email.com" autoComplete="email"
+                    className="h-12 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300" />
                 </div>
                 <div>
-                  <Label htmlFor="cf-message" className="block text-slate-700 mb-2 font-medium">
-                    Quick Summary of Your Idea <span className="text-red-500">*</span>
+                  <Label htmlFor="cf-message" className="block text-slate-700 mb-2 font-medium text-sm">
+                    Quick Summary of Your Idea <span className="text-rose-500">*</span>
                   </Label>
-                  <Textarea
-                    id="cf-message"
-                    name="message"
-                    rows={4}
-                    value={fields.message}
-                    onChange={handleChange}
-                    disabled={loading}
+                  <Textarea id="cf-message" name="message" rows={4} value={fields.message} onChange={handleChange} disabled={loading}
                     placeholder="Describe your project or idea (e.g. 'I'd like to build an AI-powered web app for...')"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
+                    className="rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 resize-none" />
                 </div>
                 <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg text-lg py-4 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg text-base py-6 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 font-semibold"
                   disabled={loading}
                 >
                   {loading ? (
                     <span className="flex items-center justify-center w-full">
-                      <svg className="animate-spin h-6 w-6 mr-2 text-white" viewBox="0 0 24 24">
+                      <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                       </svg>
@@ -190,56 +135,48 @@ const ContactForm = () => {
                   ) : (
                     <>
                       Book Free Consultation
-                      <ArrowRight className="ml-3 h-6 w-6" />
+                      <ArrowRight className="ml-2 h-5 w-5" />
                     </>
                   )}
                 </Button>
               </div>
             </form>
           </AnimatedWrapper>
-          <AnimatedWrapper animation="slide-in-from-right">
-            <div className="space-y-8 bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl shadow-lg border border-blue-100">
-              <h3 className="text-xl sm:text-2xl font-medium text-slate-800 mb-4">
-                Or Say Hi Anytime!
-              </h3>
-              <div className="space-y-6">
-                <div className="flex items-center space-x-5 group hover:scale-105 transition-transform duration-300">
-                  <span className="p-3 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
-                    <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="font-medium text-slate-800">Phone</p>
-                    <p className="text-slate-600">+94 77 123 9037</p>
-                  </div>
+          
+          <AnimatedWrapper animation="slide-in-from-right" className="lg:col-span-2">
+            <div className="space-y-6 h-full flex flex-col">
+              <div className="glass-card rounded-3xl p-8 shadow-xl flex-grow">
+                <h3 className="text-2xl font-bold text-slate-900 mb-8">
+                  Or Say Hi Anytime!
+                </h3>
+                <div className="space-y-6">
+                  {contactInfo.map((info) => (
+                    <div key={info.label} className="flex items-center gap-4 group">
+                      <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${info.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        <info.icon className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-slate-900 text-sm">{info.label}</p>
+                        {info.href ? (
+                          <a className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm" href={info.href}>{info.value}</a>
+                        ) : (
+                          <p className="text-slate-500 text-sm">{info.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center space-x-5 group hover:scale-105 transition-transform duration-300">
-                  <span className="p-3 bg-purple-100 rounded-full group-hover:bg-purple-200 transition-colors duration-300">
-                    <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 012.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="font-medium text-slate-800">Email</p>
-                    <a className="text-slate-600 hover:text-blue-700 transition-colors duration-300" href="mailto:hello@calcera.global">hello@calcera.global</a>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-5 group hover:scale-105 transition-transform duration-300">
-                  <span className="p-3 bg-emerald-100 rounded-full group-hover:bg-emerald-200 transition-colors duration-300">
-                    <MapPin className="h-6 w-6 text-emerald-600" />
-                  </span>
-                  <div>
-                    <p className="font-medium text-slate-800">Location</p>
-                    <p className="text-slate-600">Colombo, Sri Lanka</p>
-                  </div>
-                </div>
-                
-                {/* Animated decorative element */}
-                <div className="mt-8 p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl border border-blue-200">
-                  <p className="text-slate-700 text-center italic">
+              </div>
+              
+              <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 rounded-3xl p-8 text-white shadow-xl noise-overlay relative overflow-hidden">
+                <div className="relative z-10">
+                  <p className="text-lg font-medium leading-relaxed text-blue-100">
                     "Ready to transform your ideas into digital reality? Let's start the conversation!"
                   </p>
+                  <div className="mt-4 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                    <span className="text-sm text-slate-300">Available for new projects</span>
+                  </div>
                 </div>
               </div>
             </div>
