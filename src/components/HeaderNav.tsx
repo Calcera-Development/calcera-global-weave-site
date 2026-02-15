@@ -134,13 +134,16 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-white hover:bg-white/10 rounded-full w-10 h-10 transition-colors"
+              className={`md:hidden rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 ${scrolled
+                ? "text-white hover:bg-white/10"
+                : "text-blue-900 bg-white/90 hover:bg-white shadow-lg"
+                }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              <div className="relative w-6 h-6">
-                <X className={`h-6 w-6 absolute inset-0 transition-all duration-300 ${isMenuOpen ? "rotate-0 opacity-100" : "rotate-90 opacity-0 scale-50"}`} />
-                <Menu className={`h-6 w-6 absolute inset-0 transition-all duration-300 ${isMenuOpen ? "-rotate-90 opacity-0 scale-50" : "rotate-0 opacity-100"}`} />
+              <div className="relative w-6 h-6 flex items-center justify-center">
+                <X className={`h-6 w-6 absolute transition-all duration-300 ${isMenuOpen ? "rotate-0 opacity-100" : "rotate-90 opacity-0 scale-50"}`} />
+                <Menu className={`h-6 w-6 absolute transition-all duration-300 ${isMenuOpen ? "-rotate-90 opacity-0 scale-50" : "rotate-0 opacity-100"}`} />
               </div>
             </Button>
           </div>
