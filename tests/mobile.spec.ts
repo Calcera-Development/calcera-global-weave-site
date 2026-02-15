@@ -29,7 +29,8 @@ test.describe('Mobile Responsiveness Tests', () => {
         await expect(menuButton).toBeVisible();
 
         await menuButton.click();
-        const mobileMenu = page.locator('.block.md\\:hidden.fixed.top-16');
+        // The mobile menu container is the second child of nav
+        const mobileMenu = page.locator('header nav > div').last();
         await expect(mobileMenu).toBeVisible({ timeout: 10000 });
 
         await expect(mobileMenu.getByRole('link', { name: 'Services', exact: true })).toBeVisible();

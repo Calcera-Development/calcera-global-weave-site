@@ -1,5 +1,5 @@
 
-import { Code, Brain, Zap, ShoppingCart, Users } from "lucide-react";
+import { Code, Brain, Zap, ShoppingCart, Users, Search } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 
 const services = [
@@ -42,6 +42,14 @@ const services = [
     gradient: "from-orange-500 to-amber-400",
     bg: "bg-orange-500/5 hover:bg-orange-500/10",
     iconColor: "text-orange-500",
+  },
+  {
+    icon: Search,
+    title: "SEO Optimization",
+    description: "Get found by the right people. We optimize your digital presence for maximum visibility and engagement.",
+    gradient: "from-cyan-500 to-blue-400",
+    bg: "bg-cyan-500/5 hover:bg-cyan-500/10",
+    iconColor: "text-cyan-500",
   }
 ];
 

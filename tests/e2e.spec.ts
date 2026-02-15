@@ -27,7 +27,7 @@ test.describe('Calcera Global Weave Site E2E Tests', () => {
     });
 
     test('should navigate to sections via header navigation', async ({ page }) => {
-        const headerNav = page.locator('nav').first();
+        const headerNav = page.locator('header nav').first();
 
         // Test Services navigation
         const servicesLink = headerNav.getByRole('link', { name: 'Services', exact: true });
@@ -43,7 +43,7 @@ test.describe('Calcera Global Weave Site E2E Tests', () => {
         await expect(workSection.getByText(/Work We're Proud Of/i)).toBeVisible({ timeout: 15000 });
 
         // Test Contact navigation
-        const contactButton = headerNav.getByRole('button', { name: /Book Consultation/i });
+        const contactButton = headerNav.getByRole('button', { name: /Let's Talk/i });
         await contactButton.click();
         const contactSection = page.locator('#contact');
         await expect(contactSection.getByText(/Make Something Great/i)).toBeVisible({ timeout: 15000 });
