@@ -160,7 +160,7 @@ const ContactForm = () => {
                         {info.href ?
                       <a className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm" href={info.href}>{info.value}</a> :
 
-                      <p className="text-slate-500 font-sans text-xs">{info.value}</p>
+                      <p className="text-slate-500 font-sans text-xs text-center">{info.value}</p>
                       }
                       </div>
                     </div>
