@@ -70,7 +70,7 @@ const ContactForm = () => {
   const contactInfo = [
     { icon: Phone, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982", color: "from-blue-500 to-cyan-400" },
     { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
-    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", color: "from-emerald-500 to-teal-400" }];
+    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", href: "https://www.google.com/maps/dir//Shangri-La+Colombo,+WRHV%2BCQ7,+One+Galle+Face+Dr,+Colombo+2/@6.8879461,79.8632827,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ae2593b09364c4f:0x7dc13fa1f24d5c16!2m2!1d79.8444584!2d6.928457?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D", color: "from-emerald-500 to-teal-400" }];
 
 
   return (
@@ -153,21 +153,50 @@ const ContactForm = () => {
                   Or Say Hi Anytime!
                 </h3>
                 <div className="space-y-6">
-                  {contactInfo.map((info) =>
+                  {contactInfo.map((info) => (
                     <div key={info.label} className="flex items-center gap-4 group">
-                      <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${info.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <info.icon className="h-5 w-5 text-white" />
-                      </div>
+                      {info.href ? (
+                        <a
+                          href={info.href}
+                          target={info.label === "Location" ? "_blank" : undefined}
+                          rel={info.label === "Location" ? "noopener noreferrer" : undefined}
+                          className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${info.color} shadow-lg group-hover:scale-110 transition-transform duration-300 block`}
+                        >
+                          <info.icon className="h-5 w-5 text-white" />
+                        </a>
+                      ) : (
+                        <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${info.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          <info.icon className="h-5 w-5 text-white" />
+                        </div>
+                      )}
                       <div>
-                        <p className="font-medium text-slate-900 text-sm">{info.label}</p>
-                        {info.href ?
-                          <a className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm" href={info.href}>{info.value}</a> :
-
+                        {info.href ? (
+                          <a
+                            href={info.href}
+                            target={info.label === "Location" ? "_blank" : undefined}
+                            rel={info.label === "Location" ? "noopener noreferrer" : undefined}
+                            className="font-medium text-slate-900 text-sm hover:text-blue-600 transition-colors duration-300 block"
+                          >
+                            {info.label}
+                          </a>
+                        ) : (
+                          <p className="font-medium text-slate-900 text-sm">{info.label}</p>
+                        )}
+                        {info.href ? (
+                          <a
+                            className="text-slate-500 hover:text-blue-600 transition-colors duration-300 text-sm"
+                            href={info.href}
+                            target={info.label === "Location" ? "_blank" : undefined}
+                            rel={info.label === "Location" ? "noopener noreferrer" : undefined}
+                          >
+                            {info.value}
+                          </a>
+                        ) : (
                           <p className="text-slate-500 font-sans text-sm">{info.value}</p>
-                        }
+                        )}
                       </div>
                     </div>
-                  )}
+                  ))}
                 </div>
               </div>
 
