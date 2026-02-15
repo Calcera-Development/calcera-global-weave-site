@@ -22,6 +22,11 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
+const TWILIO_ACCOUNT_SID = Deno.env.get("TWILIO_ACCOUNT_SID");
+const TWILIO_AUTH_TOKEN = Deno.env.get("TWILIO_AUTH_TOKEN");
+const TWILIO_PHONE_NUMBER = Deno.env.get("TWILIO_PHONE_NUMBER");
+const WHATSAPP_TO_NUMBER = Deno.env.get("WHATSAPP_TO_NUMBER");
+
 const handler = async (req: Request): Promise<Response> => {
   console.log(`Email function invoked: ${req.method}`);
   if (req.method === "OPTIONS") {
@@ -159,8 +164,49 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // 3. Send WhatsApp Notification to Team (Twilio)
+    let whatsAppResult = null;
+    if (TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN && TWILIO_PHONE_NUMBER && WHATSAPP_TO_NUMBER) {
+      try {
+        const messageBody = `New Inquiry from ${name}\n\nEmail: ${email}\nContact: ${contact}\n\nMessage:\n${message}`;
+
+        // Encode credentials for Basic Auth
+        const basicAuth = btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`);
+
+        const params = new URLSearchParams();
+        params.append("To", `whatsapp:${WHATSAPP_TO_NUMBER}`);
+        params.append("From", `whatsapp:${TWILIO_PHONE_NUMBER}`);
+        params.append("Body", messageBody);
+
+        const twilioResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Basic ${basicAuth}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params,
+        });
+
+        whatsAppResult = await twilioResponse.json();
+        if (!twilioResponse.ok) {
+          console.error("Twilio WhatsApp error:", whatsAppResult);
+        } else {
+          console.log("WhatsApp notification sent successfully.");
+        }
+      } catch (waError) {
+        console.error("Failed to send WhatsApp notification:", waError);
+      }
+    } else {
+      console.warn("Twilio credentials missing, skipping WhatsApp notification.");
+    }
+
     return new Response(
-      JSON.stringify({ success: true, teamId: teamResult.id, customerId: customerResult.id }),
+      JSON.stringify({
+        success: true,
+        teamId: teamResult.id,
+        customerId: customerResult.id,
+        whatsApp: whatsAppResult
+      }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
