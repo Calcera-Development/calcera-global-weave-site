@@ -68,9 +68,9 @@ const ContactForm = () => {
   }
 
   const contactInfo = [
-    { icon: Phone, label: "Phone", value: "+94 77 898998 2", color: "from-blue-500 to-cyan-400" },
+    { icon: Phone, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982", color: "from-blue-500 to-cyan-400" },
     { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
-    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-03, Sri Lanka", color: "from-emerald-500 to-teal-400" }];
+    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", color: "from-emerald-500 to-teal-400" }];
 
 
   return (
