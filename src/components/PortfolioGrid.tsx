@@ -1,25 +1,8 @@
 
-import { PhoneCall, BookOpen, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
-
-const portfolio = [
-  {
-    title: "CallQA Insight",
-    category: "AI Customer Service QA",
-    description: "An AI-driven web platform that analyzes and scores customer service calls—helping teams continuously improve call quality, customer satisfaction, and CSR performance with actionable insights.",
-    icon: PhoneCall,
-    gradient: "from-orange-500 to-rose-500",
-    tag: "AI / Analytics",
-  },
-  {
-    title: "AI Comic Book",
-    category: "AI Storybook for Kids",
-    description: "A playful AI-powered storybook app where children upload their own photo to become the main hero—instantly starring in beautifully illustrated stories. Kids (and parents) can buy personalized books in both print and digital formats for a truly magical reading experience.",
-    icon: BookOpen,
-    gradient: "from-pink-500 to-purple-500",
-    tag: "AI / E-commerce",
-  }
-];
+import { projects } from "@/data/projects";
+import { Link } from "react-router-dom";
 
 interface PortfolioGridProps {
   onContactClick?: () => void;
@@ -39,43 +22,45 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
       </AnimatedWrapper>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto" role="list" aria-label="Portfolio projects">
-        {portfolio.map((project, index) => (
+        {projects.map((project, index) => (
           <AnimatedWrapper key={project.title} animation="zoom-in" delay={`${index * 150}ms`}>
-            <article
-              role="listitem"
-              aria-label={`Project: ${project.title}`}
-              className="group glass-card rounded-3xl sm:rounded-[3rem] overflow-hidden transition-all duration-700 hover:shadow-2xl hover:shadow-purple-500/10 h-full flex flex-col border border-white/40 shadow-xl premium-tilt card-shine relative"
-            >
-              {/* Internal Glow Effect */}
-              <div className={`absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-[0.05] rounded-full blur-3xl transition-opacity duration-700`} />
+            <Link to={`/projects/${project.id}`} className="block h-full group">
+              <article
+                role="listitem"
+                aria-label={`Project: ${project.title}`}
+                className="group glass-card rounded-3xl sm:rounded-[3rem] overflow-hidden transition-all duration-700 hover:shadow-2xl hover:shadow-purple-500/10 h-full flex flex-col border border-white/40 shadow-xl premium-tilt card-shine relative"
+              >
+                {/* Internal Glow Effect */}
+                <div className={`absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-[0.05] rounded-full blur-3xl transition-opacity duration-700`} />
 
-              {/* Gradient header bar */}
-              <div className={`h-2 sm:h-2.5 bg-gradient-to-r ${project.gradient}`} />
+                {/* Gradient header bar */}
+                <div className={`h-2 sm:h-2.5 bg-gradient-to-r ${project.gradient}`} />
 
-              <div className="p-8 sm:p-12 flex flex-col flex-grow relative z-10">
-                <div className="flex items-start justify-between mb-8 sm:mb-10">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-br ${project.gradient} shadow-2xl group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500`}>
-                    <project.icon className="h-7 w-7 text-white" />
+                <div className="p-8 sm:p-12 flex flex-col flex-grow relative z-10">
+                  <div className="flex items-start justify-between mb-8 sm:mb-10">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${project.gradient} shadow-2xl group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500`}>
+                      <project.icon className="h-7 w-7 text-white" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-blue-100 shadow-sm">
+                      {project.tag}
+                    </span>
                   </div>
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-blue-100 shadow-sm">
-                    {project.tag}
-                  </span>
-                </div>
 
-                <p className="font-semibold text-[10px] sm:text-xs text-slate-400 uppercase tracking-[0.2em] mb-3 sm:mb-4">{project.category}</p>
-                <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-blue-600 transition-colors duration-500 leading-tight tracking-tight">
-                  {project.title}
-                </h3>
-                <p className="text-slate-500 text-base sm:text-lg leading-relaxed flex-grow font-light">
-                  {project.description}
-                </p>
+                  <p className="font-semibold text-[10px] sm:text-xs text-slate-400 uppercase tracking-[0.2em] mb-3 sm:mb-4">{project.category}</p>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-blue-600 transition-colors duration-500 leading-tight tracking-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-slate-500 text-base sm:text-lg leading-relaxed flex-grow font-light">
+                    {project.description}
+                  </p>
 
-                <div className="mt-8 sm:mt-12 flex items-center text-blue-600 font-bold text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                  <span className="border-b-2 border-blue-600/30 group-hover:border-blue-600 transition-all">Explore Project Details</span>
-                  <ArrowUpRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 animate-bounce-horizontal" />
+                  <div className="mt-8 sm:mt-12 flex items-center text-blue-600 font-bold text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                    <span className="border-b-2 border-blue-600/30 group-hover:border-blue-600 transition-all text-blue-600">Explore Project Details</span>
+                    <ArrowUpRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 animate-bounce-horizontal" />
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           </AnimatedWrapper>
         ))}
       </div>
