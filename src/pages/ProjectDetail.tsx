@@ -74,14 +74,14 @@ const ProjectDetail = () => {
                                 <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-3xl" />
                                 <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
                             </div>
-                            <div className="absolute bottom-10 left-10 sm:bottom-20 sm:left-20 max-w-md">
-                                <div className="glass-card p-6 sm:p-8 rounded-[2rem] border-white/20 shadow-2xl backdrop-blur-2xl">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-3 h-3 bg-white rounded-full animate-ping" />
-                                        <span className="text-xs font-bold text-white uppercase tracking-widest">Live Evolution</span>
+                            <div className="absolute inset-x-6 bottom-6 sm:bottom-20 sm:left-20 sm:right-auto sm:max-w-md">
+                                <div className="glass-card p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border-white/20 shadow-2xl backdrop-blur-2xl mx-auto sm:mx-0">
+                                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                                        <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
+                                        <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest">Live Evolution</span>
                                     </div>
-                                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Technical Masterpiece</h3>
-                                    <p className="text-white/70 text-sm sm:text-base font-light">Engineered for peak performance and unparalleled user experience.</p>
+                                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 leading-tight">Technical Masterpiece</h3>
+                                    <p className="text-white/70 text-xs sm:text-base font-light">Engineered for peak performance and unparalleled user experience.</p>
                                 </div>
                             </div>
                         </div>
@@ -160,18 +160,18 @@ const ProjectDetail = () => {
                         <p className="text-lg sm:text-xl text-slate-500 font-light leading-relaxed mb-12 px-4">
                             We can help you architect and build something just as impactful. Every great product starts with a single conversation.
                         </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <Link to="/#contact">
-                                <Button size="lg" className="bg-slate-900 text-white rounded-full px-10 py-8 h-auto text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                            <Link to="/#contact" className="w-full sm:w-auto">
+                                <Button size="lg" className="w-full sm:w-auto bg-slate-900 text-white rounded-full px-8 sm:px-10 py-6 sm:py-8 h-auto text-lg sm:text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
                                     Start Your Project
                                 </Button>
                             </Link>
-                            <div className="flex items-center gap-4">
-                                <Button variant="outline" size="icon" className="w-14 h-14 rounded-full border-slate-200">
-                                    <Globe className="h-6 w-6 text-slate-600" />
+                            <div className="flex items-center gap-4 mt-2 sm:mt-0">
+                                <Button variant="outline" size="icon" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-slate-200">
+                                    <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
-                                <Button variant="outline" size="icon" className="w-14 h-14 rounded-full border-slate-200">
-                                    <Github className="h-6 w-6 text-slate-600" />
+                                <Button variant="outline" size="icon" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-slate-200">
+                                    <Github className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
                             </div>
                         </div>
