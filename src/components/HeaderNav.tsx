@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import calceraLogo from "@/assets/calcera-logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface HeaderNavProps {
   navScrollFns?: {
@@ -14,6 +15,7 @@ interface HeaderNavProps {
 
 const NAV_ITEMS = [
   { label: "Home", key: "home", id: "hero" },
+  { label: "About", key: "about", id: "about" },
   { label: "Services", key: "services", id: "services" },
   { label: "Work", key: "work", id: "portfolio" },
 ];
@@ -22,6 +24,9 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => {
@@ -32,6 +37,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
   }, []);
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -70% 0px",
@@ -54,10 +61,27 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [isHomePage]);
 
-  const handleNavClick = (key: string) => {
+  const handleNavClick = (key: string, id: string) => {
     setIsMenuOpen(false);
+
+    if (key === "about") {
+      if (location.pathname === "/about") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/about");
+      }
+      return;
+    }
+
+    if (!isHomePage) {
+      navigate(`/#${id}`);
+      // After navigation, use a small delay to scroll if possible, 
+      // but usually the hash will handle it or Index.tsx handles it.
+      return;
+    }
+
     if (navScrollFns && navScrollFns[key as keyof typeof navScrollFns]) {
       navScrollFns[key as keyof typeof navScrollFns]();
     }
@@ -65,6 +89,10 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
 
   const handleBookConsultation = () => {
     setIsMenuOpen(false);
+    if (!isHomePage) {
+      navigate("/#contact");
+      return;
+    }
     if (navScrollFns && navScrollFns.contact) {
       navScrollFns.contact();
     }
@@ -80,9 +108,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
           }`}
       >
         <div className="flex justify-between items-center relative">
-          {/* Logo */}
           <button
-            onClick={() => handleNavClick("home")}
+            onClick={() => handleNavClick("home", "hero")}
             className="flex items-center group transition-transform duration-300 hover:scale-105 active:scale-95"
           >
             <img
@@ -100,10 +127,10 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
             {NAV_ITEMS.map(item => (
               <a
                 key={item.key}
-                href={`#${item.id}`}
-                onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
+                href={isHomePage ? `#${item.id}` : (item.key === "about" ? "/about" : `/#${item.id}`)}
+                onClick={e => { e.preventDefault(); handleNavClick(item.key, item.id); }}
                 className={`relative px-5 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-full
-                  ${activeSection === item.id
+                  ${(isHomePage && activeSection === item.id) || (!isHomePage && location.pathname === `/${item.key === "home" ? "" : item.key}`)
                     ? (scrolled ? "text-white bg-white/15" : "text-blue-600 bg-blue-50/80")
                     : (scrolled ? "text-white/60 hover:text-white hover:bg-white/5" : "text-slate-600 hover:text-blue-600 hover:bg-slate-50/50")
                   }`}
@@ -160,21 +187,24 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
         <div className="rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-900 border border-white/10 overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 pointer-events-none" />
           <div className="flex flex-col p-4 gap-1 relative z-10">
-            {NAV_ITEMS.map(item => (
-              <a
-                key={item.key}
-                href={`#${item.id}`}
-                onClick={e => { e.preventDefault(); handleNavClick(item.key); }}
-                className={`flex items-center justify-between w-full rounded-2xl py-4 px-6 text-left transition-all duration-300
-                  ${activeSection === item.id
-                    ? "text-white bg-white/10"
-                    : "text-white/70 hover:text-white hover:bg-white/5"
-                  }`}
-              >
-                <span className="text-lg font-medium tracking-tight">{item.label}</span>
-                {activeSection === item.id && <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />}
-              </a>
-            ))}
+            {NAV_ITEMS.map(item => {
+              const isActive = (isHomePage && activeSection === item.id) || (!isHomePage && location.pathname === `/${item.key === "home" ? "" : item.key}`);
+              return (
+                <a
+                  key={item.key}
+                  href={isHomePage ? `#${item.id}` : (item.key === "about" ? "/about" : `/#${item.id}`)}
+                  onClick={e => { e.preventDefault(); handleNavClick(item.key, item.id); }}
+                  className={`flex items-center justify-between w-full rounded-2xl py-4 px-6 text-left transition-all duration-300
+                  ${isActive
+                      ? "text-white bg-white/10"
+                      : "text-white/70 hover:text-white hover:bg-white/5"
+                    }`}
+                >
+                  <span className="text-lg font-medium tracking-tight">{item.label}</span>
+                  {isActive && <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />}
+                </a>
+              );
+            })}
             <div className="mt-4 pt-4 border-t border-white/5">
               <Button
                 size="lg"

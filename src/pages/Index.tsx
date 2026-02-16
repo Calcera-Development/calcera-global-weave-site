@@ -39,6 +39,17 @@ const Index = () => {
     contact: () => scrollToSection(contactRef)
   };
 
+  React.useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace("#", "");
+      if (id === "hero") navScrollFns.home();
+      else if (id === "services") navScrollFns.services();
+      else if (id === "portfolio") navScrollFns.work();
+      else if (id === "contact") navScrollFns.contact();
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <HeaderNav navScrollFns={navScrollFns} />
@@ -200,9 +211,10 @@ const Index = () => {
               <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Quick Links</h4>
               <nav aria-label="Footer navigation">
                 <ul className="space-y-4">
-                  {["Home", "Services", "Work", "Contact"].map((item) =>
+                  {["Home", "About", "Services", "Work", "Contact"].map((item) =>
                     <li key={item}>
-                      <a href="#" onClick={(e) => {
+                      <a href={item === "About" ? "/about" : "#"} onClick={(e) => {
+                        if (item === "About") return;
                         e.preventDefault();
                         if (item === "Home") window.scrollTo({ top: 0, behavior: "smooth" }); else
                           if (item === "Services") scrollToSection(servicesRef); else
