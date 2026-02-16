@@ -59,7 +59,7 @@ const Index = () => {
               <div className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-2 rounded-full bg-blue-50/50 backdrop-blur-sm border border-blue-100/50 max-w-full">
                 <span className="text-xs sm:text-sm font-medium text-blue-700 tracking-wider truncate uppercase">A Global Tech Innovation Powerhouse</span>
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-8xl font-semibold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
+              <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
                 <span className="text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text gradient-text-animated">Build</span>
                 <span className="text-slate-200 mx-1.5 sm:mx-3 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text gradient-text-animated">Scale</span>
@@ -99,15 +99,15 @@ const Index = () => {
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="400ms">
-              <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-40 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0">
-                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase border-r border-slate-200 pr-8">Our Tech Stack</span>
-                <div className="flex gap-8 items-center animate-shimmer">
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">React</span>
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">TypeScript</span>
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">Next.js</span>
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">OpenAI</span>
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">Python</span>
-                  <span className="text-xl font-bold text-slate-900 tracking-tighter">Vite</span>
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-x-8 gap-y-6 opacity-40 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0">
+                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 sm:pr-8">Our Tech Stack</span>
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 items-center">
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">React</span>
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">TypeScript</span>
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Next.js</span>
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">OpenAI</span>
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Python</span>
+                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Vite</span>
                 </div>
               </div>
             </AnimatedWrapper>
