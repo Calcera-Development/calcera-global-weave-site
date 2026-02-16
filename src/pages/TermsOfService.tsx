@@ -1,3 +1,4 @@
+// Triggering re-deployment to resolve Vercel issue
 import React from "react";
 import HeaderNav from "@/components/HeaderNav";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
