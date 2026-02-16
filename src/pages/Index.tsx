@@ -95,7 +95,7 @@ const Index = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto bg-white/20 dark:bg-slate-900 border-2 border-slate-200 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 transition-all duration-300"
+                className="w-full sm:w-auto bg-white/20 dark:bg-slate-900/50 border-2 border-slate-200 dark:border-slate-800 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300 dark:text-slate-200"
                 onClick={() => scrollToSection(workRef)}
                 aria-label="View our portfolio"
               >
@@ -117,12 +117,12 @@ const Index = () => {
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="500ms" className="mt-16">
-              <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-2xl border-white/40">
-                <p className="text-base sm:text-xl text-slate-600 leading-relaxed mb-4 font-medium italic">
+              <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-2xl border-white/40 dark:border-slate-800/40">
+                <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-4 font-medium italic">
                   "The difference between a good idea and a profitable business is execution."
                 </p>
                 <div className="h-px w-20 bg-gradient-to-r from-blue-600 to-transparent mb-6 mx-auto" />
-                <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-light">
+                <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed font-light">
                   At Calcera, we don't just write code. We build <strong>revenue-generating assets</strong>. Whether you need an MVP in 4 weeks or an enterprise AI solution, our team delivers technical excellence with agency-grade reliability.
                 </p>
               </div>
