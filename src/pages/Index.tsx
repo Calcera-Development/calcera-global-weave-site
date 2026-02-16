@@ -69,9 +69,9 @@ const Index = () => {
             <AnimatedWrapper animation="fade-up" delay="200ms">
               <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 mb-8 leading-[1.05] tracking-tight">
                 <span className="text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text gradient-text-animated">Build</span>
-                <span className="text-slate-200 mx-2 sm:mx-4 font-bold">·</span>
+                <span className="text-slate-400 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text gradient-text-animated">Scale</span>
-                <span className="text-slate-200 mx-2 sm:mx-4 font-bold">·</span>
+                <span className="text-slate-400 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text gradient-text-animated">Dominate</span>
               </h1>
             </AnimatedWrapper>

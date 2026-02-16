@@ -75,13 +75,13 @@ const ProjectDetail = () => {
                                 <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
                             </div>
                             <div className="absolute inset-x-6 bottom-6 sm:bottom-20 sm:left-20 sm:right-auto sm:max-w-md">
-                                <div className="glass-card p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border-white/20 shadow-2xl backdrop-blur-2xl mx-auto sm:mx-0">
+                                <div className="bg-slate-900/80 backdrop-blur-xl p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 shadow-2xl mx-auto sm:mx-0">
                                     <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                                        <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
-                                        <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest">Live Evolution</span>
+                                        <div className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-ping" />
+                                        <span className="text-[10px] sm:text-xs font-bold text-blue-400 uppercase tracking-widest">Live Evolution</span>
                                     </div>
                                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 leading-tight">Technical Masterpiece</h3>
-                                    <p className="text-white/70 text-xs sm:text-base font-light">Engineered for peak performance and unparalleled user experience.</p>
+                                    <p className="text-white/80 text-xs sm:text-base font-light">Engineered for peak performance and unparalleled user experience.</p>
                                 </div>
                             </div>
                         </div>
