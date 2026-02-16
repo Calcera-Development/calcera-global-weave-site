@@ -48,7 +48,7 @@ const Index = () => {
         <section ref={heroRef} className="relative min-h-[90dvh] flex items-center pt-32 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay" aria-label="Hero section">
           {/* Premium Parallax-Ready Background Overlay */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-60 dark:opacity-40" />
+            <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-60" />
 
             {/* Animated Glow Orbs */}
             <div className="absolute top-1/4 left-10 w-[20rem] h-[20rem] bg-blue-500/10 rounded-full blur-[100px] animate-float opacity-50 block md:hidden" />
@@ -56,29 +56,29 @@ const Index = () => {
             <div className="absolute -bottom-40 left-1/4 w-[50rem] h-[50rem] bg-cyan-400/5 rounded-full blur-[200px] animate-pulse lg:block hidden" style={{ animationDelay: "4s" }} />
 
             {/* Subtle Grid Interaction Overlay */}
-            <div className="absolute inset-0 grid-bg opacity-[0.03] dark:opacity-[0.05]" />
+            <div className="absolute inset-0 grid-bg opacity-[0.03]" />
           </div>
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
             <AnimatedWrapper animation="fade-up" delay="100ms">
-              <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/40 dark:border-slate-800/40 shadow-sm transition-all duration-300 hover:scale-105 select-none">
-                <span className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 tracking-wider uppercase">A Global Tech Innovation Powerhouse</span>
+              <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/40 backdrop-blur-md border border-white/40 shadow-sm transition-all duration-300 hover:scale-105 select-none">
+                <span className="text-xs sm:text-sm font-semibold text-slate-600 tracking-wider uppercase">A Global Tech Innovation Powerhouse</span>
               </div>
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="200ms">
-              <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 dark:text-white mb-8 leading-[1.05] tracking-tight">
+              <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 mb-8 leading-[1.05] tracking-tight">
                 <span className="text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text gradient-text-animated">Build</span>
-                <span className="text-slate-200 dark:text-slate-700 mx-2 sm:mx-4 font-bold">·</span>
+                <span className="text-slate-200 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text gradient-text-animated">Scale</span>
-                <span className="text-slate-200 dark:text-slate-700 mx-2 sm:mx-4 font-bold">·</span>
+                <span className="text-slate-200 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text gradient-text-animated">Dominate</span>
               </h1>
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="300ms">
-              <p className="text-lg sm:text-2xl text-slate-500 dark:text-slate-400 mb-10 sm:max-w-3xl mx-auto leading-relaxed font-light px-4 sm:px-0">
-                Calcera Global transforms bold visions into <span className="text-slate-900 dark:text-slate-200 font-medium italic">market-leading realities</span> through elite AI-driven engineering and design.
+              <p className="text-lg sm:text-2xl text-slate-500 mb-10 sm:max-w-3xl mx-auto leading-relaxed font-light px-4 sm:px-0">
+                Calcera Global transforms bold visions into <span className="text-slate-900 font-medium italic">market-leading realities</span> through elite AI-driven engineering and design.
               </p>
             </AnimatedWrapper>
 
@@ -95,7 +95,7 @@ const Index = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto bg-white/20 dark:bg-slate-900/50 border-2 border-slate-200 dark:border-slate-800 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300 dark:text-slate-200"
+                className="w-full sm:w-auto bg-white/20 border-2 border-slate-200 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 transition-all duration-300"
                 onClick={() => scrollToSection(workRef)}
                 aria-label="View our portfolio"
               >
@@ -105,10 +105,10 @@ const Index = () => {
 
             <AnimatedWrapper animation="fade-up" delay="500ms">
               <div className="flex flex-col sm:flex-row justify-center items-center gap-x-12 gap-y-8 opacity-50 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0 px-4">
-                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 dark:border-slate-800 sm:pr-12">Stack Expertise</span>
+                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 sm:pr-12">Stack Expertise</span>
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-12 items-center">
                   {["React", "TypeScript", "Next.js", "OpenAI", "Python", "Vite"].map((tech) => (
-                    <span key={tech} className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-300 tracking-tighter hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-default">
+                    <span key={tech} className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter hover:text-blue-600 transition-colors cursor-default">
                       {tech}
                     </span>
                   ))}
@@ -117,12 +117,12 @@ const Index = () => {
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="500ms" className="mt-16">
-              <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-2xl border-white/40 dark:border-slate-800/40">
-                <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-4 font-medium italic">
+              <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-2xl border-white/40">
+                <p className="text-base sm:text-xl text-slate-600 leading-relaxed mb-4 font-medium italic">
                   "The difference between a good idea and a profitable business is execution."
                 </p>
                 <div className="h-px w-20 bg-gradient-to-r from-blue-600 to-transparent mb-6 mx-auto" />
-                <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed font-light">
+                <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-light">
                   At Calcera, we don't just write code. We build <strong>revenue-generating assets</strong>. Whether you need an MVP in 4 weeks or an enterprise AI solution, our team delivers technical excellence with agency-grade reliability.
                 </p>
               </div>

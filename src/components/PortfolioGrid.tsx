@@ -30,10 +30,10 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
     <div className="max-w-7xl mx-auto relative z-10">
       <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-purple-600 mb-2 sm:mb-4">Portfolio</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
           Work We're Proud Of
         </h2>
-        <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto px-4">
+        <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
           A glimpse into our digital playground.
         </p>
       </AnimatedWrapper>

@@ -59,10 +59,10 @@ const ServicesGrid = () => {
       <div className="max-w-7xl mx-auto">
         <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
           <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2 sm:mb-4">What We Do</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
             Our Core Services
           </h2>
-          <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
             What we're great at—so you can be even greater.
           </p>
         </AnimatedWrapper>
@@ -76,7 +76,7 @@ const ServicesGrid = () => {
               <div
                 role="listitem"
                 aria-label={`Service: ${service.title}`}
-                className={`group relative rounded-3xl ${service.bg} border border-slate-200/50 dark:border-slate-800/50 p-6 sm:p-10 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-500/10 h-full glass-card premium-tilt card-shine overflow-hidden`}
+                className={`group relative rounded-3xl ${service.bg} border border-slate-200/50 p-6 sm:p-10 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-500/10 h-full glass-card premium-tilt card-shine overflow-hidden`}
               >
                 {/* Internal Glow Effect */}
                 <div className={`absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.05] rounded-full blur-3xl transition-opacity duration-700`} />
@@ -87,10 +87,10 @@ const ServicesGrid = () => {
                 <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${service.gradient} mb-8 shadow-xl shadow-slate-200/50 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
                   <service.icon className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 transition-colors duration-300 tracking-tight leading-tight">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 tracking-tight leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-light">
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-light">
                   {service.description}
                 </p>
               </div>

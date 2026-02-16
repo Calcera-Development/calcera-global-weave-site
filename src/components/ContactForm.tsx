@@ -78,55 +78,55 @@ const ContactForm = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
           <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2 sm:mb-4">Contact</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
             {`Let's Make Something Great Together`}
           </h2>
-          <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
             {`We'd love to hear what you're building. Let's turn your ideas into beautifully built reality.`}
           </p>
         </AnimatedWrapper>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 sm:gap-16">
           <AnimatedWrapper animation="slide-in-from-left" className="lg:col-span-3">
-            <form className="glass-card rounded-[2.5rem] p-8 sm:p-12 shadow-2xl border border-white/50 dark:border-slate-800/50 relative overflow-hidden group/form" onSubmit={handleSubmit}>
+            <form className="glass-card rounded-[2.5rem] p-8 sm:p-12 shadow-2xl border border-white/50 relative overflow-hidden group/form" onSubmit={handleSubmit}>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-purple-600 opacity-50" />
 
-              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8 sm:mb-12 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8 sm:mb-12 tracking-tight">
                 Unleash Your Idea
               </h3>
               <div className="space-y-8">
                 <div className="group/input relative">
-                  <Label htmlFor="cf-name" className="block text-slate-500 dark:text-slate-400 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
+                  <Label htmlFor="cf-name" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Your Full Name <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-name" name="name" type="text" value={fields.name} onChange={handleChange} disabled={loading} placeholder="E.g. Elon Musk" autoComplete="name"
-                    className="h-14 rounded-2xl border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-base" />
+                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
                 </div>
                 <div className="group/input relative">
-                  <Label htmlFor="cf-contact" className="block text-slate-500 dark:text-slate-400 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
+                  <Label htmlFor="cf-contact" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Best Contact Number <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-contact" name="contact" type="text" value={fields.contact} onChange={handleChange} disabled={loading} placeholder="+X XX XXX XXXX" autoComplete="tel"
-                    className="h-14 rounded-2xl border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-base" />
+                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
                 </div>
                 <div className="group/input relative">
-                  <Label htmlFor="cf-email" className="block text-slate-500 dark:text-slate-400 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
+                  <Label htmlFor="cf-email" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Business Email Address <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-email" name="email" type="email" value={fields.email} onChange={handleChange} disabled={loading} placeholder="name@company.com" autoComplete="email"
-                    className="h-14 rounded-2xl border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-base" />
+                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
                 </div>
                 <div className="group/input relative">
-                  <Label htmlFor="cf-message" className="block text-slate-500 dark:text-slate-400 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
+                  <Label htmlFor="cf-message" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Vision Summary <span className="text-rose-500">*</span>
                   </Label>
                   <Textarea id="cf-message" name="message" rows={5} value={fields.message} onChange={handleChange} disabled={loading}
                     placeholder="Briefly describe what you're building..."
-                    className="rounded-2xl border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-base resize-none" />
+                    className="rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base resize-none" />
                 </div>
                 <Button
                   size="lg"
-                  className="w-full bg-slate-950 dark:bg-slate-800 text-white shadow-2xl text-lg py-8 rounded-2xl hover:bg-black dark:hover:bg-slate-700 transition-all duration-500 hover:scale-[1.02] active:scale-100 font-bold group/btn relative overflow-hidden shimmer-btn"
+                  className="w-full bg-slate-950 text-white shadow-2xl text-lg py-8 rounded-2xl hover:bg-black transition-all duration-500 hover:scale-[1.02] active:scale-100 font-bold group/btn relative overflow-hidden shimmer-btn"
                   disabled={loading}>
 
                   {loading ?
@@ -150,9 +150,9 @@ const ContactForm = () => {
 
           <AnimatedWrapper animation="slide-in-from-right" className="lg:col-span-2">
             <div className="space-y-8">
-              <div className="glass-card rounded-[2.5rem] p-10 shadow-2xl border border-white/40 dark:border-slate-800/40 group/sidebar relative overflow-hidden backdrop-blur-xl">
+              <div className="glass-card rounded-[2.5rem] p-10 shadow-2xl border border-white/40 group/sidebar relative overflow-hidden backdrop-blur-xl">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl -mr-16 -mt-16" />
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-10 tracking-tight">
+                <h3 className="text-2xl font-bold text-slate-900 mb-10 tracking-tight">
                   Direct Integration
                 </h3>
                 <div className="space-y-10">
@@ -173,10 +173,10 @@ const ContactForm = () => {
                         </div>
                       )}
                       <div>
-                        <p className="font-bold text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest mb-1">{info.label}</p>
+                        <p className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">{info.label}</p>
                         {info.href ? (
                           <a
-                            className="text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-base sm:text-lg font-medium tracking-tight"
+                            className="text-slate-900 hover:text-blue-600 transition-colors duration-300 text-base sm:text-lg font-medium tracking-tight"
                             href={info.href}
                             target={info.label === "Location" ? "_blank" : undefined}
                             rel={info.label === "Location" ? "noopener noreferrer" : undefined}
@@ -184,7 +184,7 @@ const ContactForm = () => {
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-slate-900 dark:text-white text-base sm:text-lg font-medium tracking-tight">{info.value}</p>
+                          <p className="text-slate-900 text-base sm:text-lg font-medium tracking-tight">{info.value}</p>
                         )}
                       </div>
                     </div>

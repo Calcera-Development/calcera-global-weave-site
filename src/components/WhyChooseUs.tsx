@@ -34,10 +34,10 @@ const WhyChooseUs = () => (
     <div className="max-w-7xl mx-auto">
       <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2 sm:mb-4">Why Us</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
           Why Calcera?
         </h2>
-        <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto px-4">
+        <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
           Because building with love and logic matters.
         </p>
       </AnimatedWrapper>
@@ -52,16 +52,16 @@ const WhyChooseUs = () => (
             <div
               role="listitem"
               aria-label={item.title}
-              className="group flex flex-col h-full p-8 rounded-3xl bg-white dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 hover:-translate-y-2 card-shine overflow-hidden relative"
+              className="group flex flex-col h-full p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 hover:-translate-y-2 card-shine overflow-hidden relative"
             >
               <div className={`p-4 rounded-2xl bg-gradient-to-br ${item.gradient} shadow-lg mb-8 w-fit group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
                 <item.icon className="h-6 w-6 text-white" />
               </div>
               <div className="relative z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors duration-300 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-700 transition-colors duration-300 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-light">{item.description}</p>
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-light">{item.description}</p>
               </div>
 
               {/* Decorative Background Element */}
