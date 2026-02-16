@@ -208,7 +208,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
             <div className="mt-4 pt-4 border-t border-white/5">
               <Button
                 size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl rounded-2xl font-bold py-5 text-lg"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl rounded-2xl font-bold py-3 text-sm"
                 onClick={handleBookConsultation}
               >
                 Book Consultation

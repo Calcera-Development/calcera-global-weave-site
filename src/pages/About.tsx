@@ -165,7 +165,7 @@ const About = () => {
                                     "We bridge business intent with technical reality—especially in complex, regulated environments. Our team scales through high-value B2B engagements and Repeatable Excellence."
                                 </p>
                                 <Link to="/#contact">
-                                    <Button className="w-full bg-white text-slate-950 hover:bg-blue-50 py-7 rounded-2xl font-bold text-lg shadow-2xl transition-all hover:scale-[1.02]">
+                                    <Button className="w-full bg-white text-slate-950 hover:bg-blue-50 py-4 rounded-2xl font-bold text-sm shadow-2xl transition-all hover:scale-[1.02]">
                                         Discuss Strategic Partnership
                                         <Rocket className="ml-2 h-5 w-5" />
                                     </Button>

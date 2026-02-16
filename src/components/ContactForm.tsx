@@ -126,7 +126,7 @@ const ContactForm = () => {
                 </div>
                 <Button
                   size="lg"
-                  className="w-full bg-slate-950 text-white shadow-2xl text-base sm:text-lg py-5 sm:py-8 rounded-2xl hover:bg-black transition-all duration-500 hover:scale-[1.02] active:scale-100 font-bold group/btn relative overflow-hidden shimmer-btn"
+                  className="w-full bg-slate-950 text-white shadow-2xl text-sm sm:text-base py-3 sm:py-4 rounded-2xl hover:bg-black transition-all duration-500 hover:scale-[1.02] active:scale-100 font-bold group/btn relative overflow-hidden shimmer-btn"
                   disabled={loading}>
 
                   {loading ?

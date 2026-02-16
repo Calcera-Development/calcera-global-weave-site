@@ -26,7 +26,7 @@ const ProjectDetail = () => {
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">Project Not Found</h1>
                 <p className="text-slate-600 mb-8 text-center max-w-md">The project you are looking for doesn't exist or has been moved.</p>
                 <Link to="/">
-                    <Button variant="outline" className="rounded-full px-8 py-6 h-auto text-lg hover:scale-105 transition-transform">
+                    <Button variant="outline" className="rounded-full px-6 py-3 h-auto text-sm hover:scale-105 transition-transform">
                         <ArrowLeft className="mr-2 h-5 w-5" /> Back to Home
                     </Button>
                 </Link>
