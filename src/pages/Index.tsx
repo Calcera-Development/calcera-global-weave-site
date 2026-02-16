@@ -59,17 +59,17 @@ const Index = () => {
                 <span className="text-xs sm:text-sm font-medium text-blue-700 tracking-wide truncate">Product Engineering + Tech Innovation Powerhouse</span>
               </div>
               <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
-                <span className="text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text">Design</span>
+                <span className="text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text">Build</span>
                 <span className="text-slate-300 mx-1.5 sm:mx-3 font-light">·</span>
-                <span className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">Build</span>
+                <span className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">Scale</span>
                 <span className="text-slate-300 mx-1.5 sm:mx-3 font-light">·</span>
-                <span className="text-transparent bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">Elevate</span>
+                <span className="text-transparent bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">Dominate</span>
               </h1>
             </AnimatedWrapper>
 
             <AnimatedWrapper animation="fade-up" delay="150ms">
-              <p className="text-xl sm:text-2xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-                Build awesome digital products with us!
+              <p className="text-xl sm:text-2xl text-slate-500 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+                We design and develop <strong>high-performance AI Apps & SaaS platforms</strong>.
               </p>
             </AnimatedWrapper>
 
@@ -100,10 +100,10 @@ const Index = () => {
             <AnimatedWrapper animation="fade-up" delay="450ms">
               <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto shadow-xl">
                 <p className="text-base sm:text-xl text-slate-600 leading-relaxed mb-2 font-medium">
-                  Crafting technology that feels effortless.
+                  "The difference between a good idea and a profitable business is execution."
                 </p>
                 <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-                  At Calcera, we build elegant digital experiences that do more than just function — they connect, convert, and captivate. Whether you're scaling up or starting fresh, we bring the technical brilliance and design magic to keep you ahead of the curve.
+                  At Calcera, we don't just write code. We build <strong>revenue-generating assets</strong>. Whether you need an MVP in 4 weeks or an enterprise AI solution, our team delivers technical excellence with agency-grade reliability.
                 </p>
               </div>
             </AnimatedWrapper>
