@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/",
 
   server: {
-    host: "::",
+    host: "localhost",
     port: 8080,
   },
 
