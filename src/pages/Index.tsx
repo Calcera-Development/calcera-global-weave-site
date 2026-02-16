@@ -107,7 +107,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row justify-center items-center gap-x-12 gap-y-8 opacity-50 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0 px-4">
                 <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 sm:pr-12">Stack Expertise</span>
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-12 items-center">
-                  {["React", "TypeScript", "Next.js", "OpenAI", "Python", "Vite"].map((tech) => (
+                  {["React", "Next.js", "TypeScript", "OpenAI O1/O3", "Claude 3.5", "Agentic AI", "LangGraph", "RAG Systems", "Python"].map((tech) => (
                     <span key={tech} className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter hover:text-blue-600 transition-colors cursor-default">
                       {tech}
                     </span>
