@@ -57,21 +57,21 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
                   <div className={`p-4 rounded-2xl bg-gradient-to-br ${project.gradient} shadow-2xl group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500`}>
                     <project.icon className="h-7 w-7 text-white" />
                   </div>
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 dark:bg-slate-900 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-blue-100 dark:border-slate-800 shadow-sm">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-blue-100 shadow-sm">
                     {project.tag}
                   </span>
                 </div>
 
                 <p className="font-semibold text-[10px] sm:text-xs text-slate-400 uppercase tracking-[0.2em] mb-3 sm:mb-4">{project.category}</p>
-                <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 group-hover:text-blue-600 transition-colors duration-500 leading-tight tracking-tight">
+                <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 sm:mb-6 group-hover:text-blue-600 transition-colors duration-500 leading-tight tracking-tight">
                   {project.title}
                 </h3>
-                <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg leading-relaxed flex-grow font-light">
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed flex-grow font-light">
                   {project.description}
                 </p>
 
-                <div className="mt-8 sm:mt-12 flex items-center text-blue-600 dark:text-blue-400 font-bold text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                  <span className="border-b-2 border-blue-600/30 dark:border-blue-400/30 group-hover:border-blue-600 dark:group-hover:border-blue-400 transition-all">Explore Project Details</span>
+                <div className="mt-8 sm:mt-12 flex items-center text-blue-600 font-bold text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                  <span className="border-b-2 border-blue-600/30 group-hover:border-blue-600 transition-all">Explore Project Details</span>
                   <ArrowUpRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 animate-bounce-horizontal" />
                 </div>
               </div>
@@ -84,7 +84,7 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
       <AnimatedWrapper animation="fade-up" delay="300ms" className="text-center mt-24 sm:mt-32 px-4">
         <div className="relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded-[2.5rem] sm:rounded-[4rem] blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-1000" />
-          <div className="relative bg-slate-950 dark:bg-black p-8 sm:p-20 rounded-[2.5rem] sm:rounded-[4rem] shadow-3xl text-white noise-overlay border border-white/10 card-shine overflow-hidden">
+          <div className="relative bg-slate-950 p-8 sm:p-20 rounded-[2.5rem] sm:rounded-[4rem] shadow-3xl text-white noise-overlay border border-white/10 card-shine overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] -mr-32 -mt-32" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] -ml-32 -mb-32" />
 
