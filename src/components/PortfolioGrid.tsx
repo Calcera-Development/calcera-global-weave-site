@@ -82,9 +82,9 @@ const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
               </p>
               <button
                 onClick={onContactClick}
-                className="group relative bg-white text-slate-950 px-8 sm:px-12 py-4 sm:py-5 rounded-2xl font-bold transition-all duration-500 hover:scale-105 hover:-translate-y-1 shadow-2xl flex items-center gap-3 mx-auto overflow-hidden"
+                className="group relative bg-white text-slate-950 px-6 sm:px-12 py-4 sm:py-5 rounded-2xl font-bold transition-all duration-500 hover:scale-105 hover:-translate-y-1 shadow-2xl flex items-center gap-3 mx-auto overflow-hidden text-sm sm:text-base"
               >
-                <span className="relative z-10">Initialize Consultation</span>
+                <span className="relative z-10 whitespace-nowrap">Book Consultation</span>
                 <ArrowUpRight className="relative z-10 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
