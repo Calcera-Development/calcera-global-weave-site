@@ -71,23 +71,26 @@ const ServicesGrid = () => {
             <AnimatedWrapper
               key={service.title}
               animation="fade-up"
-              delay={`${index * 100}ms`}
+              delay={`${index * 120}ms`}
             >
               <div
                 role="listitem"
                 aria-label={`Service: ${service.title}`}
-                className={`group relative rounded-3xl ${service.bg} border border-slate-200/50 p-6 sm:p-8 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 h-full glass-card`}
+                className={`group relative rounded-3xl ${service.bg} border border-slate-200/50 p-6 sm:p-10 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-500/10 h-full glass-card premium-tilt card-shine overflow-hidden`}
               >
-                {/* Gradient line at top */}
-                <div className={`absolute top-0 left-6 sm:left-8 right-6 sm:right-8 h-1 bg-gradient-to-r ${service.gradient} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-[1px]`} />
+                {/* Internal Glow Effect */}
+                <div className={`absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.05] rounded-full blur-3xl transition-opacity duration-700`} />
 
-                <div className={`inline-flex p-3 sm:p-4 rounded-2xl bg-gradient-to-br ${service.gradient} mb-6 sm:mb-8 shadow-lg shadow-slate-200/50 group-hover:scale-110 transition-transform duration-500`}>
-                  <service.icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                {/* Gradient line at top */}
+                <div className={`absolute top-0 left-6 sm:left-10 right-6 sm:right-10 h-1 bg-gradient-to-r ${service.gradient} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 blur-[1px]`} />
+
+                <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${service.gradient} mb-8 shadow-xl shadow-slate-200/50 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
+                  <service.icon className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-3 sm:mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 tracking-tight leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-slate-500 text-base sm:text-lg leading-relaxed">
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-light">
                   {service.description}
                 </p>
               </div>

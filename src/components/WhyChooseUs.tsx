@@ -41,23 +41,31 @@ const WhyChooseUs = () => (
           Because building with love and logic matters.
         </p>
       </AnimatedWrapper>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" role="list" aria-label="Reasons to choose Calcera Global">
+      <div className="bento-grid max-w-6xl mx-auto" role="list" aria-label="Reasons to choose Calcera Global">
         {whyChooseUs.map((item, index) => (
-          <AnimatedWrapper key={item.title} animation="fade-up" delay={`${index * 120}ms`}>
+          <AnimatedWrapper
+            key={item.title}
+            animation="fade-up"
+            delay={`${index * 120}ms`}
+            className={index === 0 || index === 3 ? "bento-long" : ""}
+          >
             <div
               role="listitem"
               aria-label={item.title}
-              className="group flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-1"
+              className="group flex flex-col h-full p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 hover:-translate-y-2 card-shine overflow-hidden relative"
             >
-              <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${item.gradient} shadow-lg`}>
-                <item.icon className="h-5 w-5 text-white" />
+              <div className={`p-4 rounded-2xl bg-gradient-to-br ${item.gradient} shadow-lg mb-8 w-fit group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
+                <item.icon className="h-6 w-6 text-white" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+              <div className="relative z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-700 transition-colors duration-300 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-slate-500 text-base leading-relaxed">{item.description}</p>
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-light">{item.description}</p>
               </div>
+
+              {/* Decorative Background Element */}
+              <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${item.gradient} opacity-[0.03] group-hover:opacity-[0.08] rounded-full blur-2xl transition-opacity duration-500`} />
             </div>
           </AnimatedWrapper>
         ))}

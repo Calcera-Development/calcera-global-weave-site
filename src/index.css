@@ -379,3 +379,102 @@ section {
   pointer-events: none;
   animation: shimmer-button 3s infinite;
 }
+/* Ultimate UI Overhaul - Post-Implementation Utilities */
+
+:root {
+  --glow-primary: hsla(217, 91%, 60%, 0.15);
+  --glow-secondary: hsla(271, 91%, 65%, 0.1);
+  --card-border-light: rgba(255, 255, 255, 0.4);
+}
+
+.dark {
+  --glow-primary: hsla(217, 91%, 60%, 0.2);
+  --glow-secondary: hsla(271, 91%, 65%, 0.15);
+  --card-border-light: rgba(255, 255, 255, 0.1);
+}
+
+/* Advanced Card Shine */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.card-shine:hover::before {
+  transform: translateX(100%);
+}
+
+/* System Glow Background */
+.system-glow {
+  position: relative;
+}
+
+.system-glow::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at center, var(--glow-primary) 0%, transparent 70%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.system-glow:hover::after {
+  opacity: 1;
+}
+
+/* Bento Grid Utilities */
+.bento-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.bento-long {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-long {
+    grid-column: span 2;
+  }
+}
+
+/* Tilt Placeholder (Logic handled in TSX if needed, CSS utility for fallback) */
+.premium-tilt {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+}
+
+.premium-tilt:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+

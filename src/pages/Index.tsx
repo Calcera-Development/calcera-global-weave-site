@@ -46,68 +46,72 @@ const Index = () => {
       <main>
         {/* Hero Section */}
         <section ref={heroRef} className="relative min-h-[90dvh] flex items-center pt-32 sm:pt-40 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay" aria-label="Hero section">
-          {/* Floating orbs */}
+          {/* Premium Parallax-Ready Background Overlay */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <div className="absolute top-1/4 -left-20 w-48 h-48 sm:w-72 sm:h-72 bg-blue-500/20 rounded-full blur-3xl animate-float" />
-            <div className="absolute top-1/3 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-            <div className="absolute -bottom-20 left-1/4 w-72 h-72 sm:w-[500px] sm:h-[500px] bg-indigo-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "4s" }} />
-            <div className="absolute top-2/3 right-1/4 w-56 h-56 bg-cyan-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+            <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-60 dark:opacity-40" />
+
+            {/* Animated Glow Orbs */}
+            <div className="absolute top-1/4 left-10 w-[20rem] h-[20rem] bg-blue-500/10 rounded-full blur-[100px] animate-float opacity-50 block md:hidden" />
+            <div className="absolute top-1/3 -right-20 w-[40rem] h-[40rem] bg-indigo-500/15 rounded-full blur-[160px] animate-float lg:block hidden" style={{ animationDelay: "2s" }} />
+            <div className="absolute -bottom-40 left-1/4 w-[50rem] h-[50rem] bg-cyan-400/5 rounded-full blur-[200px] animate-pulse lg:block hidden" style={{ animationDelay: "4s" }} />
+
+            {/* Subtle Grid Interaction Overlay */}
+            <div className="absolute inset-0 grid-bg opacity-[0.03] dark:opacity-[0.05]" />
           </div>
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
-            <AnimatedWrapper animation="fade-up">
-              <div className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 py-2 rounded-full bg-blue-50/50 backdrop-blur-sm border border-blue-100/50 max-w-full">
-                <span className="text-xs sm:text-sm font-medium text-blue-700 tracking-wider truncate uppercase">A Global Tech Innovation Powerhouse</span>
+            <AnimatedWrapper animation="fade-up" delay="100ms">
+              <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/40 dark:border-slate-800/40 shadow-sm transition-all duration-300 hover:scale-105 select-none">
+                <span className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 tracking-wider uppercase">A Global Tech Innovation Powerhouse</span>
               </div>
-              <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.95] tracking-tight">
+            </AnimatedWrapper>
+
+            <AnimatedWrapper animation="fade-up" delay="200ms">
+              <h1 className="text-3xl sm:text-6xl md:text-8xl font-semibold text-slate-900 dark:text-white mb-8 leading-[1.05] tracking-tight">
                 <span className="text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text gradient-text-animated">Build</span>
-                <span className="text-slate-200 mx-1.5 sm:mx-3 font-bold">·</span>
+                <span className="text-slate-200 dark:text-slate-700 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text gradient-text-animated">Scale</span>
-                <span className="text-slate-200 mx-1.5 sm:mx-3 font-bold">·</span>
+                <span className="text-slate-200 dark:text-slate-700 mx-2 sm:mx-4 font-bold">·</span>
                 <span className="text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text gradient-text-animated">Dominate</span>
               </h1>
             </AnimatedWrapper>
 
-            <AnimatedWrapper animation="fade-up" delay="150ms">
-              <p className="text-xl sm:text-2xl text-slate-500 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
-                We design and develop <strong>high-performance AI Apps & SaaS platforms</strong> that drive real business results.
+            <AnimatedWrapper animation="fade-up" delay="300ms">
+              <p className="text-lg sm:text-2xl text-slate-500 dark:text-slate-400 mb-10 sm:max-w-3xl mx-auto leading-relaxed font-light px-4 sm:px-0">
+                Calcera Global transforms bold visions into <span className="text-slate-900 dark:text-slate-200 font-medium italic">market-leading realities</span> through elite AI-driven engineering and design.
               </p>
             </AnimatedWrapper>
 
-            <AnimatedWrapper animation="fade-up" delay="300ms">
-              <div className="flex flex-col sm:flex-row gap-5 justify-center mb-14">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-7 rounded-2xl text-base font-bold shadow-2xl shadow-blue-600/25 hover:shadow-blue-600/40 transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group shimmer-btn"
-                  onClick={() => scrollToSection(contactRef)}
-                  aria-label="Book a free consultation with Calcera Global">
-
-                  <Rocket className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-500" aria-hidden="true" />
-                  Book Free Consultation
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-slate-200 bg-white/50 backdrop-blur-md text-slate-700 hover:bg-white hover:border-blue-200 px-10 py-7 rounded-2xl text-base font-bold transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group shadow-lg"
-                  onClick={() => scrollToSection(workRef)}
-                  aria-label="View Calcera Global's portfolio and previous work">
-
-                  <Star className="mr-2 h-5 w-5 group-hover:rotate-12 text-yellow-500 transition-transform duration-500" aria-hidden="true" />
-                  View Our Work
-                </Button>
-              </div>
+            <AnimatedWrapper animation="fade-up" delay="400ms" className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16 px-4">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-7 rounded-2xl text-base font-bold shadow-2xl shadow-blue-600/25 hover:shadow-blue-600/40 transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group shimmer-btn"
+                onClick={() => scrollToSection(contactRef)}
+                aria-label="Book a free consultation with Calcera Global"
+              >
+                Book Free Consultation
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto bg-white/20 dark:bg-slate-900 border-2 border-slate-200 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 transition-all duration-300"
+                onClick={() => scrollToSection(workRef)}
+                aria-label="View our portfolio"
+              >
+                View Our Selected Work
+              </Button>
             </AnimatedWrapper>
 
-            <AnimatedWrapper animation="fade-up" delay="400ms">
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-x-8 gap-y-6 opacity-40 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0">
-                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 sm:pr-8">Our Tech Stack</span>
-                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 items-center">
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">React</span>
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">TypeScript</span>
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Next.js</span>
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">OpenAI</span>
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Python</span>
-                  <span className="text-lg sm:text-xl font-bold text-slate-900 tracking-tighter">Vite</span>
+            <AnimatedWrapper animation="fade-up" delay="500ms">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-x-12 gap-y-8 opacity-50 hover:opacity-100 transition-opacity duration-700 select-none grayscale hover:grayscale-0 px-4">
+                <span className="text-sm font-semibold tracking-widest text-slate-400 uppercase sm:border-r border-slate-200 dark:border-slate-800 sm:pr-12">Stack Expertise</span>
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-12 items-center">
+                  {["React", "TypeScript", "Next.js", "OpenAI", "Python", "Vite"].map((tech) => (
+                    <span key={tech} className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-300 tracking-tighter hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-default">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </AnimatedWrapper>
