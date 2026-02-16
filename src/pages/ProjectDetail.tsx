@@ -191,7 +191,7 @@ const ProjectDetail = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                             <Link to="/#contact" className="w-full sm:w-auto">
-                                <Button size="lg" className="w-full sm:w-auto bg-slate-900 text-white rounded-full px-8 sm:px-10 py-6 sm:py-8 h-auto text-lg sm:text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
+                                <Button size="lg" className="w-full sm:w-auto bg-slate-900 text-white rounded-full px-8 sm:px-10 py-5 sm:py-8 h-auto text-base sm:text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
                                     Start Your Project
                                 </Button>
                             </Link>

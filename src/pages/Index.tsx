@@ -85,7 +85,7 @@ const Index = () => {
             <AnimatedWrapper animation="fade-up" delay="400ms" className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16 px-4">
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-7 rounded-2xl text-base font-bold shadow-2xl shadow-blue-600/25 hover:shadow-blue-600/40 transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group shimmer-btn"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 sm:px-10 py-5 sm:py-7 rounded-2xl text-base font-bold shadow-2xl shadow-blue-600/25 hover:shadow-blue-600/40 transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group shimmer-btn"
                 onClick={() => scrollToSection(contactRef)}
                 aria-label="Book a free consultation with Calcera Global"
               >
@@ -95,7 +95,7 @@ const Index = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto bg-white/20 border-2 border-slate-200 px-10 py-7 rounded-2xl text-base font-semibold hover:bg-slate-50 transition-all duration-300"
+                className="w-full sm:w-auto bg-white/20 border-2 border-slate-200 px-8 sm:px-10 py-5 sm:py-7 rounded-2xl text-sm sm:text-base font-semibold hover:bg-slate-50 transition-all duration-300"
                 onClick={() => scrollToSection(workRef)}
                 aria-label="View our portfolio"
               >
