@@ -3,10 +3,21 @@ import { projects } from "@/data/projects";
 import { ArrowLeft, ChevronRight, CheckCircle2, Rocket, Globe, Github } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
     const project = projects.find((p) => p.id === projectId);
+
+    useEffect(() => {
+        if (project) {
+            document.title = `${project.title} | Calcera Global - Elite AI Projects`;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute("content", `${project.title}: ${project.description} Built by Calcera Global elite engineering.`);
+            }
+        }
+    }, [project]);
 
     if (!project) {
         return (
@@ -24,6 +35,23 @@ const ProjectDetail = () => {
 
     return (
         <div className="min-h-screen bg-slate-50">
+            {/* Dynamic Project Schema */}
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "CreativeWork",
+                    "name": project.title,
+                    "description": project.description,
+                    "genre": project.category,
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "Calcera Global",
+                        "url": "https://calcera.global"
+                    },
+                    "keywords": project.technologies.join(", ")
+                })}
+            </script>
+
             {/* Navigation Header */}
             <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-slate-200 py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
