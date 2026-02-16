@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, Rocket, Star } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
 import React from "react";
+import { Link } from "react-router-dom";
 import calceraLogo from "@/assets/calcera-logo.png";
 
 const ServicesGrid = lazy(() => import("@/components/ServicesGrid"));
@@ -213,8 +214,8 @@ const Index = () => {
                 © 2026 Calcera Global
               </p>
               <div className="flex items-center gap-6 text-sm text-slate-500">
-                <a href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</a>
-                <a href="#" className="hover:text-white transition-colors duration-300">Terms of Service</a>
+                <Link to="/privacy-policy" className="hover:text-white transition-colors duration-300">Privacy Policy</Link>
+                <Link to="/terms-of-service" className="hover:text-white transition-colors duration-300">Terms of Service</Link>
               </div>
             </div>
           </div>
