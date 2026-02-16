@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronRight, CheckCircle2, Rocket, Globe, Github } from "lu
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
+import calceraLogo from "@/assets/calcera-logo.png";
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
@@ -55,9 +56,9 @@ const ProjectDetail = () => {
             {/* Navigation Header */}
             <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-slate-200 py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-2 group text-slate-600 hover:text-blue-600 transition-colors">
-                        <ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-semibold text-sm sm:text-base">Back to Projects</span>
+                    <Link to="/" className="flex items-center gap-3 group">
+                        <ArrowLeft className="h-5 w-5 text-slate-600 group-hover:-translate-x-1 transition-transform" />
+                        <img src={calceraLogo} alt="Calcera Logo" className="h-8 w-auto select-none object-contain rounded-lg" />
                     </Link>
                     <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-400 font-medium">
                         <span>Portfolio</span>
