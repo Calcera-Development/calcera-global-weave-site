@@ -39,6 +39,7 @@ const Index = () => {
 
 
   React.useEffect(() => {
+    document.title = "Calcera Global - AI Development, SaaS & Workflow Automation";
     const hash = location.hash;
     if (hash) {
       const id = hash.replace("#", "");

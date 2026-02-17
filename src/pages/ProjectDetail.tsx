@@ -14,7 +14,7 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         if (project) {
-            document.title = `${project.title} | Calcera Global - Elite AI Projects`;
+            document.title = `${project.title} | Calcera Global - AI Projects`;
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) {
                 metaDesc.setAttribute("content", `${project.title}: ${project.description} Built by Calcera Global elite engineering.`);
