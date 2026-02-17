@@ -4,15 +4,6 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import calceraLogo from "@/assets/calcera-logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
-interface HeaderNavProps {
-  navScrollFns?: {
-    home: () => void;
-    services: () => void;
-    work: () => void;
-    contact: () => void;
-  };
-}
-
 const NAV_ITEMS = [
   { label: "Home", key: "home", id: "hero" },
   { label: "About", key: "about", id: "about" },
@@ -20,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Work", key: "work", id: "portfolio" },
 ];
 
-const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
+const HeaderNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
@@ -77,13 +68,17 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
 
     if (!isHomePage) {
       navigate(`/#${id}`);
-      // After navigation, use a small delay to scroll if possible, 
-      // but usually the hash will handle it or Index.tsx handles it.
       return;
     }
 
-    if (navScrollFns && navScrollFns[key as keyof typeof navScrollFns]) {
-      navScrollFns[key as keyof typeof navScrollFns]();
+    // On Homepage
+    if (key === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -93,8 +88,9 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ navScrollFns }) => {
       navigate("/#contact");
       return;
     }
-    if (navScrollFns && navScrollFns.contact) {
-      navScrollFns.contact();
+    const element = document.getElementById("contact");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 

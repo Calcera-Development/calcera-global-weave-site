@@ -5,24 +5,25 @@ import AnimatedWrapper from "@/components/AnimatedWrapper";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/Footer";
 
 const TermsOfService = () => {
-    const navScrollFns = {
-        home: () => { window.location.href = "/"; },
-        services: () => { window.location.href = "/#services"; },
-        work: () => { window.location.href = "/#work"; },
-        contact: () => { window.location.href = "/#contact"; }
-    };
+
 
     return (
         <div className="min-h-screen bg-background">
-            <HeaderNav navScrollFns={navScrollFns} />
+            <HeaderNav />
 
-            <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+            <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+                <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-30" />
+                <div className="absolute inset-0 grid-bg opacity-[0.03]" />
+            </div>
+
+            <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <AnimatedWrapper animation="fade-up">
                         <Link to="/">
-                            <Button variant="ghost" className="mb-8 hover:bg-slate-100">
+                            <Button variant="ghost" size="sm" className="mb-8 hover:bg-slate-100">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Home
                             </Button>
@@ -86,12 +87,10 @@ const TermsOfService = () => {
                 </div>
             </main>
 
-            <footer className="py-12 border-t border-slate-100 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-4 text-center">
-                    <p className="text-slate-500 text-sm">© 2026 Calcera Global. All rights reserved.</p>
-                </div>
-            </footer>
-        </div>
+
+
+            <Footer />
+        </div >
     );
 };
 

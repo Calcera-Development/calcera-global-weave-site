@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
+import Footer from "@/components/Footer";
 import React from "react";
 import aashiqFounder from "@/assets/aashiq-founder.jpg";
+import sai from "@/assets/sai.jpg";
+import ashok from "@/assets/ashok.jpg";
 
 
 const TEAM_MEMBERS = [
@@ -15,37 +18,51 @@ const TEAM_MEMBERS = [
         gradient: "from-blue-600 to-indigo-700",
         image: aashiqFounder,
         isFounder: true,
+        imageStyle: "object-[center_35%]", // Shifted focus down to move head UP
         linkedin: "https://www.linkedin.com/in/aashiq-ahmed-9b624418b/"
-    },
-    {
-        name: "Sai Vikneshan",
-        role: "Cyber Security Consultant",
-        description: "Assists in identifying and mitigating security risks across infrastructure. Expert in system hardening, threat detection, and secure coding practices.",
-        gradient: "from-slate-700 to-slate-900",
-        linkedin: "https://www.linkedin.com/in/sai-vikneshan-jeyathasan-242a47299/"
     },
     {
         name: "Ashok Ainkaran",
         role: "Head of Operations",
         description: "Drives operational excellence across Calcera — translating strategy into structured execution, optimizing workflows, and ensuring scalable, high-performance delivery.",
         gradient: "from-emerald-500 to-teal-600",
+        image: ashok,
+        imageStyle: "object-top", // Fix "out of card" by ensuring top (head) is shown
         linkedin: "https://www.linkedin.com/in/ashok-ainkaran-jeyathasan/"
+    },
+    {
+        name: "Sai Vikneshan",
+        role: "Cyber Security Consultant",
+        description: "Assists in identifying and mitigating security risks across infrastructure. Expert in system hardening, threat detection, and secure coding practices.",
+        gradient: "from-slate-700 to-slate-900",
+        image: sai,
+        imageStyle: "object-top", // Reset to top to move head DOWN (reveal top)
+        linkedin: "https://www.linkedin.com/in/sai-vikneshan-jeyathasan-242a47299/"
     }
 ];
 
 const About = () => {
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-background">
             <HeaderNav />
 
-            <main className="pt-24 sm:pt-32 pb-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <main className="pt-24 sm:pt-32 pb-24 relative overflow-hidden">
+                {/* Premium Background Overlay */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+                    <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-30" />
+                    <div className="absolute top-1/4 left-10 w-[20rem] h-[20rem] bg-blue-500/10 rounded-full blur-[100px] animate-float opacity-50 block md:hidden" />
+                    <div className="absolute top-1/3 -right-20 w-[40rem] h-[40rem] bg-indigo-500/15 rounded-full blur-[160px] animate-float lg:block hidden" style={{ animationDelay: "2s" }} />
+                    <div className="absolute -bottom-40 left-1/4 w-[50rem] h-[50rem] bg-cyan-400/5 rounded-full blur-[200px] animate-pulse lg:block hidden" style={{ animationDelay: "4s" }} />
+                    <div className="absolute inset-0 grid-bg opacity-[0.03]" />
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     {/* Mission Hero Section */}
                     <div className="text-center mb-32 max-w-4xl mx-auto">
                         <AnimatedWrapper animation="fade-up">
-                            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 shadow-sm">
+                            <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm transition-all duration-300 hover:scale-105 select-none">
                                 <Globe className="h-4 w-4 text-blue-600" />
-                                <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">Our Collective Mission</span>
+                                <span className="text-xs sm:text-sm font-semibold text-blue-600 tracking-wider uppercase">Our Collective Mission</span>
                             </div>
                             <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-slate-900 mb-8 leading-[1.1] tracking-tight">
                                 One Team. <span className="text-blue-600">Elite Execution.</span>
@@ -102,7 +119,11 @@ const About = () => {
                                             <div className="w-full aspect-[4/5] rounded-2xl bg-slate-50 mb-6 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
                                                 <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-5`} />
                                                 {member.image ? (
-                                                    <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700" />
+                                                    <img
+                                                        src={member.image}
+                                                        alt={member.name}
+                                                        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${member.imageStyle || 'object-center'}`}
+                                                    />
                                                 ) : (
                                                     <div className="flex flex-col items-center gap-3">
                                                         <div className="w-24 h-24 rounded-full bg-slate-200/80 flex items-center justify-center">
@@ -165,9 +186,9 @@ const About = () => {
                                     "We bridge business intent with technical reality—especially in complex, regulated environments. Our team scales through high-value B2B engagements and Repeatable Excellence."
                                 </p>
                                 <Link to="/#contact">
-                                    <Button className="w-full bg-white text-slate-950 hover:bg-blue-50 py-4 rounded-2xl font-bold text-sm shadow-2xl transition-all hover:scale-[1.02]">
-                                        Discuss Strategic Partnership
-                                        <Rocket className="ml-2 h-5 w-5" />
+                                    <Button size="xl" className="w-full bg-white text-slate-950 hover:bg-blue-50 shadow-2xl transition-all hover:scale-[1.02] h-auto py-4 sm:h-14 sm:py-2 flex-wrap sm:flex-nowrap gap-2 whitespace-normal leading-tight text-sm sm:text-lg">
+                                        <span>Discuss Strategic Partnership</span>
+                                        <Rocket className="h-5 w-5 flex-shrink-0" />
                                     </Button>
                                 </Link>
                             </div>
@@ -177,11 +198,7 @@ const About = () => {
             </main>
 
             {/* Footer minimal */}
-            <footer className="py-12 border-t border-slate-200 text-center text-slate-400 text-sm">
-                <div className="max-w-7xl mx-auto px-4">
-                    <p>© {new Date().getFullYear()} Calcera Global. All engineering rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

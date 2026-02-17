@@ -5,6 +5,8 @@ import AnimatedWrapper from "@/components/AnimatedWrapper";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import calceraLogo from "@/assets/calcera-logo.png";
+import Footer from "@/components/Footer";
+import HeaderNav from "@/components/HeaderNav";
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
@@ -26,7 +28,7 @@ const ProjectDetail = () => {
                 <h1 className="text-4xl font-bold text-slate-900 mb-4">Project Not Found</h1>
                 <p className="text-slate-600 mb-8 text-center max-w-md">The project you are looking for doesn't exist or has been moved.</p>
                 <Link to="/">
-                    <Button variant="outline" className="rounded-full px-6 py-3 h-auto text-sm hover:scale-105 transition-transform">
+                    <Button variant="outline" size="sm" className="rounded-full hover:scale-105 transition-transform">
                         <ArrowLeft className="mr-2 h-5 w-5" /> Back to Home
                     </Button>
                 </Link>
@@ -35,7 +37,7 @@ const ProjectDetail = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-background">
             {/* Dynamic Project Schema */}
             <script type="application/ld+json">
                 {JSON.stringify({
@@ -54,23 +56,27 @@ const ProjectDetail = () => {
             </script>
 
             {/* Navigation Header */}
-            <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-slate-200 py-4 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-3 group">
-                        <ArrowLeft className="h-5 w-5 text-slate-600 group-hover:-translate-x-1 transition-transform" />
-                        <img src={calceraLogo} alt="Calcera Logo" className="h-8 w-auto select-none object-contain rounded-lg" />
-                    </Link>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-400 font-medium">
-                        <span>Portfolio</span>
-                        <ChevronRight className="h-4 w-4" />
-                        <span className="text-slate-900">{project.title}</span>
-                    </div>
-                </div>
-            </nav>
+            <HeaderNav />
+            <div className="pt-32 sm:pt-40">
+                <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-400 font-medium px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8">
+                    <Link to="/" className="hover:text-slate-600 transition-colors">Portfolio</Link>
+                    <ChevronRight className="h-4 w-4" />
+                    <span className="text-slate-900">{project.title}</span>
+                </nav>
+            </div>
 
             {/* Hero Section */}
-            <section className="relative pt-12 sm:pt-20 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full mesh-gradient opacity-40 -z-10" />
+            {/* Hero Section */}
+            {/* Hero Section */}
+            <section className="relative pt-6 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden mesh-gradient noise-overlay">
+                {/* Premium Background Overlay */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                    <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] mesh-gradient opacity-60" />
+                    <div className="absolute top-1/4 left-10 w-[20rem] h-[20rem] bg-blue-500/10 rounded-full blur-[100px] animate-float opacity-50 block md:hidden" />
+                    <div className="absolute top-1/3 -right-20 w-[40rem] h-[40rem] bg-indigo-500/15 rounded-full blur-[160px] animate-float lg:block hidden" style={{ animationDelay: "2s" }} />
+                    <div className="absolute -bottom-40 left-1/4 w-[50rem] h-[50rem] bg-cyan-400/5 rounded-full blur-[200px] animate-pulse lg:block hidden" style={{ animationDelay: "4s" }} />
+                    <div className="absolute inset-0 grid-bg opacity-[0.03]" />
+                </div>
 
                 <div className="max-w-7xl mx-auto">
                     <AnimatedWrapper animation="fade-up" className="max-w-4xl">
@@ -191,15 +197,15 @@ const ProjectDetail = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                             <Link to="/#contact" className="w-full sm:w-auto">
-                                <Button size="lg" className="w-full sm:w-auto bg-slate-900 text-white rounded-full px-8 sm:px-10 py-5 sm:py-8 h-auto text-base sm:text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
+                                <Button size="xl" className="w-full sm:w-auto bg-slate-900 text-white hover:scale-105 transition-transform shadow-2xl">
                                     Start Your Project
                                 </Button>
                             </Link>
                             <div className="flex items-center gap-4 mt-2 sm:mt-0">
-                                <Button variant="outline" size="icon" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-slate-200">
+                                <Button variant="outline" size="icon" className="w-14 h-14 rounded-full border-slate-200">
                                     <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
-                                <Button variant="outline" size="icon" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-slate-200">
+                                <Button variant="outline" size="icon" className="w-14 h-14 rounded-full border-slate-200">
                                     <Github className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
                             </div>
@@ -209,11 +215,7 @@ const ProjectDetail = () => {
             </section>
 
             {/* Footer minimal */}
-            <footer className="py-12 border-t border-slate-200 text-center text-slate-400 text-sm">
-                <div className="max-w-7xl mx-auto px-4">
-                    <p>© {new Date().getFullYear()} Calcera Global. All engineering rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
