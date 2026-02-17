@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles, Rocket, Star } from "lucide-react";
 import AnimatedWrapper from "@/components/AnimatedWrapper";
 import HeaderNav from "@/components/HeaderNav";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import calceraLogo from "@/assets/calcera-logo.png";
 
 const ServicesGrid = lazy(() => import("@/components/ServicesGrid"));
@@ -22,6 +22,9 @@ const SectionLoader = () =>
 
 
 const Index = () => {
+  const location = useLocation();
+
+
   const heroRef = React.useRef<HTMLDivElement>(null);
   const servicesRef = React.useRef<HTMLElement>(null);
   const workRef = React.useRef<HTMLElement>(null);
@@ -36,7 +39,7 @@ const Index = () => {
 
 
   React.useEffect(() => {
-    const hash = window.location.hash;
+    const hash = location.hash;
     if (hash) {
       const id = hash.replace("#", "");
       if (id) {
@@ -49,7 +52,7 @@ const Index = () => {
         }, 100);
       }
     }
-  }, []);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-background">
