@@ -1,11 +1,15 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+/// <reference lib="deno.ns" />
+import { serve } from "std/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+// Environment variables - trim quotes and handle fallbacks
+const RESEND_API_KEY = (Deno.env.get("RESEND_API_KEY") || Deno.env.get("VITE_RESEND_API_KEY"))?.trim().replace(/^["']|["']$/g, "");
+
+if (!RESEND_API_KEY) console.error("CRITICAL: RESEND_API_KEY is missing");
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -69,25 +73,43 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Calcera Website <hello@calcera.global>",
         to: ["hello@calcera.global"],
-        subject: `[Internal] New Consultation Request: ${name}`,
+        subject: `[Internal Lead] ${name} - Consultation Request`,
         html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 12px; background-color: #ffffff;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #1e40af; margin: 0; font-size: 24px;">New Inquiry Received</h1>
-              <p style="color: #6b7280; margin-top: 5px;">A new request has been submitted via the website.</p>
+          <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9fbfc; border: 1px solid #e1e8ed; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 30px 20px; text-align: center;">
+              <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em;">New Business Inquiry</h1>
+              <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0; font-size: 14px;">A new consultation request from the website</p>
             </div>
             
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
-              <h2 style="font-size: 16px; color: #334155; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">Inquiry Details</h2>
-              <p style="margin: 10px 0;"><strong>Name:</strong> ${escapeHtml(name)}</p>
-              <p style="margin: 10px 0;"><strong>Email:</strong> ${escapeHtml(email)}</p>
-              <p style="margin: 10px 0;"><strong>Contact:</strong> ${escapeHtml(contact)}</p>
-              <p style="margin: 15px 0 5px 0;"><strong>Message:</strong></p>
-              <div style="background: #ffffff; padding: 15px; border: 1px solid #e2e8f0; border-radius: 6px; white-space: pre-wrap; color: #475569;">${escapeHtml(message)}</div>
+            <div style="padding: 30px; background-color: #ffffff;">
+              <div style="margin-bottom: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="background-color: #f8fafc; padding: 15px; border-radius: 10px; border-left: 4px solid #3b82f6;">
+                  <span style="font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 4px;">Lead Name</span>
+                  <span style="font-size: 16px; color: #1e293b; font-weight: 600;">${escapeHtml(name)}</span>
+                </div>
+                <div style="background-color: #f8fafc; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981;">
+                  <span style="font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 4px;">Lead Email</span>
+                  <span style="font-size: 16px; color: #1e293b; font-weight: 600;">${escapeHtml(email)}</span>
+                </div>
+              </div>
+
+              <div style="background-color: #f8fafc; padding: 15px; border-radius: 10px; border-left: 4px solid #f59e0b; margin-bottom: 25px;">
+                <span style="font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 4px;">Contact Info</span>
+                <span style="font-size: 16px; color: #1e293b; font-weight: 600;">${escapeHtml(contact)}</span>
+              </div>
+              
+              <div style="margin-top: 30px;">
+                <h3 style="font-size: 14px; color: #64748b; text-transform: uppercase; margin-bottom: 12px; font-weight: 600;">Message Summary</h3>
+                <div style="background-color: #ffffff; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; line-height: 1.6; color: #334155; white-space: pre-wrap; font-size: 15px;">${escapeHtml(message)}</div>
+              </div>
+
+              <div style="margin-top: 35px; border-top: 1px solid #edf2f7; padding-top: 25px; text-align: center;">
+                <a href="mailto:${email}" style="display: inline-block; background-color: #2563eb; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: background-color 0.2s;">Reply to Lead</a>
+              </div>
             </div>
             
-            <div style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 20px;">
-              <p>Sent from Calcera Global Website</p>
+            <div style="background-color: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
+              <p style="margin: 0; font-size: 12px; color: #94a3b8;">Automated notification from <strong>Calcera Digital Engine</strong></p>
             </div>
           </div>
         `,
@@ -106,43 +128,63 @@ const handler = async (req: Request): Promise<Response> => {
         to: [email],
         subject: "We've Received Your Inquiry - Calcera Global",
         html: `
-          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333; line-height: 1.6;">
-            <div style="text-align: center; margin-bottom: 40px;">
-               <h1 style="color: #2563eb; margin: 0; font-size: 28px; letter-spacing: -0.025em;">Calcera Global</h1>
-               <div style="height: 4px; width: 40px; background: #2563eb; margin: 20px auto 0;"></div>
-            </div>
-
-            <p style="font-size: 18px; margin-bottom: 20px;">Hello ${escapeHtml(name)},</p>
-            
-            <p style="margin-bottom: 25px;">
-              Thank you for reaching out to **Calcera Global**. We've successfully received your inquiry regarding your project idea.
-            </p>
-
-            <div style="background-color: #f0f7ff; border-left: 4px solid #2563eb; padding: 20px; margin-bottom: 30px; border-radius: 0 8px 8px 0;">
-              <p style="margin: 0; color: #1e40af; font-weight: 500;">
-                Our team is currently reviewing your details. We strive to respond to all consultation requests within 24-48 business hours.
-              </p>
-            </div>
-
-            <p style="margin-bottom: 10px;">While you wait, feel free to:</p>
-            <ul style="margin-bottom: 30px; padding-left: 20px;">
-              <li style="margin-bottom: 8px;">Explore our [portfolio](https://calcera.global#work)</li>
-              <li style="margin-bottom: 8px;">Check out our [services](https://calcera.global#services)</li>
-            </ul>
-
-            <p style="margin-bottom: 40px;">
-              We look forward to the possibility of collaborating with you.
-            </p>
-
-            <div style="border-top: 1px solid #eee; padding-top: 30px; margin-top: 40px; text-align: center;">
-              <p style="margin: 0; font-weight: bold; color: #1e293b;">The Calcera Global Team</p>
-              <p style="margin: 5px 0 0; font-size: 14px; color: #64748b;">Building the future, together.</p>
-              
-              <div style="margin-top: 25px;">
-                <a href="https://calcera.global" style="color: #2563eb; text-decoration: none; font-size: 14px; margin: 0 10px;">Website</a>
-                <span style="color: #cbd5e1;">&bull;</span>
-                <a href="mailto:hello@calcera.global" style="color: #2563eb; text-decoration: none; font-size: 14px; margin: 0 10px;">Contact Us</a>
+          <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; color: #1e293b; line-height: 1.6;">
+            <!-- Header Section -->
+            <div style="padding: 40px 20px; text-align: center; background: linear-gradient(to bottom, #f8fafc, #ffffff);">
+              <div style="margin-bottom: 24px;">
+                <h1 style="color: #2563eb; margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.04em;">CALCERA GLOBAL</h1>
+                <div style="height: 4px; width: 48px; background: #2563eb; margin: 16px auto 0; border-radius: 2px;"></div>
               </div>
+              <h2 style="font-size: 22px; color: #0f172a; margin: 0; font-weight: 700;">Inquiry Received Successfully</h2>
+            </div>
+            
+            <!-- Main Content -->
+            <div style="padding: 0 40px 40px;">
+              <p style="font-size: 16px; margin-bottom: 24px;">Dear ${escapeHtml(name)},</p>
+              
+              <p style="font-size: 16px; margin-bottom: 24px; color: #475569;">
+                Thank you for reaching out to **Calcera Global**. We've successfully received your inquiry and are excited to learn more about your vision.
+              </p>
+
+              <div style="background-color: #f0f9ff; border-radius: 12px; padding: 24px; margin-bottom: 32px; border-left: 4px solid #0284c7;">
+                <p style="margin: 0; color: #0369a1; font-weight: 600; font-size: 15px;">
+                  Next Steps:
+                </p>
+                <p style="margin: 8px 0 0; color: #0c4a6e; font-size: 15px;">
+                  Our strategy team is reviewing your requirements. You can expect a personalized response within <span style="font-weight: 700;">24-48 business hours</span> to discuss your project in detail.
+                </p>
+              </div>
+
+              <div style="margin-bottom: 40px;">
+                <h3 style="font-size: 14px; color: #64748b; text-transform: uppercase; margin-bottom: 16px; font-weight: 700; letter-spacing: 0.05em;">Quick Resources</h3>
+                <div style="display: flex; gap: 12px;">
+                  <a href="https://calcera.global#work" style="flex: 1; text-align: center; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-decoration: none; color: #1e293b; font-weight: 600; font-size: 14px; background-color: #f8fafc;">View Portfolio</a>
+                  <a href="https://calcera.global#services" style="flex: 1; text-align: center; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-decoration: none; color: #1e293b; font-weight: 600; font-size: 14px; background-color: #f8fafc;">Our Services</a>
+                </div>
+              </div>
+
+              <p style="margin-bottom: 32px; font-size: 16px;">
+                We look forward to the possibility of collaborating on something extraordinary.
+              </p>
+
+              <!-- Footer Signature -->
+              <div style="border-top: 1px solid #f1f5f9; padding-top: 32px;">
+                <p style="margin: 0; font-weight: 700; color: #0f172a; font-size: 16px;">The Calcera Global Team</p>
+                <p style="margin: 4px 0 0; font-size: 14px; color: #94a3b8;">Strategic Solutions | Premium Implementation</p>
+                
+                <div style="margin-top: 24px; display: flex; gap: 20px; font-size: 13px;">
+                  <a href="https://calcera.global" style="color: #2563eb; text-decoration: none; font-weight: 600;">Website</a>
+                  <span style="color: #cbd5e1;">&bull;</span>
+                  <a href="mailto:hello@calcera.global" style="color: #2563eb; text-decoration: none; font-weight: 600;">Connect with Us</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div style="background-color: #0f172a; padding: 32px 20px; text-align: center; border-radius: 0 0 16px 16px;">
+              <p style="margin: 0; color: #94a3b8; font-size: 12px; letter-spacing: 0.025em; text-transform: uppercase;">
+                &copy; 2026 Calcera Global. All rights reserved.
+              </p>
             </div>
           </div>
         `,

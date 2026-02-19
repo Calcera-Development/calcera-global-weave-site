@@ -109,6 +109,27 @@ const Index = () => {
                 Book Free Consultation
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
+
+              <Link to="/ai-diagnostic" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full bg-slate-900 border-2 border-slate-700 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-2xl text-sm font-bold shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-500 hover:-translate-y-1 active:translate-y-0 group relative overflow-hidden"
+                >
+                  {/* Persistent Subtle Pulsing Glow */}
+                  <div className="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/10 animate-pulse transition-colors" />
+
+                  {/* High-Luminosity Border Shimmer */}
+                  <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-blue-500/20 via-indigo-500/40 to-blue-500/20 [mask-image:linear-gradient(white,white)_padding-box,linear-gradient(white,white)_border-box] [mask-composite:exclude] opacity-100 group-hover:opacity-100 transition-opacity" />
+
+                  <div className="relative z-10 flex items-center justify-center">
+                    <div className="mr-3 p-1 rounded-lg bg-blue-600/20 group-hover:bg-blue-600/30 transition-colors">
+                      <Sparkles className="h-4 w-4 text-blue-400 group-hover:text-blue-300 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
+                    </div>
+                    <span className="tracking-tight text-slate-100 group-hover:text-white">Enterprise AI Diagnostic</span>
+                  </div>
+                </Button>
+              </Link>
+
               <Button
                 variant="outline"
                 size="xl"
@@ -201,7 +222,7 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <Suspense fallback={<div className="h-20 bg-slate-950" />}>
+      <Suspense fallback={<div className="h-64 bg-slate-950" />}>
         <Footer />
       </Suspense>
     </div>);
