@@ -124,7 +124,7 @@ export default function DiagnosticForm() {
             console.error('Diagnostic Error:', err);
             toast({
                 title: 'Synthesis Failed',
-                description: 'We encountered an error while analyzing your data. Please try again.',
+                description: err.details || err.message || 'We encountered an error while analyzing your data. Please try again.',
                 variant: 'destructive',
             });
         } finally {

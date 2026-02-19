@@ -311,6 +311,7 @@ Providing a comprehensive diagnostic analysis.`;
         let roiData = calculateROI({ currentAnnualCost: 100000, implementationCost: 50000, annualMaintenanceCost: 10000, estimatedCostSavingsPerYear: 30000 });
         let finalReport = null;
 
+        // --- AI PROCESSOR ---
         const openAIResponse = await fetch(`${AI_BASE_URL}/chat/completions`, {
             method: "POST",
             headers: {
@@ -328,6 +329,11 @@ Providing a comprehensive diagnostic analysis.`;
                 temperature: 0.7,
             }),
         });
+
+        if (!openAIResponse.ok) {
+            const errText = await openAIResponse.text();
+            throw new Error(`DeepSeek API Error (${openAIResponse.status}): ${errText}`);
+        }
 
         const openAIData = await openAIResponse.json();
 
@@ -370,6 +376,12 @@ Providing a comprehensive diagnostic analysis.`;
                     response_format: { type: "json_object" },
                 }),
             });
+
+            if (!secondResponse.ok) {
+                const errText = await secondResponse.text();
+                throw new Error(`DeepSeek Completion Error: ${errText}`);
+            }
+
             const secondData = await secondResponse.json();
             finalReport = JSON.parse(cleanJSON(secondData.choices[0].message.content || "{}"));
         } else {
@@ -412,8 +424,8 @@ Providing a comprehensive diagnostic analysis.`;
                 estimated_timeline_range: complexityData.range,
                 roi_metrics: roiData,
                 budget_band: complexityData.budgetBand,
-                openai_model: AI_MODEL,
-                total_tokens: openAIData.usage?.total_tokens || 0,
+                openai_model: currentModel,
+                total_tokens: 0, // Usage stats vary between providers
                 processing_time_ms: Date.now() - startTime,
                 status: 'generated',
             })
@@ -442,8 +454,14 @@ Providing a comprehensive diagnostic analysis.`;
         );
 
     } catch (error: any) {
-        console.error("Error in ai-diagnostic:", error);
-        return new Response(JSON.stringify({ error: error.message || "Internal server error" }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
+        console.error("CRITICAL error in ai-diagnostic:", error);
+        return new Response(
+            JSON.stringify({
+                error: error.message || "Internal server error",
+                details: "Architect synthesis failed. Please verify your connection or try again in a moment."
+            }),
+            { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
     }
 };
 
