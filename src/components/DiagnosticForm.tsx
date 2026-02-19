@@ -122,9 +122,28 @@ export default function DiagnosticForm() {
 
         } catch (err: any) {
             console.error('Diagnostic Error:', err);
+
+            let errorMessage = 'We encountered an error while analyzing your data. Please try again.';
+
+            // Try to extract detailed error from Supabase Functions response
+            if (err.context && typeof err.context.json === 'function') {
+                try {
+                    const errorDetails = await err.context.json();
+                    if (errorDetails.details) {
+                        errorMessage = errorDetails.details;
+                    } else if (errorDetails.error) {
+                        errorMessage = errorDetails.error;
+                    }
+                } catch (e) {
+                    console.error('Failed to parse error context:', e);
+                }
+            } else if (err.message) {
+                errorMessage = err.message;
+            }
+
             toast({
                 title: 'Synthesis Failed',
-                description: err.details || err.message || 'We encountered an error while analyzing your data. Please try again.',
+                description: errorMessage,
                 variant: 'destructive',
             });
         } finally {

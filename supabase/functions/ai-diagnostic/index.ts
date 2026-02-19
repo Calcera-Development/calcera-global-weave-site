@@ -200,13 +200,24 @@ function normalizeReportStructure(report: any): any {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+    // Handle CORS preflight
     if (req.method === "OPTIONS") {
         return new Response(null, { headers: corsHeaders });
     }
 
-    if (!AI_API_KEY) {
+    // Strict environment variable validation
+    const missing = [];
+    if (!SUPABASE_URL) missing.push("SUPABASE_URL");
+    if (!SUPABASE_SERVICE_ROLE_KEY) missing.push("SUPABASE_SERVICE_ROLE_KEY");
+    if (!AI_API_KEY) missing.push("AI_API_KEY");
+    
+    if (missing.length > 0) {
+        console.error(`CRITICAL: Missing configuration: ${missing.join(", ")}`);
         return new Response(
-            JSON.stringify({ error: "AI Service API key not configured" }),
+            JSON.stringify({ 
+                error: "Configuration error", 
+                details: `The server is missing required configuration: ${missing.join(", ")}. Please check Supabase project secrets.` 
+            }),
             { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
     }
