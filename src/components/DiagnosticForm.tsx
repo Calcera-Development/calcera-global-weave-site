@@ -97,28 +97,55 @@ export default function DiagnosticForm() {
 
         setIsProcessing(true);
 
+        // Debugging Auth State (v2.3)
+        console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
+        console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
+
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            console.log('[DEBUG] Session State:', session ? 'AUTHENTICATED' : 'ANONYMOUS');
+        } catch (e) {
+            console.warn('[DEBUG] Failed to get session:', e);
+        }
+
         try {
             const { data, error } = await supabase.functions.invoke('ai-diagnostic', {
                 body: formData,
             });
 
-            if (error) throw error;
+            if (error) {
+                console.error('[SYNTHESIS_ERROR]', error);
+                throw error;
+            }
+
+            if (!data || !data.reportId) {
+                throw new Error("Synthesis completed but no report ID was returned.");
+            }
 
             setReportData(data as DiagnosticResponse);
+            console.log('[SYNTHESIS_SUCCESS]', data.reportId);
 
-            // Send report via email
-            const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report', {
-                body: { reportId: data.reportId },
-            });
+            // STEP 2: Email Delivery (Attempt)
+            try {
+                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report', {
+                    body: { reportId: data.reportId },
+                });
+                if (emailError) throw emailError;
 
-            if (emailError) throw emailError;
+                toast({
+                    title: 'Analysis Complete! ✨',
+                    description: 'Your premium diagnostic report is ready and has been sent to your inbox.',
+                });
+            } catch (emailErr: any) {
+                console.warn('[EMAIL_DELIVERY_FAILURE]', emailErr);
+                toast({
+                    title: 'Report Generated (Mail Delayed)',
+                    description: 'Your analysis is ready below, but we had trouble emailing the PDF.',
+                    variant: 'default',
+                });
+            }
 
             setIsComplete(true);
-
-            toast({
-                title: 'Analysis Complete! ✨',
-                description: 'Your premium diagnostic report is ready and has been sent to your inbox.',
-            });
 
         } catch (err: any) {
             console.error('Diagnostic Error:', err);
@@ -144,8 +171,10 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: 'Synthesis Failed',
-                description: errorMessage,
+                title: `Synthesis Failed (v2.3)`,
+                description: (err.status === 401 || (err.message && err.message.includes('401')))
+                    ? "Authentication failed (401). Please ensure Supabase project secrets are set and 'Enforce JWT' is DISABLED for this function in the Supabase dashboard."
+                    : errorMessage,
                 variant: 'destructive',
             });
         } finally {
