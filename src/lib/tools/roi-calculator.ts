@@ -100,17 +100,14 @@ export function calculateROI(input: ROIInput): ROIMetrics {
     // Year 1 calculations
     const totalCostYear1 = input.implementationCost + input.annualMaintenanceCost;
     const totalSavingsYear1 = totalAnnualSavings;
-    const netYear1 = totalSavingsYear1 - totalCostYear1;
 
     // Year 3 calculations
     const totalCostYear3 = input.implementationCost + (input.annualMaintenanceCost * 3);
     const totalSavingsYear3 = totalAnnualSavings * 3;
-    const netYear3 = totalSavingsYear3 - totalCostYear3;
 
     // Year 5 calculations
     const totalCostYear5 = input.implementationCost + (input.annualMaintenanceCost * 5);
     const totalSavingsYear5 = totalAnnualSavings * 5;
-    const netYear5 = totalSavingsYear5 - totalCostYear5;
 
     // ROI percentages
     const year1ROI = ((totalSavingsYear1 - totalCostYear1) / totalCostYear1) * 100;

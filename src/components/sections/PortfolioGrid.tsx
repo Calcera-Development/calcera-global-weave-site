@@ -1,6 +1,6 @@
 
 import { ArrowUpRight } from "lucide-react";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import AnimatedWrapper from "./AnimatedWrapper";
 import { projects } from "@/data/projects";
 import { Link } from "react-router-dom";
 

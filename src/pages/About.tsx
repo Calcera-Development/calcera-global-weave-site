@@ -1,10 +1,9 @@
-import { Linkedin, Rocket, Target, Briefcase, Zap, Star, Globe, Shield } from "lucide-react";
+import { LinkedinIcon, Rocket, Target, Briefcase, Zap, Star, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
-import HeaderNav from "@/components/HeaderNav";
-import Footer from "@/components/Footer";
-import React from "react";
+import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
+import HeaderNav from "@/components/layout/HeaderNav";
+import Footer from "@/components/layout/Footer";
 import aashiqFounder from "@/assets/aashiq-founder.jpg";
 import sai from "@/assets/sai.jpg";
 import ashok from "@/assets/ashok.jpg";
@@ -142,10 +141,10 @@ const About = () => {
                                             <div className="mt-6 pt-4 border-t border-slate-50 flex gap-4">
                                                 {member.linkedin ? (
                                                     <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                                                        <Linkedin className="h-4 w-4 text-slate-400 hover:text-blue-600 cursor-pointer transition-colors" />
+                                                        <LinkedinIcon className="h-4 w-4 text-slate-400 hover:text-blue-600 cursor-pointer transition-colors" />
                                                     </a>
                                                 ) : (
-                                                    <Linkedin className="h-4 w-4 text-slate-300" />
+                                                    <LinkedinIcon className="h-4 w-4 text-slate-300" />
                                                 )}
                                             </div>
                                         </div>

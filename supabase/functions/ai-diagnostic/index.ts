@@ -32,7 +32,7 @@ interface ROIInput {
 
 function cleanJSON(text: string): string {
     if (!text) return "{}";
-    let cleaned = text.trim();
+    const cleaned = text.trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
         return jsonMatch[0];

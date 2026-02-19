@@ -7,11 +7,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
 import AIDiagnostic from "./pages/AIDiagnostic";
-import FloatingDiagnosticButton from "./components/FloatingDiagnosticButton";
+import FloatingDiagnosticButton from "./components/diagnostic/FloatingDiagnosticButton";
 
 const queryClient = new QueryClient();
 

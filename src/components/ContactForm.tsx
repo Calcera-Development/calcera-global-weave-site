@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
 import { supabase } from "@/integrations/supabase/client";
 
 const initialState = {
@@ -44,7 +44,7 @@ const ContactForm = () => {
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
         body: fields,
       });
 

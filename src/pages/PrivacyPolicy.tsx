@@ -1,10 +1,9 @@
-import React from "react";
-import HeaderNav from "@/components/HeaderNav";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import HeaderNav from "@/components/layout/HeaderNav";
+import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 
 const PrivacyPolicy = () => {
 

@@ -33,14 +33,6 @@ export const usePerformance = () => {
 
   // Preload critical resources
   useEffect(() => {
-    const preloadResource = (href: string, as: string) => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = href;
-      link.as = as;
-      document.head.appendChild(link);
-    };
-
     // Logo is now bundled and loaded automatically via import
   }, []);
 };

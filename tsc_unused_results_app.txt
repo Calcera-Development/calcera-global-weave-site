@@ -1,0 +1,19 @@
+﻿src/components/ContactForm.tsx(47,15): error TS6133: 'data' is declared but its value is never read.
+src/components/diagnostic/DiagnosticDashboard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/diagnostic/DiagnosticDashboard.tsx(149,149): error TS6133: 'i' is declared but its value is never read.
+src/components/diagnostic/DiagnosticSubComponents.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/layout/Footer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/layout/HeaderNav.tsx(23,20): error TS6133: 'navScrollFns' is declared but its value is never read.
+src/components/ui/calendar.tsx(55,9): error TS2353: Object literal may only specify known properties, and 'IconLeft' does not exist in type 'Partial<CustomComponents>'.
+src/components/ui/calendar.tsx(55,20): error TS6133: '_props' is declared but its value is never read.
+src/components/ui/calendar.tsx(56,21): error TS6133: '_props' is declared but its value is never read.
+src/hooks/usePerformance.tsx(36,11): error TS6133: 'preloadResource' is declared but its value is never read.
+src/lib/tools/roi-calculator.ts(103,11): error TS6133: 'netYear1' is declared but its value is never read.
+src/lib/tools/roi-calculator.ts(108,11): error TS6133: 'netYear3' is declared but its value is never read.
+src/lib/tools/roi-calculator.ts(113,11): error TS6133: 'netYear5' is declared but its value is never read.
+src/pages/About.tsx(7,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/AIDiagnostic.tsx(3,1): error TS6133: 'AnimatedWrapper' is declared but its value is never read.
+src/pages/Index.tsx(1,10): error TS6133: 'useState' is declared but its value is never read.
+src/pages/NotFound.tsx(2,21): error TS6133: 'lazy' is declared but its value is never read.
+src/pages/NotFound.tsx(2,27): error TS6133: 'Suspense' is declared but its value is never read.
+src/pages/PrivacyPolicy.tsx(1,1): error TS6133: 'React' is declared but its value is never read.

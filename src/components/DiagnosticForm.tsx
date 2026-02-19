@@ -1,60 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-    Loader2,
-    Sparkles,
-    CheckCircle2,
-    Building2,
-    Target,
-    Rocket,
-    ArrowRight,
-    ArrowLeft,
-    ShieldCheck,
-    BarChart3,
-    Cpu,
-    Globe,
-    Database,
-    Zap,
-    AlertCircle,
-    Layers,
-    Clock,
-    DollarSign
-} from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { cn } from '@/lib/utils';
-
-interface DiagnosticFormData {
-    companyName: string;
-    industry: string;
-    companySize: string;
-    revenue: string;
-    email: string;
-    challenges: string;
-    desiredOutcomes: string;
-}
-
-interface DiagnosticResponse {
-    success: boolean;
-    reportId: string;
-    report: any;
-    complexity: any;
-    roi: any;
-}
+import { DiagnosticFormData, DiagnosticResponse } from '@/types/diagnostic';
+import { DiagnosticFormSteps } from './diagnostic/DiagnosticFormSteps';
+import { DiagnosticDashboard } from './diagnostic/DiagnosticDashboard';
+import { Button } from './ui/button';
 
 export default function DiagnosticForm() {
     const { toast } = useToast();
-    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
-    const [reportData, setReportData] = useState<DiagnosticResponse | null>(null);
-
     const [formData, setFormData] = useState<DiagnosticFormData>({
         companyName: '',
         industry: '',
@@ -62,136 +18,82 @@ export default function DiagnosticForm() {
         revenue: '',
         email: '',
         challenges: '',
-        desiredOutcomes: '',
+        desiredOutcomes: ''
     });
+    const [reportData, setReportData] = useState<DiagnosticResponse | null>(null);
 
     const handleChange = (field: keyof DiagnosticFormData, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
+        setFormData(prev => ({ ...prev, [field]: value }));
     };
 
     const nextStep = () => {
         if (step === 1) {
             if (!formData.companyName || !formData.industry || !formData.email) {
                 toast({
-                    title: "Required Fields",
-                    description: "Please fill in company details and your business email.",
+                    title: "Missing Information",
+                    description: "Please fill in all required corporate details.",
                     variant: "destructive"
                 });
                 return;
             }
         }
-        setStep(prev => Math.min(prev + 1, 2));
+        setStep(prev => prev + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
+    const prevStep = () => {
+        setStep(prev => prev - 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!formData.challenges) {
-            toast({
-                title: 'Operational Context',
-                description: 'Please describe your challenges so the AI can provide an accurate analysis.',
-                variant: 'destructive',
-            });
-            return;
-        }
-
         setIsProcessing(true);
 
-        // Debugging Auth State (v2.10)
-        console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
-        console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
-
         try {
-            const { data: { session } } = await supabase.auth.getSession();
-            console.log('[DEBUG] Session State:', session ? 'AUTHENTICATED' : 'ANONYMOUS');
-        } catch (e) {
-            console.warn('[DEBUG] Failed to get session:', e);
-        }
-
-        try {
-            const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
-            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.13', {
-                body: formData,
-                headers: {
-                    'apikey': apiKey,
-                    'Authorization': `Bearer ${apiKey}`
-                }
+            console.log("Submitting diagnostic request for:", formData.companyName);
+            const { data, error } = await supabase.functions.invoke('ai-diagnostic', {
+                body: formData
             });
 
             if (error) {
-                console.error('[SYNTHESIS_ERROR]', error);
+                console.error("Supabase function error:", error);
                 throw error;
             }
 
-            if (!data || !data.reportId) {
-                throw new Error("Synthesis completed but no report ID was returned.");
-            }
+            const diagnosticData = data as DiagnosticResponse;
+            console.log("Diagnostic synthesis complete:", diagnosticData.reportId);
 
-            setReportData(data as DiagnosticResponse);
+            setReportData(diagnosticData);
             setIsComplete(true);
-            console.log('[SYNTHESIS_SUCCESS]', data.reportId);
 
-            // STEP 2: Email Delivery (v2.13) - Background Trigger
-            try {
-                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
-                supabase.functions.invoke('send-diagnostic-report?v=2.13', {
-                    body: { reportId: data.reportId },
-                    headers: {
-                        'apikey': apiKey,
-                        'Authorization': `Bearer ${apiKey}`
-                    }
-                }).then(({ error: emailError }) => {
-                    if (emailError) {
-                        console.warn('[EMAIL_DELIVERY_FAILURE_ASYNC]', emailError);
-                    } else {
-                        toast({
-                            title: 'Analysis Complete! ✨',
-                            description: 'Your premium diagnostic report is ready and has been sent to your inbox.',
-                        });
-                    }
-                });
-            } catch (emailErr: any) {
-                console.warn('[EMAIL_TRIGGER_FAILURE]', emailErr);
-            }
+            toast({
+                title: "Strategy Synthesized",
+                description: "Your enterprise roadmap is ready.",
+            });
 
-        } catch (err: any) {
-            console.error('Diagnostic Error:', err);
+        } catch (error: unknown) {
+            console.error("Diagnostic error process:", error);
 
-            let errorMessage = 'We encountered an error while analyzing your data. Please try again.';
+            let errorMessage = "Our AI architect encountered an issue. Please try again.";
 
-            // Try to extract detailed error from Supabase Functions response
-            if (err.context && typeof err.context.json === 'function') {
-                try {
-                    const errorDetails = await err.context.json();
-                    if (errorDetails.details) {
-                        errorMessage = errorDetails.details;
-                    } else if (errorDetails.error) {
-                        errorMessage = errorDetails.error;
-                    }
-                } catch (e) {
-                    console.error('Failed to parse error context:', e);
-                }
-            } else if (err.message) {
-                errorMessage = err.message;
-            } else {
-                errorMessage = `Error: ${JSON.stringify(err)}`;
+            if (error instanceof Error) {
+                errorMessage = error.message;
+            } else if (typeof error === 'object' && error !== null && 'name' in error && error.name === 'FunctionsHttpError') {
+                const httpError = error as { status?: number };
+                errorMessage = `Connection error: ${httpError.status || 'unknown'}. Please refresh.`;
             }
 
             toast({
-                title: `Synthesis Failed (v2.10)`,
-                description: (err.status === 401 || (err.message && err.message.includes('401')))
-                    ? "Authorization Failure (401). Final Solution: Supabase > Functions > [Both Functions] > Settings > DISABLE 'Enforce JWT'."
-                    : errorMessage,
-                variant: 'destructive',
+                title: "Processing Failed",
+                description: errorMessage,
+                variant: "destructive"
             });
         } finally {
             setIsProcessing(false);
         }
     };
 
-    // --- SUCCESS DASHBOARD ---
     if (isComplete && reportData && reportData.report) {
         const r = reportData.report;
 
@@ -207,399 +109,23 @@ export default function DiagnosticForm() {
         }
 
         return (
-            <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                {/* Dashboard Header */}
-                <div className="bg-white border rounded-2xl p-4 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-                    <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto">
-                        <div className="h-12 w-12 md:h-16 md:w-16 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
-                            <ShieldCheck className="w-6 h-6 md:w-10 md:h-10" />
-                        </div>
-                        <div className="min-w-0">
-                            <div className="flex items-center gap-2 md:gap-3 mb-1 overflow-hidden">
-                                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full border border-blue-100 uppercase tracking-wider whitespace-nowrap">Solution Design</span>
-                                <span className="text-slate-400 text-xs shrink-0">•</span>
-                                <span className="text-slate-500 text-[10px] md:text-xs font-medium truncate">Ref ID: {reportData.reportId.slice(0, 8)}</span>
-                            </div>
-                            <h2 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tight truncate">Enterprise Strategy Overview</h2>
-                        </div>
-                    </div>
-                    <div className="flex gap-2 md:gap-3 w-full md:w-auto">
-                        <Button variant="outline" size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10" onClick={() => navigate(0)}>New Request</Button>
-                        <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => navigate('/#contact')}>Book Deep Dive</Button>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Diagnostic Summary Column */}
-                    <div className="lg:col-span-2 space-y-8">
-                        {/* Executive Diagnosis */}
-                        <Card className="border-none shadow-sm overflow-hidden">
-                            <CardHeader className="bg-slate-50 border-b py-4">
-                                <div className="flex items-center gap-2">
-                                    <BarChart3 className="w-5 h-5 text-blue-600" />
-                                    <h3 className="font-bold text-slate-900">Operational Diagnosis</h3>
-                                </div>
-                            </CardHeader>
-                            <CardContent className="p-6">
-                                <p className="text-slate-600 leading-relaxed mb-6 italic">"{r.operationalDiagnosis.executiveSummary}"</p>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-4">
-                                        <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Root Causes</h4>
-                                        <ul className="space-y-3">
-                                            {r.operationalDiagnosis.rootCauses.map((cause: string, i: number) => (
-                                                <li key={i} className="flex items-start gap-3">
-                                                    <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-red-400 shrink-0" />
-                                                    <span className="text-sm text-slate-600">{cause}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Business Impact</h4>
-                                        <div className="bg-red-50/50 p-4 rounded-xl border border-red-100">
-                                            <p className="text-sm text-red-900 leading-relaxed font-medium">{r.operationalDiagnosis.businessImpact}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        {/* Technology Stack Recommendations */}
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2 px-1">
-                                <Layers className="w-5 h-5 text-indigo-600" />
-                                <h3 className="font-bold text-slate-900">Recommended Architecture Stack</h3>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <StackCard icon={<Globe className="w-5 h-5" />} title="User Experience" content={r.recommendedArchitecture.frontend} />
-                                <StackCard icon={<Zap className="w-5 h-5" />} title="Service Layer" content={r.recommendedArchitecture.backend} />
-                                <StackCard icon={<Database className="w-5 h-5" />} title="Data Systems" content={r.recommendedArchitecture.database} />
-                                <StackCard icon={<Cpu className="w-5 h-5" />} title="AI Capability" content={r.recommendedArchitecture.aiComponents} />
-                                <StackCard icon={<Rocket className="w-5 h-5" />} title="Infrastructure" content={r.recommendedArchitecture.infrastructure} color="bg-orange-50" iconColor="text-orange-600" />
-                                <StackCard icon={<Layers className="w-5 h-5" />} title="Integrations" content={r.recommendedArchitecture.integrations} color="bg-emerald-50" iconColor="text-emerald-600" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Financial & Roadmap Sidebar */}
-                    <div className="space-y-8">
-                        {/* Financial Analysis */}
-                        <Card className="bg-slate-900 text-white border-none shadow-xl">
-                            <CardHeader className="border-b border-slate-800">
-                                <div className="flex items-center gap-2">
-                                    <BarChart3 className="w-5 h-5 text-blue-400" />
-                                    <h3 className="font-bold">ROI Projections</h3>
-                                </div>
-                            </CardHeader>
-                            <CardContent className="p-6 space-y-6">
-                                <div className="text-center pb-4">
-                                    <p className="text-slate-400 text-xs uppercase font-bold tracking-widest mb-1">Complexity Tier</p>
-                                    <h4 className="text-3xl font-bold text-blue-400">{r.complexityClassification.tier}</h4>
-                                    <p className="text-sm text-slate-400 mt-1">{r.complexityClassification.label}</p>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <ROIMetric label="Payback Period" value={r.financialImpact.roiMetrics.paybackPeriod} sub="Estimated Break Even" />
-                                    <ROIMetric label="3-Year ROI" value={`${r.financialImpact.roiMetrics.year3ROI}%`} sub="Total Transformation Gain" />
-                                    <ROIMetric label="Budget Alignment" value={r.financialImpact.budgetBand} sub="Industry Standard Allocation" />
-                                </div>
-
-                                <div className="mt-8 pt-6 border-t border-slate-800">
-                                    <div className="bg-blue-600/20 border border-blue-600/30 rounded-xl p-4 text-center">
-                                        <p className="text-xs text-blue-200 font-bold uppercase mb-1">Verdict</p>
-                                        <p className="text-sm font-medium text-white capitalize">{r.financialImpact.recommendation.replace('_', ' ')} Investment</p>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        {/* Implementation Timeline */}
-                        <Card className="border-none shadow-sm overflow-hidden">
-                            <CardHeader className="bg-slate-50 border-b py-4">
-                                <div className="flex items-center gap-2">
-                                    <Clock className="w-5 h-5 text-indigo-600" />
-                                    <h3 className="font-bold text-slate-900">Roadmap</h3>
-                                </div>
-                            </CardHeader>
-                            <CardContent className="p-0">
-                                <div className="p-6 bg-white">
-                                    <p className="text-sm font-bold text-slate-900 mb-4 tracking-tight">Timeline: <span className="text-indigo-600">{r.timelineEstimate.range}</span></p>
-                                    <div className="space-y-4">
-                                        {Object.entries(r.timelineEstimate.phaseBreakdown).map(([phase, duration]: [string, any], i) => (
-                                            <div key={phase} className="flex items-center justify-between text-sm">
-                                                <span className="text-slate-500 capitalize">{phase}</span>
-                                                <span className="font-bold text-slate-900">{duration}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="bg-indigo-50 p-6 flex flex-col gap-3 border-t">
-                                    <p className="text-xs font-bold text-indigo-900 uppercase">Strategic Next Steps</p>
-                                    {r.strategicRecommendation.nextSteps.map((step: string, i: number) => (
-                                        <div key={i} className="flex items-center gap-3 text-sm text-indigo-900">
-                                            <div className="h-5 w-5 bg-white rounded-full flex items-center justify-center font-bold text-[10px] text-indigo-600 shadow-sm shrink-0">{i + 1}</div>
-                                            <span>{step}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-
-                {/* Email Confirmation CTA */}
-                <div className="bg-indigo-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-8 opacity-10">
-                        <Rocket className="w-48 h-48 rotate-12" />
-                    </div>
-                    <h3 className="text-3xl font-bold mb-4 relative z-10">Ready to accelerate?</h3>
-                    <p className="text-indigo-100 max-w-2xl mx-auto mb-8 text-lg relative z-10">
-                        A detailed white-paper format of this diagnostic has been sent to <strong>{formData.email}</strong>.
-                        Let's discuss how we can bring this architecture to life for {formData.companyName}.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                        <Button className="bg-white text-indigo-600 hover:bg-slate-50 font-bold px-8 h-12 rounded-xl" onClick={() => navigate('/#contact')}>
-                            Schedule Strategy Session
-                        </Button>
-                    </div>
-                </div>
-            </div>
+            <DiagnosticDashboard
+                reportData={reportData}
+                userEmail={formData.email}
+                companyName={formData.companyName}
+            />
         );
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-4 md:py-8">
-            <div className="mb-8 md:mb-12 relative h-1.5 md:h-2 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                    className="absolute inset-y-0 left-0 bg-blue-600 transition-all duration-500 ease-out rounded-full shadow-sm"
-                    style={{ width: `${(step / 2) * 100}%` }}
-                />
-            </div>
-
-            <Card className="border-none shadow-2xl shadow-blue-50/50 rounded-3xl overflow-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-5 h-full">
-                    {/* Sidebar / Context */}
-                    <div className="md:col-span-2 bg-slate-900 p-6 md:p-8 text-white flex flex-col justify-between overflow-hidden relative">
-                        {/* Decorative background elements */}
-                        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" />
-                        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl" />
-
-                        <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-8">
-                                <div className="h-10 w-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/40">
-                                    <Sparkles className="w-6 h-6 text-white" />
-                                </div>
-                                <span className="font-bold text-lg tracking-tight">AI Architect</span>
-                            </div>
-
-                            <h3 className="text-2xl font-bold leading-tight mb-6">
-                                {step === 1 ? "Let's start with the foundations." : "How can we help you scale?"}
-                            </h3>
-                            <p className="text-slate-400 text-sm leading-relaxed mb-8">
-                                {step === 1
-                                    ? "Provide your company context. This helps our AI calibrate the ROI models and complexity tiers specific to your industry."
-                                    : "Tell us about your operational friction. Be as detailed as possible to receive a high-fidelity roadmap."}
-                            </p>
-
-                            <div className="space-y-4">
-                                <div className={cn("flex items-center gap-4 transition-all duration-300", step === 1 ? "opacity-100" : "opacity-40 grayscale")}>
-                                    <div className="h-8 w-8 rounded-full border border-slate-700 flex items-center justify-center text-xs font-bold font-mono">01</div>
-                                    <span className="text-sm font-medium">Business Context</span>
-                                </div>
-                                <div className={cn("flex items-center gap-4 transition-all duration-300", step === 2 ? "opacity-100" : "opacity-40 grayscale")}>
-                                    <div className="h-8 w-8 rounded-full border border-slate-700 flex items-center justify-center text-xs font-bold font-mono">02</div>
-                                    <span className="text-sm font-medium">Strategic Vision</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="pt-12 relative z-10">
-                            <div className="flex items-center gap-2 mb-2">
-                                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Enterprise Privacy</span>
-                            </div>
-                            <p className="text-[11px] text-slate-500">Your data is processed by private AI instances and encrypted at rest.</p>
-                        </div>
-                    </div>
-
-                    {/* Form Area */}
-                    <div className="md:col-span-3 bg-white p-6 md:p-12">
-                        <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 h-full flex flex-col justify-between">
-                            <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
-                                {step === 1 ? (
-                                    <div className="space-y-6">
-                                        <div className="space-y-4">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="companyName" className="text-xs font-bold uppercase tracking-widest text-slate-500">Company Name</Label>
-                                                <Input
-                                                    id="companyName"
-                                                    value={formData.companyName}
-                                                    onChange={(e) => handleChange('companyName', e.target.value)}
-                                                    placeholder="Acme Enterprise"
-                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium text-sm md:text-base"
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="industry" className="text-xs font-bold uppercase tracking-widest text-slate-500">Industry</Label>
-                                                    <Input
-                                                        id="industry"
-                                                        value={formData.industry}
-                                                        onChange={(e) => handleChange('industry', e.target.value)}
-                                                        placeholder="Healthcare"
-                                                        className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
-                                                        required
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="companySize" className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">Scale</Label>
-                                                    <Input
-                                                        id="companySize"
-                                                        value={formData.companySize}
-                                                        onChange={(e) => handleChange('companySize', e.target.value)}
-                                                        placeholder="Enterprise"
-                                                        className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="space-y-2">
-                                                <Label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-slate-500">Corporate Email</Label>
-                                                <Input
-                                                    id="email"
-                                                    type="email"
-                                                    value={formData.email}
-                                                    onChange={(e) => handleChange('email', e.target.value)}
-                                                    placeholder="exec@company.com"
-                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium text-sm md:text-base"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-6">
-                                        <div className="space-y-4">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="challenges" className="text-xs font-bold uppercase tracking-widest text-slate-500">Primary Obstacles</Label>
-                                                <Textarea
-                                                    id="challenges"
-                                                    value={formData.challenges}
-                                                    onChange={(e) => handleChange('challenges', e.target.value)}
-                                                    placeholder="Describe your current bottlenecks..."
-                                                    rows={4}
-                                                    required
-                                                    className="bg-slate-50 border-none rounded-2xl focus-visible:ring-blue-600 transition-all resize-none p-3 md:p-4 text-sm md:text-base"
-                                                />
-                                            </div>
-
-                                            <div className="space-y-2">
-                                                <Label htmlFor="desiredOutcomes" className="text-xs font-bold uppercase tracking-widest text-slate-500">Target Objectives</Label>
-                                                <Input
-                                                    id="desiredOutcomes"
-                                                    value={formData.desiredOutcomes}
-                                                    onChange={(e) => handleChange('desiredOutcomes', e.target.value)}
-                                                    placeholder="e.g., 40% reduction..."
-                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="pt-8 mt-auto flex items-center justify-between">
-                                {step > 1 ? (
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        className="text-slate-500 hover:text-slate-900 font-bold gap-2"
-                                        onClick={prevStep}
-                                    >
-                                        <ArrowLeft className="w-4 h-4" /> Back
-                                    </Button>
-                                ) : <div />}
-
-                                {step === 1 ? (
-                                    <Button
-                                        type="button"
-                                        className="h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-100 font-bold gap-2"
-                                        onClick={nextStep}
-                                    >
-                                        Continue <ArrowRight className="w-4 h-4" />
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        type="submit"
-                                        className="h-10 md:h-12 px-4 md:px-8 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-100 font-bold gap-2 text-xs md:text-base whitespace-nowrap"
-                                        disabled={isProcessing}
-                                    >
-                                        {isProcessing ? (
-                                            <>
-                                                <Loader2 className="w-5 h-5 animate-spin" />
-                                                Synthesizing...
-                                            </>
-                                        ) : (
-                                            <>
-                                                Generate Strategy <Rocket className="w-4 h-4" />
-                                            </>
-                                        )}
-                                    </Button>
-                                )}
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </Card>
-
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-                <TrustBadge icon={<Building2 className="w-4 h-4" />} text="Sector Calibration" />
-                <TrustBadge icon={<Target className="w-4 h-4" />} text="ROI Modelling" />
-                <TrustBadge icon={<Cpu className="w-4 h-4" />} text="Tech Stack Audit" />
-                <TrustBadge icon={<Zap className="w-4 h-4" />} text="Rapid Roadmap" />
-            </div>
-        </div>
-    );
-}
-
-// --- HELPER COMPONENTS ---
-
-function StackCard({ icon, title, content, color = "bg-blue-50", iconColor = "text-blue-600" }: any) {
-    return (
-        <Card className="border-none shadow-none bg-slate-50/50 p-5 rounded-2xl hover:bg-slate-50 transition-colors">
-            <div className={cn("h-10 w-10 rounded-xl flex items-center justify-center mb-4 shadow-sm", color, iconColor)}>
-                {icon}
-            </div>
-            <h4 className="font-bold text-slate-900 text-sm mb-2">{title}</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">{content}</p>
-        </Card>
-    );
-}
-
-function ROIMetric({ label, value, sub }: any) {
-    return (
-        <div className="flex items-center justify-between gap-4">
-            <div>
-                <p className="text-xs font-bold text-slate-500 mb-0.5 uppercase tracking-wider">{label}</p>
-                <p className="text-[10px] text-slate-600 font-medium">{sub}</p>
-            </div>
-            <div className="text-right">
-                <p className="text-lg font-bold text-white tracking-tight">{value}</p>
-            </div>
-        </div>
-    );
-}
-
-function TrustBadge({ icon, text }: any) {
-    return (
-        <div className="flex items-center gap-3 px-2">
-            <div className="h-8 w-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors">
-                {icon}
-            </div>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{text}</span>
-        </div>
+        <DiagnosticFormSteps
+            step={step}
+            formData={formData}
+            isProcessing={isProcessing}
+            onHandleChange={handleChange}
+            onNextStep={nextStep}
+            onPrevStep={prevStep}
+            onSubmit={handleSubmit}
+        />
     );
 }

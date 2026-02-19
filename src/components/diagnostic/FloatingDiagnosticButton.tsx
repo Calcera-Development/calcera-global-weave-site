@@ -24,7 +24,7 @@ const FloatingDiagnosticButton = () => {
         toggleVisibility();
 
         return () => window.removeEventListener("scroll", toggleVisibility);
-    }, []);
+    }, [location.pathname]);
 
     if (location.pathname === "/ai-diagnostic") return null;
 

@@ -1,12 +1,11 @@
 import { useParams, Link } from "react-router-dom";
 import { projects } from "@/data/projects";
-import { ArrowLeft, ChevronRight, CheckCircle2, Rocket, Globe, Github } from "lucide-react";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import { ArrowLeft, ChevronRight, CheckCircle2, Rocket, Globe, GithubIcon } from "lucide-react";
+import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
-import calceraLogo from "@/assets/calcera-logo.png";
-import Footer from "@/components/Footer";
-import HeaderNav from "@/components/HeaderNav";
+import Footer from "@/components/layout/Footer";
+import HeaderNav from "@/components/layout/HeaderNav";
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
@@ -206,7 +205,7 @@ const ProjectDetail = () => {
                                     <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
                                 <Button variant="outline" size="icon" className="w-14 h-14 rounded-full border-slate-200">
-                                    <Github className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
+                                    <GithubIcon className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                                 </Button>
                             </div>
                         </div>

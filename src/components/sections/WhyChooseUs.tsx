@@ -1,6 +1,6 @@
 
 import { Users, Heart, CheckCircle, Zap } from "lucide-react";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import AnimatedWrapper from "./AnimatedWrapper";
 
 const whyChooseUs = [
   {

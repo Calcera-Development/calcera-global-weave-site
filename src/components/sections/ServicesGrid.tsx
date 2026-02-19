@@ -1,6 +1,6 @@
 
 import { Code, Brain, Zap, ShoppingCart, Users, Search } from "lucide-react";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
+import AnimatedWrapper from "./AnimatedWrapper";
 
 const services = [
   {

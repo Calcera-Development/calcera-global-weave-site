@@ -1,19 +1,12 @@
-import HeaderNav from "@/components/HeaderNav";
+import HeaderNav from "@/components/layout/HeaderNav";
 import DiagnosticForm from "@/components/DiagnosticForm";
-import AnimatedWrapper from "@/components/AnimatedWrapper";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 
 const AIDiagnostic = () => {
-    const navScrollFns = {
-        home: () => (window.location.href = "/"),
-        services: () => (window.location.href = "/#services"),
-        work: () => (window.location.href = "/#portfolio"),
-        contact: () => (window.location.href = "/#contact"),
-    };
 
     return (
         <div className="min-h-screen bg-white flex flex-col selection:bg-blue-100">
-            <HeaderNav navScrollFns={navScrollFns} />
+            <HeaderNav />
 
             <main className="flex-grow pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 {/* Decorative Elements */}
