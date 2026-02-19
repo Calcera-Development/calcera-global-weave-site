@@ -217,7 +217,14 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { reportId } = await req.json();
+    let body;
+    try {
+      body = await req.json();
+    } catch (e) {
+      console.error("Failed to parse request body:", e);
+      throw new Error("Invalid JSON body");
+    }
+    const { reportId } = body;
     console.log(`Email request for reportId: ${reportId}`);
 
     if (!reportId) {
@@ -400,4 +407,4 @@ const handler = async (req: Request): Promise<Response> => {
   }
 };
 
-serve(handler);
+Deno.serve(handler);

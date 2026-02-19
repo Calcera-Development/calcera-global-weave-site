@@ -171,9 +171,9 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: `Synthesis Failed (v2.3)`,
+                title: `Synthesis Failed (v2.4)`,
                 description: (err.status === 401 || (err.message && err.message.includes('401')))
-                    ? "Authentication failed (401). Please ensure Supabase project secrets are set and 'Enforce JWT' is DISABLED for this function in the Supabase dashboard."
+                    ? "Unauthorized (401). Solution: Go to Supabase Dashboard > Functions > ai-diagnostic > Settings and UNCHECK 'Enforce JWT'. Then refresh."
                     : errorMessage,
                 variant: 'destructive',
             });

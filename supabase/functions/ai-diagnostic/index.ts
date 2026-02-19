@@ -40,25 +40,35 @@ function cleanJSON(text: string): string {
     return cleaned || "{}";
 }
 
-function calculateROI(input: ROIInput) {
-    let totalAnnualSavings = input.estimatedCostSavingsPerYear + (input.revenueImpactPerYear || 0);
+function calculateROI(input: any) {
+    // Strict type casting to prevent NaN issues
+    const currentAnnualCost = Number(input.currentAnnualCost) || 0;
+    const implementationCost = Number(input.implementationCost) || 0;
+    const annualMaintenanceCost = Number(input.annualMaintenanceCost) || 0;
+    const estimatedCostSavingsPerYear = Number(input.estimatedCostSavingsPerYear) || 0;
+    const revenueImpactPerYear = Number(input.revenueImpactPerYear) || 0;
+
+    let totalAnnualSavings = estimatedCostSavingsPerYear + revenueImpactPerYear;
 
     if (input.employeeCount && input.averageHourlyRate && input.hoursWastedPerWeek && input.productivityGainPercentage) {
         const productivitySavings =
-            input.employeeCount * input.hoursWastedPerWeek * 52 * input.averageHourlyRate * (input.productivityGainPercentage / 100);
-        totalAnnualSavings += productivitySavings;
+            Number(input.employeeCount) * 
+            Number(input.hoursWastedPerWeek) * 52 * 
+            Number(input.averageHourlyRate) * 
+            (Number(input.productivityGainPercentage) / 100);
+        totalAnnualSavings += Math.max(0, productivitySavings || 0);
     }
 
-    const totalCostYear1 = input.implementationCost + input.annualMaintenanceCost;
-    const totalCostYear3 = input.implementationCost + (input.annualMaintenanceCost * 3);
-    const totalCostYear5 = input.implementationCost + (input.annualMaintenanceCost * 5);
+    const totalCostYear1 = implementationCost + annualMaintenanceCost;
+    const totalCostYear3 = implementationCost + (annualMaintenanceCost * 3);
+    const totalCostYear5 = implementationCost + (annualMaintenanceCost * 5);
 
-    const year1ROI = ((totalAnnualSavings - totalCostYear1) / totalCostYear1) * 100;
-    const year3ROI = ((totalAnnualSavings * 3 - totalCostYear3) / totalCostYear3) * 100;
-    const year5ROI = ((totalAnnualSavings * 5 - totalCostYear5) / totalCostYear5) * 100;
+    const year1ROI = totalCostYear1 > 0 ? ((totalAnnualSavings - totalCostYear1) / totalCostYear1) * 100 : 0;
+    const year3ROI = totalCostYear3 > 0 ? ((totalAnnualSavings * 3 - totalCostYear3) / totalCostYear3) * 100 : 0;
+    const year5ROI = totalCostYear5 > 0 ? ((totalAnnualSavings * 5 - totalCostYear5) / totalCostYear5) * 100 : 0;
 
-    const monthlyNetSavings = (totalAnnualSavings - input.annualMaintenanceCost) / 12;
-    const breakEvenMonths = monthlyNetSavings > 0 ? Math.ceil(input.implementationCost / monthlyNetSavings) : 999;
+    const monthlyNetSavings = (totalAnnualSavings - annualMaintenanceCost) / 12;
+    const breakEvenMonths = (monthlyNetSavings > 0 && implementationCost > 0) ? Math.ceil(implementationCost / monthlyNetSavings) : 999;
 
     const paybackPeriod = breakEvenMonths >= 999
         ? "Does not break even"
@@ -90,16 +100,16 @@ function calculateROI(input: ROIInput) {
 
 function mapComplexity(input: any) {
     let score = 0;
-    score += Math.min(input.integrationCount * 10, 50);
-    score += Math.min(input.userTypes * 8, 40);
+    score += Math.min((Number(input.integrationCount) || 0) * 10, 50);
+    score += Math.min((Number(input.userTypes) || 0) * 8, 40);
 
     const dataScores = { low: 5, medium: 15, high: 30 };
     score += dataScores[input.dataComplexity as keyof typeof dataScores] || 15;
 
-    if (input.aiComponentsNeeded) score += 25;
-    if (input.realtimeFeatures) score += 20;
-    if (input.mobileApps) score += 20;
-    if (input.legacySystemIntegration) score += 30;
+    if (input.aiComponentsNeeded === true || input.aiComponentsNeeded === 'true') score += 25;
+    if (input.realtimeFeatures === true || input.realtimeFeatures === 'true') score += 20;
+    if (input.mobileApps === true || input.mobileApps === 'true') score += 20;
+    if (input.legacySystemIntegration === true || input.legacySystemIntegration === 'true') score += 30;
 
     let tier: 'T1' | 'T2' | 'T3' | 'T4' = 'T2';
     if (score <= 50) tier = 'T1';
@@ -265,7 +275,10 @@ const handler = async (req: Request): Promise<Response> => {
             .select()
             .single();
 
-        if (leadError) throw leadError;
+        if (leadError) {
+            console.error("[LEAD_SAVE_ERROR]", leadError);
+            throw new Error(`[DATABASE_ERROR] Failed to save lead: ${JSON.stringify(leadError)}`);
+        }
 
         const userMessage = `Analyze this client:
 **Company:** ${companyName}
@@ -460,7 +473,10 @@ Providing a comprehensive diagnostic analysis.`;
             .select()
             .single();
 
-        if (reportError) throw reportError;
+        if (reportError) {
+            console.error("[REPORT_SAVE_ERROR]", reportError);
+            throw new Error(`[DATABASE_ERROR] Failed to save diagnostic report: ${JSON.stringify(reportError)}`);
+        }
 
         // Update rate limit - non-blocking
         try {
@@ -497,4 +513,4 @@ Providing a comprehensive diagnostic analysis.`;
     }
 };
 
-serve(handler);
+Deno.serve(handler);
