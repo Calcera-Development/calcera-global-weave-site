@@ -97,7 +97,7 @@ export default function DiagnosticForm() {
 
         setIsProcessing(true);
 
-        // Debugging Auth State (v2.6)
+        // Debugging Auth State (v2.7)
         console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
         console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
 
@@ -127,10 +127,12 @@ export default function DiagnosticForm() {
 
             // STEP 2: Email Delivery (Attempt)
             try {
+                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
                 const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report', {
                     body: { reportId: data.reportId },
                     headers: {
-                        'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || ''
+                        'apikey': apiKey,
+                        'Authorization': `Bearer ${apiKey}`
                     }
                 });
                 if (emailError) throw emailError;
@@ -176,7 +178,7 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: `Synthesis Failed (v2.6)`,
+                title: `Synthesis Failed (v2.7)`,
                 description: (err.status === 401 || (err.message && err.message.includes('401')))
                     ? "Authorization Failure (401). Final check: Supabase > Functions > ai-diagnostic > Settings > Uncheck 'Enforce JWT'."
                     : errorMessage,
