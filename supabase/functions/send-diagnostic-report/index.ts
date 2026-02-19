@@ -11,12 +11,10 @@ const RESEND_API_KEY = (Deno.env.get("RESEND_API_KEY") || Deno.env.get("VITE_RES
 const SUPABASE_URL = (Deno.env.get("SUPABASE_URL") || Deno.env.get("VITE_SUPABASE_URL"))?.trim();
 const SUPABASE_SERVICE_ROLE_KEY = (Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("VITE_SUPABASE_SERVICE_ROLE_KEY"))?.trim();
 
-if (!RESEND_API_KEY) console.error("CRITICAL: RESEND_API_KEY is missing");
-if (!SUPABASE_URL) console.error("CRITICAL: SUPABASE_URL is missing");
-if (!SUPABASE_SERVICE_ROLE_KEY) console.error("CRITICAL: SUPABASE_SERVICE_ROLE_KEY is missing");
-
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !RESEND_API_KEY) {
   console.error("Initialization failed: Missing credentials");
+  // Pre-handler check can't return Response easily without being inside serve, 
+  // but the server will handle the crash or missing vars.
 }
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

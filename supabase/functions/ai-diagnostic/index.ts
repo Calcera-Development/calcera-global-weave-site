@@ -352,7 +352,14 @@ Providing a comprehensive diagnostic analysis.`;
             const toolResults = [];
             for (const toolCall of openAIData.choices[0].message.tool_calls) {
                 const functionName = toolCall.function.name;
-                const functionArgs = JSON.parse(toolCall.function.arguments || "{}");
+                let functionArgs;
+                try {
+                    functionArgs = JSON.parse(toolCall.function.arguments || "{}");
+                } catch (e) {
+                    console.error("Failed to parse tool arguments:", toolCall.function.arguments);
+                    functionArgs = {};
+                }
+
                 let result;
                 if (functionName === "calculate_roi_metrics") {
                     result = calculateROI(functionArgs);
@@ -394,9 +401,19 @@ Providing a comprehensive diagnostic analysis.`;
             }
 
             const secondData = await secondResponse.json();
-            finalReport = JSON.parse(cleanJSON(secondData.choices[0].message.content || "{}"));
+            try {
+                finalReport = JSON.parse(cleanJSON(secondData.choices[0].message.content || "{}"));
+            } catch (e) {
+                console.error("Failed to parse second response JSON:", secondData.choices[0].message.content);
+                finalReport = {};
+            }
         } else {
-            finalReport = JSON.parse(cleanJSON(openAIData.choices[0].message.content || "{}"));
+            try {
+                finalReport = JSON.parse(cleanJSON(openAIData.choices[0].message.content || "{}"));
+            } catch (e) {
+                console.error("Failed to parse primary response JSON:", openAIData.choices[0].message.content);
+                finalReport = {};
+            }
         }
 
         finalReport = normalizeReportStructure(finalReport || {});
@@ -435,7 +452,7 @@ Providing a comprehensive diagnostic analysis.`;
                 estimated_timeline_range: complexityData.range,
                 roi_metrics: roiData,
                 budget_band: complexityData.budgetBand,
-                openai_model: currentModel,
+                openai_model: AI_MODEL,
                 total_tokens: 0, // Usage stats vary between providers
                 processing_time_ms: Date.now() - startTime,
                 status: 'generated',
@@ -445,13 +462,17 @@ Providing a comprehensive diagnostic analysis.`;
 
         if (reportError) throw reportError;
 
-        // Update rate limit
-        await supabase.from("rate_limits").insert({
-            identifier: clientIP,
-            identifier_type: "ip",
-            endpoint: "/ai-diagnostic",
-            window_start: new Date().toISOString(),
-        });
+        // Update rate limit - non-blocking
+        try {
+            await supabase.from("rate_limits").insert({
+                identifier: clientIP,
+                identifier_type: "ip",
+                endpoint: "/ai-diagnostic",
+                window_start: new Date().toISOString(),
+            });
+        } catch (rlError) {
+            console.warn("Failed to update rate limit (non-critical):", rlError);
+        }
 
         return new Response(
             JSON.stringify({
