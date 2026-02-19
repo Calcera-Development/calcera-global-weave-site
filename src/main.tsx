@@ -5,9 +5,28 @@ import './index.css'
 
 // Logo is now bundled and preloaded automatically via ES6 imports
 
-// Optimize rendering with concurrent features
-const root = createRoot(document.getElementById("root")!);
-root.render(<App />);
+// Initial Load Reliability Check
+const container = document.getElementById("root");
+
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+} else {
+  console.error("Critical Failure: Root element not found.");
+  // Attempt a fallback or automatic reload if the DOM is completely empty
+  if (window.location.search.indexOf('reload=true') === -1) {
+    window.location.href = window.location.href + (window.location.href.indexOf('?') === -1 ? '?' : '&') + 'reload=true';
+  }
+}
+
+// Global error tracking for production reliability
+window.addEventListener('error', (event) => {
+  console.error('[GLOBAL_ERROR]', event.error);
+  // Auto-recovery for chunk loading failures (typical in Vercel updates)
+  if (event.message && event.message.includes('Loading chunk')) {
+    window.location.reload();
+  }
+});
 
 // Report web vitals for performance monitoring
 if ('performance' in window) {

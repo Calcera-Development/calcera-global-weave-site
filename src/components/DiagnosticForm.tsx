@@ -371,10 +371,9 @@ export default function DiagnosticForm() {
         );
     }
 
-    // --- MULTI-STEP FORM ---
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
-            <div className="mb-12 relative h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 py-4 md:py-8">
+            <div className="mb-8 md:mb-12 relative h-1.5 md:h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div
                     className="absolute inset-y-0 left-0 bg-blue-600 transition-all duration-500 ease-out rounded-full shadow-sm"
                     style={{ width: `${(step / 2) * 100}%` }}
@@ -384,7 +383,7 @@ export default function DiagnosticForm() {
             <Card className="border-none shadow-2xl shadow-blue-50/50 rounded-3xl overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-5 h-full">
                     {/* Sidebar / Context */}
-                    <div className="md:col-span-2 bg-slate-900 p-8 text-white flex flex-col justify-between overflow-hidden relative">
+                    <div className="md:col-span-2 bg-slate-900 p-6 md:p-8 text-white flex flex-col justify-between overflow-hidden relative">
                         {/* Decorative background elements */}
                         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" />
                         <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl" />
@@ -428,8 +427,8 @@ export default function DiagnosticForm() {
                     </div>
 
                     {/* Form Area */}
-                    <div className="md:col-span-3 bg-white p-8 md:p-12">
-                        <form onSubmit={handleSubmit} className="space-y-8 h-full flex flex-col justify-between">
+                    <div className="md:col-span-3 bg-white p-6 md:p-12">
+                        <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 h-full flex flex-col justify-between">
                             <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
                                 {step === 1 ? (
                                     <div className="space-y-6">
@@ -441,7 +440,7 @@ export default function DiagnosticForm() {
                                                     value={formData.companyName}
                                                     onChange={(e) => handleChange('companyName', e.target.value)}
                                                     placeholder="Acme Enterprise"
-                                                    className="h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium"
+                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium text-sm md:text-base"
                                                     required
                                                 />
                                             </div>
@@ -454,18 +453,18 @@ export default function DiagnosticForm() {
                                                         value={formData.industry}
                                                         onChange={(e) => handleChange('industry', e.target.value)}
                                                         placeholder="Healthcare"
-                                                        className="h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all"
+                                                        className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
                                                         required
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="companySize" className="text-xs font-bold uppercase tracking-widest text-slate-500">Scale</Label>
+                                                    <Label htmlFor="companySize" className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500">Scale</Label>
                                                     <Input
                                                         id="companySize"
                                                         value={formData.companySize}
                                                         onChange={(e) => handleChange('companySize', e.target.value)}
                                                         placeholder="Enterprise"
-                                                        className="h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all"
+                                                        className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
                                                     />
                                                 </div>
                                             </div>
@@ -478,7 +477,7 @@ export default function DiagnosticForm() {
                                                     value={formData.email}
                                                     onChange={(e) => handleChange('email', e.target.value)}
                                                     placeholder="exec@company.com"
-                                                    className="h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium"
+                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all font-medium text-sm md:text-base"
                                                     required
                                                 />
                                             </div>
@@ -493,10 +492,10 @@ export default function DiagnosticForm() {
                                                     id="challenges"
                                                     value={formData.challenges}
                                                     onChange={(e) => handleChange('challenges', e.target.value)}
-                                                    placeholder="Describe your current bottlenecks, manual processes, and system integration gaps..."
-                                                    rows={6}
+                                                    placeholder="Describe your current bottlenecks..."
+                                                    rows={4}
                                                     required
-                                                    className="bg-slate-50 border-none rounded-2xl focus-visible:ring-blue-600 transition-all resize-none p-4"
+                                                    className="bg-slate-50 border-none rounded-2xl focus-visible:ring-blue-600 transition-all resize-none p-3 md:p-4 text-sm md:text-base"
                                                 />
                                             </div>
 
@@ -506,8 +505,8 @@ export default function DiagnosticForm() {
                                                     id="desiredOutcomes"
                                                     value={formData.desiredOutcomes}
                                                     onChange={(e) => handleChange('desiredOutcomes', e.target.value)}
-                                                    placeholder="e.g., 40% reduction in manual data entry"
-                                                    className="h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all"
+                                                    placeholder="e.g., 40% reduction..."
+                                                    className="h-10 md:h-12 bg-slate-50 border-none rounded-xl focus-visible:ring-blue-600 transition-all text-sm md:text-base"
                                                 />
                                             </div>
                                         </div>
