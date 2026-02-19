@@ -207,23 +207,23 @@ export default function DiagnosticForm() {
         return (
             <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 {/* Dashboard Header */}
-                <div className="bg-white border rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-                    <div className="flex items-center gap-6">
-                        <div className="h-16 w-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                            <ShieldCheck className="w-10 h-10" />
+                <div className="bg-white border rounded-2xl p-4 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                    <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto">
+                        <div className="h-12 w-12 md:h-16 md:w-16 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                            <ShieldCheck className="w-6 h-6 md:w-10 md:h-10" />
                         </div>
-                        <div>
-                            <div className="flex items-center gap-3 mb-1">
-                                <span className="px-2.5 py-0.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100 uppercase tracking-wider">Solution Design</span>
-                                <span className="text-slate-400 text-xs">•</span>
-                                <span className="text-slate-500 text-xs font-medium">Ref ID: {reportData.reportId.slice(0, 8)}</span>
+                        <div className="min-w-0">
+                            <div className="flex items-center gap-2 md:gap-3 mb-1 overflow-hidden">
+                                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full border border-blue-100 uppercase tracking-wider whitespace-nowrap">Solution Design</span>
+                                <span className="text-slate-400 text-xs shrink-0">•</span>
+                                <span className="text-slate-500 text-[10px] md:text-xs font-medium truncate">Ref ID: {reportData.reportId.slice(0, 8)}</span>
                             </div>
-                            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Enterprise Strategy Overview</h2>
+                            <h2 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tight truncate">Enterprise Strategy Overview</h2>
                         </div>
                     </div>
-                    <div className="flex gap-3">
-                        <Button variant="outline" onClick={() => window.location.reload()}>New Request</Button>
-                        <Button className="bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => window.location.href = '#contact'}>Book Deep Dive</Button>
+                    <div className="flex gap-2 md:gap-3 w-full md:w-auto">
+                        <Button variant="outline" size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10" onClick={() => window.location.reload()}>New Request</Button>
+                        <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => window.location.href = '#contact'}>Book Deep Dive</Button>
                     </div>
                 </div>
 
@@ -532,7 +532,7 @@ export default function DiagnosticForm() {
                                 ) : (
                                     <Button
                                         type="submit"
-                                        className="h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-100 font-bold gap-2"
+                                        className="h-10 md:h-12 px-4 md:px-8 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-100 font-bold gap-2 text-xs md:text-base whitespace-nowrap"
                                         disabled={isProcessing}
                                     >
                                         {isProcessing ? (
