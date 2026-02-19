@@ -191,7 +191,7 @@ function generateReportHTML(report: any, companyName: string): string {
   <div class="cta">
     <h2>Ready to Transform Your Operations?</h2>
     <p>Let's discuss how Calcera Global can bring this vision to life.</p>
-    <a href="https://calcera.global/contact">Schedule a Strategic Consultation</a>
+    <a href="https://calcera.global/#contact">Schedule a Strategic Consultation</a>
   </div>
 
   <div class="footer">
