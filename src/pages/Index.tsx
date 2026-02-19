@@ -44,13 +44,26 @@ const Index = () => {
     if (hash) {
       const id = hash.replace("#", "");
       if (id) {
-        // give browser a moment to render
-        setTimeout(() => {
+        // give browser a moment to render lazy components
+        const timer1 = setTimeout(() => {
           const element = document.getElementById(id);
           if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
           }
-        }, 100);
+        }, 500);
+
+        // secondary check for late layout shifts (mobile/lazy load)
+        const timer2 = setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 1500);
+
+        return () => {
+          clearTimeout(timer1);
+          clearTimeout(timer2);
+        };
       }
     }
   }, [location]);

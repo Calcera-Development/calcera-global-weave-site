@@ -267,6 +267,7 @@ img {
 /* Standard section spacing */
 section {
   position: relative;
+  scroll-margin-top: 100px;
 }
 
 /* Animated gradient text */
