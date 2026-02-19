@@ -9,8 +9,6 @@ import aashiqFounder from "@/assets/aashiq-founder.jpg";
 import sai from "@/assets/sai.jpg";
 import ashok from "@/assets/ashok.jpg";
 
-import Footer from "@/components/Footer";
-
 const TEAM_MEMBERS = [
     // ... existing members ...
     {
@@ -199,10 +197,7 @@ const About = () => {
                 </div>
             </main>
 
-<<<<<<< HEAD
             {/* Footer minimal */}
-=======
->>>>>>> d8199ac (feat: AI Diagnostic UI 100% upgrade & global footer sync)
             <Footer />
         </div>
     );
