@@ -223,7 +223,7 @@ export default function DiagnosticForm() {
                     </div>
                     <div className="flex gap-2 md:gap-3 w-full md:w-auto">
                         <Button variant="outline" size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10" onClick={() => window.location.reload()}>New Request</Button>
-                        <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => window.location.href = '#contact'}>Book Deep Dive</Button>
+                        <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => window.location.href = '/#contact'}>Book Deep Dive</Button>
                     </div>
                 </div>
 
@@ -357,7 +357,7 @@ export default function DiagnosticForm() {
                         Let's discuss how we can bring this architecture to life for {formData.companyName}.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                        <Button className="bg-white text-indigo-600 hover:bg-slate-50 font-bold px-8 h-12 rounded-xl" onClick={() => window.location.href = '#contact'}>
+                        <Button className="bg-white text-indigo-600 hover:bg-slate-50 font-bold px-8 h-12 rounded-xl" onClick={() => window.location.href = '/#contact'}>
                             Schedule Strategy Session
                         </Button>
                     </div>
