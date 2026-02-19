@@ -110,7 +110,7 @@ export default function DiagnosticForm() {
 
         try {
             const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
-            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.10', {
+            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.13', {
                 body: formData,
                 headers: {
                     'apikey': apiKey,
@@ -130,6 +130,29 @@ export default function DiagnosticForm() {
             setReportData(data as DiagnosticResponse);
             setIsComplete(true);
             console.log('[SYNTHESIS_SUCCESS]', data.reportId);
+
+            // STEP 2: Email Delivery (v2.13) - Background Trigger
+            try {
+                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
+                supabase.functions.invoke('send-diagnostic-report?v=2.13', {
+                    body: { reportId: data.reportId },
+                    headers: {
+                        'apikey': apiKey,
+                        'Authorization': `Bearer ${apiKey}`
+                    }
+                }).then(({ error: emailError }) => {
+                    if (emailError) {
+                        console.warn('[EMAIL_DELIVERY_FAILURE_ASYNC]', emailError);
+                    } else {
+                        toast({
+                            title: 'Analysis Complete! ✨',
+                            description: 'Your premium diagnostic report is ready and has been sent to your inbox.',
+                        });
+                    }
+                });
+            } catch (emailErr: any) {
+                console.warn('[EMAIL_TRIGGER_FAILURE]', emailErr);
+            }
 
         } catch (err: any) {
             console.error('Diagnostic Error:', err);
