@@ -140,7 +140,9 @@ export default function DiagnosticForm() {
                 console.warn('[EMAIL_DELIVERY_FAILURE]', emailErr);
                 toast({
                     title: 'Report Generated (Mail Delayed)',
-                    description: 'Your analysis is ready below, but we had trouble emailing the PDF.',
+                    description: (emailErr.status === 401 || (emailErr.message && emailErr.message.includes('401')))
+                        ? "Email auth failed (401). Solution: Go to Supabase > Functions > send-diagnostic-report > Settings and UNCHECK 'Enforce JWT'."
+                        : "Your analysis is ready below, but we had trouble emailing the PDF.",
                     variant: 'default',
                 });
             }
