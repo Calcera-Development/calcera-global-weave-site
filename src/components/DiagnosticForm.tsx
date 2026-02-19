@@ -97,7 +97,7 @@ export default function DiagnosticForm() {
 
         setIsProcessing(true);
 
-        // Debugging Auth State (v2.9)
+        // Debugging Auth State (v2.10)
         console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
         console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
 
@@ -109,8 +109,13 @@ export default function DiagnosticForm() {
         }
 
         try {
-            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.9', {
+            const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
+            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.10', {
                 body: formData,
+                headers: {
+                    'apikey': apiKey,
+                    'Authorization': `Bearer ${apiKey}`
+                }
             });
 
             if (error) {
@@ -125,10 +130,15 @@ export default function DiagnosticForm() {
             setReportData(data as DiagnosticResponse);
             console.log('[SYNTHESIS_SUCCESS]', data.reportId);
 
-            // STEP 2: Email Delivery (v2.9)
+            // STEP 2: Email Delivery (v2.10)
             try {
-                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report?v=2.9', {
+                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
+                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report?v=2.10', {
                     body: { reportId: data.reportId },
+                    headers: {
+                        'apikey': apiKey,
+                        'Authorization': `Bearer ${apiKey}`
+                    }
                 });
                 if (emailError) throw emailError;
 
@@ -173,9 +183,9 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: `Synthesis Failed (v2.9)`,
+                title: `Synthesis Failed (v2.10)`,
                 description: (err.status === 401 || (err.message && err.message.includes('401')))
-                    ? "Authorization Failure (401). Solution: In Supabase, check the 'Settings' tab for BOTH functions and ensure 'Enforce JWT' is OFF for BOTH."
+                    ? "Authorization Failure (401). Final Solution: Supabase > Functions > [Both Functions] > Settings > DISABLE 'Enforce JWT'."
                     : errorMessage,
                 variant: 'destructive',
             });
@@ -185,8 +195,20 @@ export default function DiagnosticForm() {
     };
 
     // --- SUCCESS DASHBOARD ---
-    if (isComplete && reportData) {
+    if (isComplete && reportData && reportData.report) {
         const r = reportData.report;
+
+        // Defensive guards for nested report structure
+        if (!r.operationalDiagnosis || !r.recommendedArchitecture || !r.financialImpact) {
+            return (
+                <div className="p-8 text-center bg-white rounded-2xl border">
+                    <h3 className="text-xl font-bold mb-2">Partial Data Warning</h3>
+                    <p className="text-slate-500">The analysis generated, but some sections are missing. Please refresh and try again.</p>
+                    <Button className="mt-4" onClick={() => window.location.reload()}>Refresh</Button>
+                </div>
+            );
+        }
+
         return (
             <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 {/* Dashboard Header */}
