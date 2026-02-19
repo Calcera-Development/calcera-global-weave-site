@@ -31,10 +31,14 @@ window.addEventListener('error', (event) => {
 // Report web vitals for performance monitoring
 if ('performance' in window) {
   window.addEventListener('load', () => {
-    // Log performance metrics
-    const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-    console.log('Page Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-    console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.fetchStart, 'ms');
-    console.log('First Paint:', performance.getEntriesByName('first-paint')[0]?.startTime || 'N/A', 'ms');
+    // Wrap in timeout to ensure metrics are fully available
+    setTimeout(() => {
+      const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+      if (perfData) {
+        console.log('Page Load Time:', Math.max(0, perfData.loadEventEnd - perfData.fetchStart), 'ms');
+        console.log('DOM Content Loaded:', Math.max(0, perfData.domContentLoadedEventEnd - perfData.fetchStart), 'ms');
+        console.log('First Paint:', performance.getEntriesByName('first-paint')[0]?.startTime || 'N/A', 'ms');
+      }
+    }, 100);
   });
 }

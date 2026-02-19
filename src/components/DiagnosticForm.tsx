@@ -128,36 +128,8 @@ export default function DiagnosticForm() {
             }
 
             setReportData(data as DiagnosticResponse);
-            console.log('[SYNTHESIS_SUCCESS]', data.reportId);
-
-            // STEP 2: Email Delivery (v2.10)
-            try {
-                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
-                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report?v=2.10', {
-                    body: { reportId: data.reportId },
-                    headers: {
-                        'apikey': apiKey,
-                        'Authorization': `Bearer ${apiKey}`
-                    }
-                });
-                if (emailError) throw emailError;
-
-                toast({
-                    title: 'Analysis Complete! ✨',
-                    description: 'Your premium diagnostic report is ready and has been sent to your inbox.',
-                });
-            } catch (emailErr: any) {
-                console.warn('[EMAIL_DELIVERY_FAILURE]', emailErr);
-                toast({
-                    title: 'Report Generated (Mail Delayed)',
-                    description: (emailErr.status === 401 || (emailErr.message && emailErr.message.includes('401')))
-                        ? "Email Auth Failure (401). Ensure BOTH functions have 'Enforce JWT' disabled in Supabase."
-                        : "Your analysis is ready below, but we had trouble emailing the PDF.",
-                    variant: 'default',
-                });
-            }
-
             setIsComplete(true);
+            console.log('[SYNTHESIS_SUCCESS]', data.reportId);
 
         } catch (err: any) {
             console.error('Diagnostic Error:', err);

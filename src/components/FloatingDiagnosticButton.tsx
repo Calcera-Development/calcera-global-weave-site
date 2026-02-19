@@ -8,10 +8,9 @@ const FloatingDiagnosticButton = () => {
     const location = useLocation();
     const [isVisible, setIsVisible] = useState(false);
 
-    // Don't show on the diagnostic page itself
-    if (location.pathname === "/ai-diagnostic") return null;
-
     useEffect(() => {
+        // Don't show on the diagnostic page itself
+        if (location.pathname === "/ai-diagnostic") return;
         const toggleVisibility = () => {
             if (window.scrollY > 300) {
                 setIsVisible(true);
@@ -26,6 +25,8 @@ const FloatingDiagnosticButton = () => {
 
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
+
+    if (location.pathname === "/ai-diagnostic") return null;
 
     return (
         <div className={cn(
