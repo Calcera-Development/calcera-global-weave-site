@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 // Environment variables - trim quotes and handle fallbacks
-const AI_API_KEY = (Deno.env.get("AI_API_KEY") || Deno.env.get("OPENAI_API_KEY") || Deno.env.get("VITE_OPENAI_API_KEY"))?.trim().replace(/^["']|["']$/g, "");
+const AI_API_KEY = (Deno.env.get("AI_API_KEY") || Deno.env.get("OPENAI_API_KEY") || Deno.env.get("VITE_OPENAI_API_KEY"))?.trim()?.replace(/^["']|["']$/g, "") || "";
 const AI_BASE_URL = (Deno.env.get("AI_BASE_URL") || "https://api.deepseek.com/v1").trim();
 const AI_MODEL = Deno.env.get("AI_MODEL") || "deepseek-chat";
 

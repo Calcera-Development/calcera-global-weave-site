@@ -139,6 +139,8 @@ export default function DiagnosticForm() {
                 }
             } else if (err.message) {
                 errorMessage = err.message;
+            } else {
+                errorMessage = `Error: ${JSON.stringify(err)}`;
             }
 
             toast({

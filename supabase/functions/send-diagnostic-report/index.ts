@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 // Environment variables - trim quotes and handle fallbacks
-const RESEND_API_KEY = (Deno.env.get("RESEND_API_KEY") || Deno.env.get("VITE_RESEND_API_KEY"))?.trim().replace(/^["']|["']$/g, "");
+const RESEND_API_KEY = (Deno.env.get("RESEND_API_KEY") || Deno.env.get("VITE_RESEND_API_KEY"))?.trim()?.replace(/^["']|["']$/g, "") || "";
 const SUPABASE_URL = (Deno.env.get("SUPABASE_URL") || Deno.env.get("VITE_SUPABASE_URL"))?.trim();
 const SUPABASE_SERVICE_ROLE_KEY = (Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("VITE_SUPABASE_SERVICE_ROLE_KEY"))?.trim();
 
