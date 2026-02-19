@@ -5,8 +5,11 @@ const ScrollToTop = () => {
     const { pathname } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+        // Only scroll to top if there is no hash (section navigation)
+        if (!location.hash) {
+            window.scrollTo(0, 0);
+        }
+    }, [pathname, location.hash]);
 
     return null;
 };
