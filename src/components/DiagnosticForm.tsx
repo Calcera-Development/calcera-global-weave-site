@@ -97,7 +97,7 @@ export default function DiagnosticForm() {
 
         setIsProcessing(true);
 
-        // Debugging Auth State (v2.7)
+        // Debugging Auth State (v2.9)
         console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
         console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
 
@@ -109,7 +109,7 @@ export default function DiagnosticForm() {
         }
 
         try {
-            const { data, error } = await supabase.functions.invoke('ai-diagnostic', {
+            const { data, error } = await supabase.functions.invoke('ai-diagnostic?v=2.9', {
                 body: formData,
             });
 
@@ -125,15 +125,10 @@ export default function DiagnosticForm() {
             setReportData(data as DiagnosticResponse);
             console.log('[SYNTHESIS_SUCCESS]', data.reportId);
 
-            // STEP 2: Email Delivery (Attempt)
+            // STEP 2: Email Delivery (v2.9)
             try {
-                const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
-                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report', {
+                const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report?v=2.9', {
                     body: { reportId: data.reportId },
-                    headers: {
-                        'apikey': apiKey,
-                        'Authorization': `Bearer ${apiKey}`
-                    }
                 });
                 if (emailError) throw emailError;
 
@@ -178,9 +173,9 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: `Synthesis Failed (v2.7)`,
+                title: `Synthesis Failed (v2.9)`,
                 description: (err.status === 401 || (err.message && err.message.includes('401')))
-                    ? "Authorization Failure (401). Final check: Supabase > Functions > ai-diagnostic > Settings > Uncheck 'Enforce JWT'."
+                    ? "Authorization Failure (401). Solution: In Supabase, check the 'Settings' tab for BOTH functions and ensure 'Enforce JWT' is OFF for BOTH."
                     : errorMessage,
                 variant: 'destructive',
             });
