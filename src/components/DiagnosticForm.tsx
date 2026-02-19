@@ -97,7 +97,7 @@ export default function DiagnosticForm() {
 
         setIsProcessing(true);
 
-        // Debugging Auth State (v2.3)
+        // Debugging Auth State (v2.6)
         console.log('[DEBUG] Supabase URL:', import.meta.env.VITE_SUPABASE_URL ? 'PRESENT' : 'MISSING');
         console.log('[DEBUG] Supabase Key:', import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? 'PRESENT' : 'MISSING');
 
@@ -129,6 +129,9 @@ export default function DiagnosticForm() {
             try {
                 const { error: emailError } = await supabase.functions.invoke('send-diagnostic-report', {
                     body: { reportId: data.reportId },
+                    headers: {
+                        'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || ''
+                    }
                 });
                 if (emailError) throw emailError;
 
@@ -141,7 +144,7 @@ export default function DiagnosticForm() {
                 toast({
                     title: 'Report Generated (Mail Delayed)',
                     description: (emailErr.status === 401 || (emailErr.message && emailErr.message.includes('401')))
-                        ? "Email auth failed (401). Solution: Go to Supabase > Functions > send-diagnostic-report > Settings and UNCHECK 'Enforce JWT'."
+                        ? "Email Auth Failure (401). Ensure BOTH functions have 'Enforce JWT' disabled in Supabase."
                         : "Your analysis is ready below, but we had trouble emailing the PDF.",
                     variant: 'default',
                 });
@@ -173,9 +176,9 @@ export default function DiagnosticForm() {
             }
 
             toast({
-                title: `Synthesis Failed (v2.4)`,
+                title: `Synthesis Failed (v2.6)`,
                 description: (err.status === 401 || (err.message && err.message.includes('401')))
-                    ? "Unauthorized (401). Solution: Go to Supabase Dashboard > Functions > ai-diagnostic > Settings and UNCHECK 'Enforce JWT'. Then refresh."
+                    ? "Authorization Failure (401). Final check: Supabase > Functions > ai-diagnostic > Settings > Uncheck 'Enforce JWT'."
                     : errorMessage,
                 variant: 'destructive',
             });
