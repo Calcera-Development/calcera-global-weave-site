@@ -11,12 +11,12 @@ interface PortfolioGridProps {
 const PortfolioGrid = ({ onContactClick }: PortfolioGridProps) => (
   <section id="work" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mesh-gradient">
     <div className="max-w-7xl mx-auto relative z-10">
-      <AnimatedWrapper animation="fade-up" className="text-center mb-10 sm:mb-16">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-purple-600 mb-2 sm:mb-4">Portfolio</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
+      <AnimatedWrapper animation="fade-up" className="text-center mb-14 sm:mb-20">
+        <span className="inline-block text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-purple-600 mb-4 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100">Portfolio</span>
+        <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 mt-4 tracking-tight">
           Work We're Proud Of
         </h2>
-        <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto px-4">
+        <p className="text-base sm:text-xl text-slate-500 max-w-xl mx-auto">
           A glimpse into our digital playground.
         </p>
       </AnimatedWrapper>
