@@ -1,4 +1,3 @@
-// Triggering re-deployment to resolve Vercel issue
 import HeaderNav from "@/components/layout/HeaderNav";
 import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
 import { Link } from "react-router-dom";
@@ -18,7 +17,7 @@ const TermsOfService = () => {
                 <div className="absolute inset-0 grid-bg opacity-[0.03]" />
             </div>
 
-            <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
+            <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <AnimatedWrapper animation="fade-up">
                         <Link to="/">

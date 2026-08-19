@@ -11,19 +11,21 @@ const FloatingDiagnosticButton = () => {
     useEffect(() => {
         // Don't show on the diagnostic page itself
         if (location.pathname === "/ai-diagnostic") return;
-        const toggleVisibility = () => {
-            if (window.scrollY > 300) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
+
+        const sentinel = document.createElement("div");
+        sentinel.style.cssText = "position:absolute;top:300px;height:1px;width:1px;pointer-events:none;";
+        document.body.prepend(sentinel);
+
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(!entry.isIntersecting),
+            { threshold: 0 }
+        );
+        observer.observe(sentinel);
+
+        return () => {
+            observer.disconnect();
+            sentinel.remove();
         };
-
-        window.addEventListener("scroll", toggleVisibility);
-        // Initial check in case they are already scrolled
-        toggleVisibility();
-
-        return () => window.removeEventListener("scroll", toggleVisibility);
     }, [location.pathname]);
 
     if (location.pathname === "/ai-diagnostic") return null;

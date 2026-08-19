@@ -20,11 +20,20 @@ const HeaderNav = () => {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const sentinel = document.createElement("div");
+    sentinel.style.cssText = "position:absolute;top:50px;height:1px;width:1px;pointer-events:none;";
+    document.body.prepend(sentinel);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+
+    return () => {
+      observer.disconnect();
+      sentinel.remove();
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -95,12 +104,18 @@ const HeaderNav = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:py-6 transition-all duration-500 pointer-events-none">
+    <header className="fixed top-0 left-0 w-full z-[100] transition-all duration-500 pointer-events-none">
+      {/* Soft scrim so scrolling content fades behind the nav instead of colliding with its edge */}
+      <div
+        className="absolute inset-x-0 top-0 h-28 sm:h-32 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
+        aria-hidden="true"
+      />
+      <div className="relative px-4 py-3 sm:py-4 pointer-events-none">
       <nav
         className={`mx-auto max-w-7xl transition-all duration-500 pointer-events-auto [will-change:padding,background-color]
           ${scrolled
-            ? "bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2.5 px-3 sm:px-6 mt-0"
-            : "bg-transparent py-2.5 px-3 sm:px-6 mt-0"
+            ? "bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2 px-3 sm:px-6 mt-0"
+            : "bg-transparent py-2 px-3 sm:px-6 mt-0"
           }`}
       >
         <div className="flex justify-between items-center relative">
@@ -111,8 +126,8 @@ const HeaderNav = () => {
             <img
               src={calceraLogo}
               alt="Calcera Logo"
-              className={`w-auto select-none object-contain rounded-xl transition-all duration-500 
-                ${scrolled ? "h-8 sm:h-10" : "h-12 sm:h-24"} 
+              className={`w-auto select-none object-contain rounded-xl transition-all duration-500
+                ${scrolled ? "h-7 sm:h-9" : "h-9 sm:h-11"}
                 group-hover:brightness-125`}
             />
           </button>
@@ -148,7 +163,7 @@ const HeaderNav = () => {
                   } px-5 py-2.5 hover:-translate-y-0.5 active:translate-y-0`}
                 onClick={handleBookConsultation}
               >
-                Let's Talk
+                Book a Consultation
                 <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Button>
             </div>
@@ -177,12 +192,11 @@ const HeaderNav = () => {
       <div className={`
         md:hidden fixed left-4 right-4 z-[110]
         transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)
-        ${scrolled ? "top-[76px]" : "top-[96px]"}
+        ${scrolled ? "top-[72px]" : "top-[88px]"}
         ${isMenuOpen ? "max-h-[80vh] opacity-100 translate-y-0 pointer-events-auto" : "max-h-0 opacity-0 -translate-y-8 pointer-events-none shadow-none"}
       `} style={{ transitionProperty: "max-height, opacity, transform, top" }}>
-        <div className="rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-900 border border-white/10 overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 pointer-events-none" />
-          <div className="flex flex-col p-4 gap-1 relative z-10">
+        <div className="rounded-2xl shadow-[0_20px_50px_-12px_rgba(15,23,42,0.25)] bg-white border border-slate-200 overflow-hidden">
+          <nav className="flex flex-col p-2" aria-label="Mobile navigation">
             {NAV_ITEMS.map(item => {
               const isActive = (isHomePage && activeSection === item.id) || (!isHomePage && location.pathname === `/${item.key === "home" ? "" : item.key}`);
               return (
@@ -190,29 +204,38 @@ const HeaderNav = () => {
                   key={item.key}
                   href={isHomePage ? `#${item.id}` : (item.key === "about" ? "/about" : `/#${item.id}`)}
                   onClick={e => { e.preventDefault(); handleNavClick(item.key, item.id); }}
-                  className={`flex items-center justify-between w-full rounded-2xl py-4 px-6 text-left transition-all duration-300
+                  className={`flex items-center justify-between w-full rounded-xl py-3.5 px-4 text-left transition-colors duration-200
                   ${isActive
-                      ? "text-white bg-white/10"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-slate-700 hover:bg-slate-50"
                     }`}
                 >
-                  <span className="text-lg font-medium tracking-tight">{item.label}</span>
-                  {isActive && <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />}
+                  <span className="text-base font-medium tracking-tight">{item.label}</span>
+                  {isActive && <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
                 </a>
               );
             })}
-            <div className="mt-4 pt-4 border-t border-white/5">
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl rounded-2xl font-bold py-3 text-sm"
-                onClick={handleBookConsultation}
-              >
-                Book Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
+          </nav>
+
+          <div className="p-3 pt-1 border-t border-slate-100 flex flex-col gap-2">
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold py-3 text-sm"
+              onClick={handleBookConsultation}
+            >
+              Book a Consultation
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <a
+              href="/ai-diagnostic"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full text-center rounded-xl border border-slate-200 text-slate-700 font-medium py-3 text-sm hover:border-blue-300 hover:text-blue-600 transition-colors duration-200"
+            >
+              Try the AI Diagnostic
+            </a>
           </div>
         </div>
+      </div>
       </div>
     </header>
   );

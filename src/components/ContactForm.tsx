@@ -68,9 +68,9 @@ const ContactForm = () => {
   }
 
   const contactInfo = [
-    { icon: Phone, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982", color: "from-blue-500 to-cyan-400" },
-    { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global", color: "from-purple-500 to-pink-400" },
-    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", href: "https://www.google.com/maps/dir//Shangri-La+Colombo,+WRHV%2BCQ7,+One+Galle+Face+Dr,+Colombo+2/@6.8879461,79.8632827,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ae2593b09364c4f:0x7dc13fa1f24d5c16!2m2!1d79.8444584!2d6.928457?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D", color: "from-emerald-500 to-teal-400" }];
+    { icon: Phone, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982" },
+    { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global" },
+    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", href: "https://www.google.com/maps/dir//Shangri-La+Colombo,+WRHV%2BCQ7,+One+Galle+Face+Dr,+Colombo+2/@6.8879461,79.8632827,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ae2593b09364c4f:0x7dc13fa1f24d5c16!2m2!1d79.8444584!2d6.928457?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D" }];
 
 
   return (
@@ -88,9 +88,7 @@ const ContactForm = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 sm:gap-16">
           <AnimatedWrapper animation="slide-in-from-left" className="lg:col-span-3">
-            <form className="glass-card rounded-[2.5rem] p-8 sm:p-12 shadow-2xl border border-white/50 relative overflow-hidden group/form" onSubmit={handleSubmit}>
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-purple-600 opacity-50" />
-
+            <form className="bg-white rounded-2xl p-8 sm:p-12 border border-slate-200 shadow-sm relative overflow-hidden group/form" onSubmit={handleSubmit}>
               <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-8 sm:mb-12 tracking-tight">
                 Unleash Your Idea
               </h3>
@@ -99,22 +97,22 @@ const ContactForm = () => {
                   <Label htmlFor="cf-name" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Your Full Name <span className="text-rose-500">*</span>
                   </Label>
-                  <Input id="cf-name" name="name" type="text" value={fields.name} onChange={handleChange} disabled={loading} placeholder="E.g. Elon Musk" autoComplete="name"
-                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
+                  <Input id="cf-name" name="name" type="text" value={fields.name} onChange={handleChange} disabled={loading} placeholder="E.g. Alex Rivera" autoComplete="name"
+                    className="h-14 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 text-base" />
                 </div>
                 <div className="group/input relative">
                   <Label htmlFor="cf-contact" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Best Contact Number <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-contact" name="contact" type="text" value={fields.contact} onChange={handleChange} disabled={loading} placeholder="+X XX XXX XXXX" autoComplete="tel"
-                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
+                    className="h-14 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 text-base" />
                 </div>
                 <div className="group/input relative">
                   <Label htmlFor="cf-email" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
                     Business Email Address <span className="text-rose-500">*</span>
                   </Label>
                   <Input id="cf-email" name="email" type="email" value={fields.email} onChange={handleChange} disabled={loading} placeholder="name@company.com" autoComplete="email"
-                    className="h-14 rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base" />
+                    className="h-14 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 text-base" />
                 </div>
                 <div className="group/input relative">
                   <Label htmlFor="cf-message" className="block text-slate-500 mb-2 font-semibold text-xs uppercase tracking-widest transition-colors group-focus-within/input:text-blue-600">
@@ -122,11 +120,11 @@ const ContactForm = () => {
                   </Label>
                   <Textarea id="cf-message" name="message" rows={5} value={fields.message} onChange={handleChange} disabled={loading}
                     placeholder="Briefly describe what you're building..."
-                    className="rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-500 bg-white/50 backdrop-blur-sm text-base resize-none" />
+                    className="rounded-xl border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 text-base resize-none" />
                 </div>
                 <Button
                   size="lg"
-                  className="w-full bg-slate-950 text-white shadow-2xl text-sm sm:text-base py-3 sm:py-4 rounded-2xl hover:bg-black transition-all duration-500 hover:scale-[1.02] active:scale-100 font-bold group/btn relative overflow-hidden shimmer-btn"
+                  className="w-full bg-blue-600 text-white text-sm sm:text-base py-3 sm:py-4 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold group/btn relative overflow-hidden"
                   disabled={loading}>
 
                   {loading ?
@@ -150,8 +148,7 @@ const ContactForm = () => {
 
           <AnimatedWrapper animation="slide-in-from-right" className="lg:col-span-2">
             <div className="space-y-8">
-              <div className="glass-card rounded-[2.5rem] p-10 shadow-2xl border border-white/40 group/sidebar relative overflow-hidden backdrop-blur-xl">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl -mr-16 -mt-16" />
+              <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm">
                 <h3 className="text-2xl font-bold text-slate-900 mb-10 tracking-tight">
                   Direct Integration
                 </h3>
@@ -163,13 +160,13 @@ const ContactForm = () => {
                           href={info.href}
                           target={info.label === "Location" ? "_blank" : undefined}
                           rel={info.label === "Location" ? "noopener noreferrer" : undefined}
-                          className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${info.color} shadow-xl group-hover/item:scale-110 group-hover/item:-rotate-6 transition-all duration-500 block`}
+                          className="flex-shrink-0 p-4 rounded-xl bg-blue-50 group-hover/item:bg-blue-100 transition-colors duration-300 block"
                         >
-                          <info.icon className="h-6 w-6 text-white" />
+                          <info.icon className="h-5 w-5 text-blue-600" />
                         </a>
                       ) : (
-                        <div className={`flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br ${info.color} shadow-xl group-hover/item:scale-110 group-hover/item:-rotate-6 transition-all duration-500`}>
-                          <info.icon className="h-6 w-6 text-white" />
+                        <div className="flex-shrink-0 p-4 rounded-xl bg-blue-50 group-hover/item:bg-blue-100 transition-colors duration-300">
+                          <info.icon className="h-5 w-5 text-blue-600" />
                         </div>
                       )}
                       <div>
@@ -192,18 +189,13 @@ const ContactForm = () => {
                 </div>
               </div>
 
-              <div className="group relative">
-                <div className="absolute inset-0 bg-blue-600 rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
-                <div className="relative bg-gradient-to-br from-slate-950 to-blue-950 rounded-[2.5rem] p-10 text-white shadow-2xl noise-overlay border border-white/10 overflow-hidden card-shine">
-                  <div className="relative z-10">
-                    <p className="text-xl font-light leading-relaxed text-blue-100/90 italic">
-                      "Ready to transform your ideas into digital reality? Let's start the conversation!"
-                    </p>
-                    <div className="mt-8 flex items-center gap-3">
-                      <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping" />
-                      <span className="text-sm font-semibold tracking-wide uppercase text-slate-400">Available for new projects</span>
-                    </div>
-                  </div>
+              <div className="bg-slate-950 rounded-2xl p-10 text-white">
+                <p className="text-lg font-light leading-relaxed text-blue-100/90">
+                  Ready to turn your idea into digital reality? Let's start the conversation.
+                </p>
+                <div className="mt-8 flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                  <span className="text-sm font-medium tracking-wide text-slate-400">Available for new projects</span>
                 </div>
               </div>
             </div>

@@ -21,10 +21,9 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-950 text-white overflow-hidden noise-overlay" role="contentinfo">
+        <footer className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white overflow-hidden" role="contentinfo">
             <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -99,11 +98,12 @@ const Footer = () => {
                         <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-6">Our Services</h4>
                         <ul className="space-y-4 text-slate-400 text-sm">
                             <li>Web Development</li>
-                            <li>AI Solutions</li>
+                            <li>AI-Powered Applications</li>
                             <li>UI/UX Design</li>
-                            <li>E-Commerce</li>
-                            <li>R&D Consulting</li>
+                            <li>E-Commerce Solutions</li>
+                            <li>In-house R&D Team</li>
                             <li>SEO Optimization</li>
+                            <li>Marketing & Growth</li>
                         </ul>
                     </div>
                 </div>

@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import AnimatedWrapper from "./AnimatedWrapper";
 
 const avatarColors = [
-    "from-blue-500 to-cyan-400",
-    "from-purple-500 to-pink-400",
-    "from-emerald-500 to-teal-400",
-    "from-orange-500 to-amber-400",
-    "from-violet-500 to-indigo-400",
+    "from-blue-600 to-blue-500",
+    "from-blue-500 to-blue-400",
+    "from-slate-700 to-slate-600",
+    "from-blue-600 to-indigo-600",
+    "from-slate-600 to-slate-500",
 ];
 
 const initials = ["AK", "SR", "MJ", "NR", "PL"];
@@ -24,8 +24,6 @@ const TeamCTA = () => {
 
             <div className="max-w-5xl mx-auto relative z-10">
                 <AnimatedWrapper animation="fade-up" className="text-center">
-                    <span className="inline-block text-xs font-bold text-blue-600 uppercase tracking-widest mb-5 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100">The People Behind the Work</span>
-
                     {/* Avatar stack */}
                     <div className="flex justify-center mb-8 mt-2">
                         <div className="flex -space-x-3">
@@ -48,7 +46,7 @@ const TeamCTA = () => {
                         Built by Friends.<br className="hidden sm:block" /> Driven by Excellence.
                     </h2>
                     <p className="text-slate-500 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed mb-10">
-                        What started as a group of friends with a shared obsession for solving hard problems became a specialized force — united by trust, driven by results.
+                        What started as a group of friends with a shared obsession for solving hard problems became a specialized force, united by trust and driven by results.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

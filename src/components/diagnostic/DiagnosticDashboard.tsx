@@ -44,7 +44,7 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
                 </div>
                 <div className="flex gap-2 md:gap-3 w-full md:w-auto">
                     <Button variant="outline" size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10" onClick={() => navigate(0)}>New Request</Button>
-                    <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => navigate('/#contact')}>Book Deep Dive</Button>
+                    <Button size="sm" className="flex-1 md:flex-none text-xs md:text-sm h-9 md:h-10 bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-100" onClick={() => navigate('/#contact')}>Book a Consultation</Button>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
                     {/* Technology Stack Recommendations */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 px-1">
-                            <Layers className="w-5 h-5 text-indigo-600" />
+                            <Layers className="w-5 h-5 text-blue-600" />
                             <h3 className="font-bold text-slate-900">Recommended Architecture Stack</h3>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -95,8 +95,8 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
                             <StackCard icon={Zap} title="Service Layer" content={r.recommendedArchitecture.backend} />
                             <StackCard icon={Database} title="Data Systems" content={r.recommendedArchitecture.database} />
                             <StackCard icon={Cpu} title="AI Capability" content={r.recommendedArchitecture.aiComponents || 'N/A'} />
-                            <StackCard icon={Rocket} title="Infrastructure" content={r.recommendedArchitecture.infrastructure} color="bg-orange-50" iconColor="text-orange-600" />
-                            <StackCard icon={Layers} title="Integrations" content={r.recommendedArchitecture.integrations} color="bg-emerald-50" iconColor="text-emerald-600" />
+                            <StackCard icon={Rocket} title="Infrastructure" content={r.recommendedArchitecture.infrastructure} />
+                            <StackCard icon={Layers} title="Integrations" content={r.recommendedArchitecture.integrations} />
                         </div>
                     </div>
                 </div>
@@ -137,13 +137,13 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
                     <Card className="border-none shadow-sm overflow-hidden">
                         <CardHeader className="bg-slate-50 border-b py-4">
                             <div className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-indigo-600" />
+                                <Clock className="w-5 h-5 text-blue-600" />
                                 <h3 className="font-bold text-slate-900">Roadmap</h3>
                             </div>
                         </CardHeader>
                         <CardContent className="p-0">
                             <div className="p-6 bg-white">
-                                <p className="text-sm font-bold text-slate-900 mb-4 tracking-tight">Timeline: <span className="text-indigo-600">{r.timelineEstimate.range}</span></p>
+                                <p className="text-sm font-bold text-slate-900 mb-4 tracking-tight">Timeline: <span className="text-blue-600">{r.timelineEstimate.range}</span></p>
                                 <div className="space-y-4">
                                     {r.timelineEstimate.phaseBreakdown && Object.entries(r.timelineEstimate.phaseBreakdown).map(([phase, duration]) => (
                                         <div key={phase} className="flex items-center justify-between text-sm">
@@ -153,11 +153,11 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
                                     ))}
                                 </div>
                             </div>
-                            <div className="bg-indigo-50 p-6 flex flex-col gap-3 border-t">
-                                <p className="text-xs font-bold text-indigo-900 uppercase">Strategic Next Steps</p>
+                            <div className="bg-blue-50 p-6 flex flex-col gap-3 border-t">
+                                <p className="text-xs font-bold text-blue-900 uppercase">Strategic Next Steps</p>
                                 {r.strategicRecommendation.nextSteps.map((step, i) => (
-                                    <div key={i} className="flex items-center gap-3 text-sm text-indigo-900">
-                                        <div className="h-5 w-5 bg-white rounded-full flex items-center justify-center font-bold text-[10px] text-indigo-600 shadow-sm shrink-0">{i + 1}</div>
+                                    <div key={i} className="flex items-center gap-3 text-sm text-blue-900">
+                                        <div className="h-5 w-5 bg-white rounded-full flex items-center justify-center font-bold text-[10px] text-blue-600 shadow-sm shrink-0">{i + 1}</div>
                                         <span>{step}</span>
                                     </div>
                                 ))}
@@ -168,18 +168,18 @@ export const DiagnosticDashboard = ({ reportData, userEmail, companyName }: Diag
             </div>
 
             {/* Email Confirmation CTA */}
-            <div className="bg-indigo-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
+            <div className="bg-blue-600 rounded-2xl p-10 text-center text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 opacity-10">
                     <Rocket className="w-48 h-48 rotate-12" />
                 </div>
                 <h3 className="text-3xl font-bold mb-4 relative z-10">Ready to accelerate?</h3>
-                <p className="text-indigo-100 max-w-2xl mx-auto mb-8 text-lg relative z-10">
+                <p className="text-blue-100 max-w-2xl mx-auto mb-8 text-lg relative z-10">
                     A detailed white-paper format of this diagnostic has been sent to <strong>{userEmail}</strong>.
                     Let's discuss how we can bring this architecture to life for {companyName}.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                    <Button className="bg-white text-indigo-600 hover:bg-slate-50 font-bold px-8 h-12 rounded-xl" onClick={() => navigate('/#contact')}>
-                        Schedule Strategy Session
+                    <Button className="bg-white text-blue-600 hover:bg-slate-50 font-bold px-8 h-12 rounded-xl" onClick={() => navigate('/#contact')}>
+                        Book a Consultation
                     </Button>
                 </div>
             </div>

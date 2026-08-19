@@ -54,7 +54,7 @@ export const DiagnosticFormSteps = ({
                     <div className="md:col-span-2 bg-slate-900 p-6 md:p-8 text-white flex flex-col justify-between overflow-hidden relative">
                         {/* Decorative background elements */}
                         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" />
-                        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl" />
+                        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-blue-500/15 rounded-full blur-2xl" />
 
                         <div className="relative z-10">
                             <div className="flex items-center gap-2 mb-8">

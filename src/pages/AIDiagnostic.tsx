@@ -8,7 +8,7 @@ const AIDiagnostic = () => {
         <div className="min-h-screen bg-white flex flex-col selection:bg-blue-100">
             <HeaderNav />
 
-            <main className="flex-grow pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <main className="flex-grow pt-28 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 {/* Decorative Elements */}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03]"
                     style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
@@ -19,7 +19,7 @@ const AIDiagnostic = () => {
                             Global Strategy Engine
                         </div>
                         <h1 className="text-5xl sm:text-7xl font-extrabold text-slate-950 mb-6 tracking-tighter leading-[1.1]">
-                            Enterprise <span className="text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-500 bg-clip-text">AI Diagnostic</span>
+                            Enterprise <span className="text-blue-600">AI Diagnostic</span>
                         </h1>
                         <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
                             Our advanced AI architect will analyze your operational bottlenecks and provide a

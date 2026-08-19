@@ -1,4 +1,4 @@
-import { PhoneCall, BookOpen, LucideIcon, Target, Cpu, Layers, Sparkles } from "lucide-react";
+import { PhoneCall, BookOpen, Newspaper, LucideIcon, Target, Cpu, Layers, Sparkles, Search, ShieldCheck, RefreshCw, Megaphone } from "lucide-react";
 
 export interface ProjectDetail {
     id: string;
@@ -6,6 +6,8 @@ export interface ProjectDetail {
     category: string;
     description: string;
     fullDescription: string;
+    liveUrl?: string;
+    liveUrlLabel?: string;
     icon: LucideIcon;
     gradient: string;
     tag: string;
@@ -26,13 +28,64 @@ export interface ProjectDetail {
 
 export const projects: ProjectDetail[] = [
     {
+        id: "databreachrights-news-engine",
+        title: "DataBreachRights",
+        category: "AI Content & Marketing Automation",
+        description: "An automated pipeline that turns breaking data-breach news into original articles, backed by ongoing marketing consulting and autonomous social media marketing.",
+        fullDescription: "For DataBreachRights.com, we run the full growth loop: an autonomous content pipeline that turns breaking data-breach news into original, SEO-ready articles, ongoing consulting on content and campaign ideation, and autonomous social media marketing that plans, posts, and optimizes itself, all without a human touching a keyboard.",
+        liveUrl: "https://databreachrights.com",
+        liveUrlLabel: "DataBreachRights.com",
+        icon: Newspaper,
+        gradient: "from-blue-600 to-blue-500",
+        tag: "AI / Automation",
+        technologies: ["Workflow Automation", "Large Language Models", "SEO Metadata", "CMS Publishing", "Social Media Automation", "Licensed Imagery"],
+        features: [
+            {
+                title: "Autonomous Publishing",
+                description: "Monitors breach-related news sources continuously, then drafts and publishes new articles on a recurring schedule with no manual step.",
+                icon: RefreshCw
+            },
+            {
+                title: "SEO Built In",
+                description: "Every article ships with its meta title, description, and focus keyword set automatically before it goes live.",
+                icon: Search
+            },
+            {
+                title: "Autonomous Social Marketing",
+                description: "Plans, posts, and optimizes social content on its own, backed by ongoing consulting on ideation and campaign strategy.",
+                icon: Megaphone
+            },
+            {
+                title: "Source Attribution",
+                description: "Each rewritten article credits the original outlet, keeping the content original while reducing plagiarism risk.",
+                icon: ShieldCheck
+            },
+            {
+                title: "Self-Healing Pipeline",
+                description: "A dedup ledger tracks what's already published, and failed runs simply retry on the next cycle instead of needing manual cleanup.",
+                icon: Layers
+            }
+        ],
+        challenge: "Data-breach coverage moves fast, and staying visible in search and social means publishing a steady stream of original, well-optimized content, far more than a small team can realistically produce by hand every day.",
+        solution: "We built an automated pipeline that pulls breach reports from multiple news sources, rewrites each one as an original, SEO-structured article with proper source credit, then publishes it live with full metadata, a licensed hero image, and the right category, all logged so nothing is ever published twice. Alongside it, we consult on content and campaign ideation and run autonomous social media marketing that keeps the brand active without daily manual effort.",
+        impact: [
+            "Zero manual writing or publishing for new breach coverage",
+            "Every article ships SEO-ready with metadata set automatically",
+            "No duplicate publishing, enforced by an automatic dedup ledger",
+            "Social presence stays active through autonomous, self-optimizing campaigns"
+        ],
+        images: [
+            { url: "/placeholder.svg", alt: "DataBreachRights automated publishing pipeline" }
+        ]
+    },
+    {
         id: "callqa-insight",
         title: "CallQA Insight",
         category: "AI Customer Service QA",
         description: "An AI-driven web platform that analyzes and scores customer service calls.",
         fullDescription: "CallQA Insight is a cutting-edge enterprise solution designed to revolutionize quality assurance in high-volume call centers. By leveraging advanced Natural Language Processing (NLP) and Sentiment Analysis, the platform automatically transcribes, analyzes, and scores 100% of customer interactions. This eliminates the bottleneck of manual sampling and provides management with a comprehensive view of CSR performance, compliance adherence, and customer sentiment trends.",
         icon: PhoneCall,
-        gradient: "from-orange-500 to-rose-500",
+        gradient: "from-blue-600 to-blue-500",
         tag: "AI / Analytics",
         technologies: ["React", "TypeScript", "Python (FastAPI)", "OpenAI GPT-4", "Whisper v3", "Supabase", "Tailwind CSS"],
         features: [
@@ -77,7 +130,7 @@ export const projects: ProjectDetail[] = [
         description: "A playful AI-powered storybook app where children become the main hero.",
         fullDescription: "AI Comic Book is a revolutionary edutainment platform that turns every child into the protagonist of their own epic adventure. By integrating facial recognition and generative AI, the app allows parents to upload a single photo of their child, which is then magically transformed into a consistent character across a range of beautifully illustrated stories. It's not just a book; it's a personalized digital legacy that encourages reading through deep personal engagement.",
         icon: BookOpen,
-        gradient: "from-pink-500 to-purple-500",
+        gradient: "from-blue-500 to-blue-400",
         tag: "AI / E-commerce",
         technologies: ["Next.js", "Stable Diffusion XL", "FaceSwap API", "Stripe Connect", "React Three Fiber", "Tailwind CSS"],
         features: [

@@ -44,6 +44,13 @@
   --animate-shimmer: shimmer 3s linear infinite;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
   --animate-shimmer-button: shimmer-button 2.5s ease-out infinite;
+  --animate-flow-dash: flow-dash 3s linear infinite;
+
+  @keyframes flow-dash {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
 
   @keyframes shimmer-button {
     0% {
@@ -284,12 +291,11 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Mesh gradient background */
+/* Mesh gradient background - single accent, no rainbow */
 .mesh-gradient {
   background:
-    radial-gradient(at 20% 20%, hsl(217 91% 60% / 0.12) 0px, transparent 50%),
-    radial-gradient(at 80% 10%, hsl(271 91% 65% / 0.1) 0px, transparent 50%),
-    radial-gradient(at 50% 80%, hsl(199 89% 48% / 0.08) 0px, transparent 50%),
+    radial-gradient(at 15% 10%, hsl(217 91% 60% / 0.08) 0px, transparent 55%),
+    radial-gradient(at 85% 90%, hsl(217 91% 60% / 0.05) 0px, transparent 55%),
     hsl(var(--background));
 }
 
