@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/../calcera-ops/hooks/guard.py\""
+            "command": "p=$CLAUDE_PROJECT_DIR/../calcera-ops/hooks/guard.py; [ -f $p ] || p=../calcera-ops/hooks/guard.py; [ -f $p ] || p=/Users/aashiq/Projects/calcera-ops/hooks/guard.py; [ -f $p ] && python3 $p || true"
           }
         ]
       },
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/../calcera-ops/hooks/guard.py\""
+            "command": "p=$CLAUDE_PROJECT_DIR/../calcera-ops/hooks/guard.py; [ -f $p ] || p=../calcera-ops/hooks/guard.py; [ -f $p ] || p=/Users/aashiq/Projects/calcera-ops/hooks/guard.py; [ -f $p ] && python3 $p || true"
           }
         ]
       }
