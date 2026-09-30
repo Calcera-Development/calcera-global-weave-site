@@ -4,7 +4,7 @@ Last updated: 2026-09-24. Living document — update it (don't just append) when
 
 ## 1. What this is
 
-Calcera's own marketing site (Vite/React, originally Lovable-scaffolded). SEO work: `SEO_HANDOVER.md`. Cross-project conventions: `../calcera-ops/CONVENTIONS.md`. Calcera's own property, not client work, but still deploys to production — treat deploys with the same care as client repos.
+Calcera's own marketing site (Vite/React, originally Lovable-scaffolded). SEO work: `SEO_HANDOVER.md`. Calcera's own property, not client work, but still deploys to production — treat deploys with the same care as client repos.
 
 ## 2. Recent focus (as of last update)
 
