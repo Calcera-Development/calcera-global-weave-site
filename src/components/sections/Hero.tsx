@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, Code, Workflow, TrendingUp } from 'lucide-react';
+import { ArrowRight, Code, Workflow, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface HeroProps {
@@ -108,17 +108,6 @@ const Hero = ({ heroRef, contactRef, workRef, scrollToSection }: HeroProps) => {
                                     Book a Consultation
                                     <ArrowRight className="ml-2 h-4 w-4" />
                                 </Button>
-
-                                <a href="/ai-diagnostic" className="w-full sm:w-auto">
-                                    <Button
-                                        size="xl"
-                                        variant="outline"
-                                        className="w-full border-slate-300 text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl"
-                                    >
-                                        <Sparkles className="mr-2 h-4 w-4" />
-                                        Try the AI Diagnostic
-                                    </Button>
-                                </a>
                             </div>
 
                             <button

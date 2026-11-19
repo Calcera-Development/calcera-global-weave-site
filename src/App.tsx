@@ -10,8 +10,6 @@ import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
-import AIDiagnostic from "./pages/AIDiagnostic";
-import FloatingDiagnosticButton from "./components/diagnostic/FloatingDiagnosticButton";
 
 const queryClient = new QueryClient();
 
@@ -22,10 +20,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <FloatingDiagnosticButton />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/ai-diagnostic" element={<AIDiagnostic />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects/:projectId" element={<ProjectDetail />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -217,7 +217,7 @@ const HeaderNav = () => {
             })}
           </nav>
 
-          <div className="p-3 pt-1 border-t border-slate-100 flex flex-col gap-2">
+          <div className="p-3 pt-1 border-t border-slate-100">
             <Button
               size="lg"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold py-3 text-sm"
@@ -226,13 +226,6 @@ const HeaderNav = () => {
               Book a Consultation
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <a
-              href="/ai-diagnostic"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full text-center rounded-xl border border-slate-200 text-slate-700 font-medium py-3 text-sm hover:border-blue-300 hover:text-blue-600 transition-colors duration-200"
-            >
-              Try the AI Diagnostic
-            </a>
           </div>
         </div>
       </div>
