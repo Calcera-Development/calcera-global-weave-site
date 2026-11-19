@@ -34,7 +34,7 @@ const TermsOfService = () => {
                             <section>
                                 <h2 className="text-2xl font-semibold text-slate-800 mb-4">1. Agreement to Terms</h2>
                                 <p>
-                                    By accessing or using the Calcera Global website, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, then you may not access the service.
+                                    By accessing or using the Calcera Global (Private) Limited ("Calcera Global", "we", "us", or "our") website, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, then you may not access the service.
                                 </p>
                             </section>
 

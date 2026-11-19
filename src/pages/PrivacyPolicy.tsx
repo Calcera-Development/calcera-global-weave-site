@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
                             <section>
                                 <h2 className="text-2xl font-semibold text-slate-800 mb-4">1. Introduction</h2>
                                 <p>
-                                    At Calcera Global, we respect your privacy and are committed to protecting your personal data. This Privacy Policy informs you about how we handle your personal data when you visit our website and tells you about your privacy rights and how the law protects you.
+                                    At Calcera Global (Private) Limited ("Calcera Global", "we", "us", or "our"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy informs you about how we handle your personal data when you visit our website and tells you about your privacy rights and how the law protects you.
                                 </p>
                             </section>
 
