@@ -20,3 +20,4 @@ Redesigned around a minimalist, single-blue-accent B2B brand; a prior UI overhau
 ## 4. Recent work log
 
 - 2026-11-19: Removed the `/ai-diagnostic` page per request (it was live at calcera.global/ai-diagnostic). Deleted the page, its form/dashboard/sub-components, the floating CTA button, and the route in `App.tsx`; removed the links from the hero and mobile nav. The two Supabase edge functions backing it were intentionally left alone (outside this repo's deploy surface) — see open items.
+- 2026-11-19: Fixed npm audit findings (GitHub reported 52, local `npm audit` reported 22 — same underlying issues, GitHub counts duplicate advisory paths separately). `npm audit fix` handled most; force-bumped `zod` 3.24.1 → 4.6.7 (major, unused directly in `src/`, verified clean via typecheck/build/smoke test). Down to 0 locally. One residual: `minimatch` nested inside `typescript-eslint`'s own tree — devDependency only, no newer compatible version published yet, left as-is.
