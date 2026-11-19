@@ -112,7 +112,7 @@ const Footer = () => {
                 <div className="border-t border-white/10 pt-8">
                     <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
                         <p className="text-slate-400 text-sm">
-                            © {new Date().getFullYear()} Calcera Global
+                            © {new Date().getFullYear()} Calcera Global (Private) Limited
                         </p>
                         <div className="flex items-center gap-6 text-sm text-slate-500">
                             <Link to="/privacy-policy" onClick={scrollToTop} className="hover:text-white transition-colors duration-300">Privacy Policy</Link>
