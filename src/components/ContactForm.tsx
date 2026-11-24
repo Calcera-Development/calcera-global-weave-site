@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import AnimatedWrapper from "@/components/sections/AnimatedWrapper";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
 
 const initialState = {
   name: "",
@@ -34,10 +35,12 @@ const ContactForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!fields.name.trim() || !fields.contact.trim() || !fields.email.trim() || !fields.message.trim()) {
+      trackEvent("contact_form_failed", { reason: "validation" });
       toast({ title: "All fields are required.", variant: "destructive" });
       return;
     }
     if (!validateEmail(fields.email.trim())) {
+      trackEvent("contact_form_failed", { reason: "validation" });
       toast({ title: "Please enter a valid email.", variant: "destructive" });
       return;
     }
@@ -50,17 +53,20 @@ const ContactForm = () => {
 
       if (error) {
         console.error("Consultation form error:", error);
+        trackEvent("contact_form_failed", { reason: "send_error" });
         toast({
           title: "Message failed to send",
           description: error.message || "Something went wrong. Please try again.",
           variant: "destructive"
         });
       } else {
+        trackEvent("contact_form_submitted");
         toast({ title: "Message sent!", description: "Thanks for reaching out. We'll be in touch soon." });
         setFields(initialState);
       }
     } catch (err) {
       console.error(err);
+      trackEvent("contact_form_failed", { reason: "send_error" });
       toast({ title: "Something went wrong.", description: "Please try again later.", variant: "destructive" });
     } finally {
       setLoading(false);
@@ -68,9 +74,9 @@ const ContactForm = () => {
   }
 
   const contactInfo = [
-    { icon: Phone, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982" },
-    { icon: Mail, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global" },
-    { icon: MapPin, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", href: "https://www.google.com/maps/dir//Shangri-La+Colombo,+WRHV%2BCQ7,+One+Galle+Face+Dr,+Colombo+2/@6.8879461,79.8632827,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ae2593b09364c4f:0x7dc13fa1f24d5c16!2m2!1d79.8444584!2d6.928457?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D" }];
+    { icon: Phone, method: "phone" as const, label: "Phone", value: "+94 77 898998 2", href: "tel:+94778989982" },
+    { icon: Mail, method: "email" as const, label: "Email", value: "hello@calcera.global", href: "mailto:hello@calcera.global" },
+    { icon: MapPin, method: "location" as const, label: "Location", value: "Shangri-La Hotel, Colombo-02, Sri Lanka", href: "https://www.google.com/maps/dir//Shangri-La+Colombo,+WRHV%2BCQ7,+One+Galle+Face+Dr,+Colombo+2/@6.8879461,79.8632827,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ae2593b09364c4f:0x7dc13fa1f24d5c16!2m2!1d79.8444584!2d6.928457?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D" }];
 
 
   return (
@@ -160,7 +166,8 @@ const ContactForm = () => {
                           href={info.href}
                           target={info.label === "Location" ? "_blank" : undefined}
                           rel={info.label === "Location" ? "noopener noreferrer" : undefined}
-                          className="flex-shrink-0 p-4 rounded-xl bg-blue-50 group-hover/item:bg-blue-100 transition-colors duration-300 block"
+                          onClick={() => trackEvent("contact_link_clicked", { method: info.method })}
+className="flex-shrink-0 p-4 rounded-xl bg-blue-50 group-hover/item:bg-blue-100 transition-colors duration-300 block"
                         >
                           <info.icon className="h-5 w-5 text-blue-600" />
                         </a>
@@ -177,7 +184,8 @@ const ContactForm = () => {
                             href={info.href}
                             target={info.label === "Location" ? "_blank" : undefined}
                             rel={info.label === "Location" ? "noopener noreferrer" : undefined}
-                          >
+                          onClick={() => trackEvent("contact_link_clicked", { method: info.method })}
+>
                             {info.value}
                           </a>
                         ) : (

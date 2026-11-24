@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Code, Workflow, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
 interface HeroProps {
     heroRef: React.RefObject<HTMLDivElement>;
@@ -102,7 +103,10 @@ const Hero = ({ heroRef, contactRef, workRef, scrollToSection }: HeroProps) => {
                                 <Button
                                     size="xl"
                                     className="w-full sm:w-auto bg-blue-600 text-white hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/20 hover:-translate-y-0.5 transition-all duration-300"
-                                    onClick={() => scrollToSection(contactRef)}
+                                    onClick={() => {
+                                        trackEvent("book_consultation_clicked", { location: "hero" });
+                                        scrollToSection(contactRef);
+                                    }}
                                     aria-label="Book a free consultation with Calcera Global"
                                 >
                                     Book a Consultation

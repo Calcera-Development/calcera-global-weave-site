@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import calceraLogo from "@/assets/calcera-logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 
 const NAV_ITEMS = [
   { label: "Home", key: "home", id: "hero" },
@@ -91,7 +92,8 @@ const HeaderNav = () => {
     }
   };
 
-  const handleBookConsultation = () => {
+  const handleBookConsultation = (location: "header" | "mobile_menu") => {
+    trackEvent("book_consultation_clicked", { location });
     setIsMenuOpen(false);
     if (!isHomePage) {
       navigate("/#contact");
@@ -161,7 +163,7 @@ const HeaderNav = () => {
                     ? "bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-600/20"
                     : "bg-white text-blue-700 hover:bg-blue-50 shadow-xl"
                   } px-5 py-2.5 hover:-translate-y-0.5 active:translate-y-0`}
-                onClick={handleBookConsultation}
+                onClick={() => handleBookConsultation("header")}
               >
                 Book a Consultation
                 <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -221,7 +223,7 @@ const HeaderNav = () => {
             <Button
               size="lg"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold py-3 text-sm"
-              onClick={handleBookConsultation}
+              onClick={() => handleBookConsultation("mobile_menu")}
             >
               Book a Consultation
               <ArrowRight className="ml-2 h-4 w-4" />
